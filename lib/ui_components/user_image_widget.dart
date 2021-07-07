@@ -4,9 +4,10 @@ import 'package:flutter_instagram/models/image_model.dart';
 class UserImageWidget extends StatelessWidget {
 
   final ImageModel? imageModel;
+  final bool hasNewStory;
   final Size size;
 
-  UserImageWidget(this.imageModel, { required this.size});
+  UserImageWidget(this.imageModel, { required this.hasNewStory, required this.size});
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +21,19 @@ class UserImageWidget extends StatelessWidget {
       }
     } else {
       image = AssetImage("assets/images/instagram_icon.png");
+    }
+
+    if (hasNewStory == false) {
+      return Container(
+        width: size.width,
+        height: size.height,
+        decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            image: DecorationImage(
+                image: image
+            ),
+        ),
+      );
     }
 
     return Container(

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram/pages/timeline_page.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+class LaunchPage extends StatefulWidget {
+  const LaunchPage({Key? key}) : super(key: key);
 
   @override
-  _MainPageState createState() => _MainPageState();
+  _LaunchPageState createState() => _LaunchPageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _LaunchPageState extends State<LaunchPage> {
   @override
   void initState() {
     super.initState();
@@ -23,13 +23,15 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Container(
-      color: Colors.white,
-      child: Center(
-        child: Container(
-          height: size.width * 0.25,
-          width: size.width * 0.25,
-          child: Image(image: AssetImage("assets/images/instagram_icon.png")),
+    return Scaffold(
+      body: Container(
+        color: Colors.white,
+        child: Center(
+          child: Container(
+            height: size.width * 0.25,
+            width: size.width * 0.25,
+            child: Image(image: AssetImage("assets/images/instagram_icon.png")),
+          ),
         ),
       ),
     );
