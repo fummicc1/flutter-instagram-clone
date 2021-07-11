@@ -3,8 +3,10 @@ import 'package:flutter_instagram/models/image_model.dart';
 import 'package:flutter_instagram/models/post.dart';
 import 'package:flutter_instagram/models/story.dart';
 import 'package:flutter_instagram/models/video_model.dart';
+import 'package:flutter_instagram/pages/add_post_page.dart';
 import 'package:flutter_instagram/pages/story_page.dart';
 import 'package:flutter_instagram/ui_components/blacked_icon.dart';
+import 'package:flutter_instagram/ui_components/open_leftward_page_transition_builder.dart';
 import 'package:flutter_instagram/ui_components/story_widget.dart';
 import 'package:flutter_instagram/ui_components/user_image_widget.dart';
 
@@ -68,13 +70,11 @@ class _TimelinePageState extends State<TimelinePage> {
         likeCount: 0,
         isFavorite: false,
         createdAt: DateTime.now(),
-        updatedAt: DateTime.now()
-    ),
+        updatedAt: DateTime.now()),
     Post(
         userName: "userName2",
         userImage: ImageModel(
-            isLocal: true,
-            resource: "assets/images/instagram_icon.png"),
+            isLocal: true, resource: "assets/images/instagram_icon.png"),
         postImage: ImageModel(
             isLocal: false,
             resource:
@@ -95,7 +95,22 @@ class _TimelinePageState extends State<TimelinePage> {
         title: Text("Instagram", style: TextStyle(color: Colors.black)),
         actions: [
           IconButton(
-              icon: BlackedIcon(Icons.add_box_outlined), onPressed: null),
+              icon: BlackedIcon(Icons.add_box_outlined),
+              onPressed: () {
+                Navigator.of(context).push(PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) => AddPostPage(),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      return OpenLeftwardPageTransitionBuilder()
+                          .buildTransitions(
+                              MaterialPageRoute(
+                                  builder: (context) => AddPostPage()),
+                              context,
+                              animation,
+                              secondaryAnimation,
+                              child);
+                    }));
+              }),
           IconButton(icon: BlackedIcon(Icons.favorite), onPressed: null),
           IconButton(
               icon: BlackedIcon(
@@ -168,9 +183,13 @@ class _TimelinePageState extends State<TimelinePage> {
                               child: Row(
                                 children: [
                                   BlackedIcon(Icons.favorite_border),
-                                  SizedBox(width: 8,),
+                                  SizedBox(
+                                    width: 8,
+                                  ),
                                   BlackedIcon(Icons.message),
-                                  SizedBox(width: 8,),
+                                  SizedBox(
+                                    width: 8,
+                                  ),
                                   BlackedIcon(Icons.share_rounded)
                                 ],
                               ),
