@@ -8,6 +8,7 @@ import 'package:flutter_instagram/pages/story_page.dart';
 import 'package:flutter_instagram/ui_components/blacked_icon.dart';
 import 'package:flutter_instagram/ui_components/open_leftward_page_transition_builder.dart';
 import 'package:flutter_instagram/ui_components/story_widget.dart';
+import 'package:flutter_instagram/ui_components/timeline_card_widget.dart';
 import 'package:flutter_instagram/ui_components/user_image_widget.dart';
 
 class TimelinePage extends StatefulWidget {
@@ -145,72 +146,11 @@ class _TimelinePageState extends State<TimelinePage> {
                     itemCount: posts.length,
                     itemBuilder: (context, index) {
                       Post post = posts[index];
-                      return Card(
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                height: 32,
-                                child: Stack(
-                                  children: [
-                                    Row(children: [
-                                      UserImageWidget(post.userImage,
-                                          size: Size(32, 32),
-                                          hasNewStory: false),
-                                      SizedBox(width: 8),
-                                      Text(post.userName),
-                                    ]),
-                                    Positioned(
-                                        top: 0,
-                                        right: 0,
-                                        bottom: 0,
-                                        child: IconButton(
-                                          icon: Icon(Icons.menu),
-                                          onPressed: null,
-                                        ))
-                                  ],
-                                ),
-                              ),
-                            ),
-                            buildPostImage(post),
-                            Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Text(post.message),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Row(
-                                children: [
-                                  BlackedIcon(Icons.favorite_border),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  BlackedIcon(Icons.message),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  BlackedIcon(Icons.share_rounded)
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
+                      return TimelineCardWidget(post: post);
                     }))
           ],
         ),
       ),
     );
-  }
-
-  Image buildPostImage(Post post) {
-    if (post.postImage.isLocal) {
-      return Image(
-        image: AssetImage(post.postImage.resource),
-      );
-    } else {
-      return Image.network(post.postImage.resource);
-    }
   }
 }
