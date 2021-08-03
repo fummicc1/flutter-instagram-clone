@@ -1,6 +1,5 @@
 # flutter_instagram
 
-[WIP] Clone App of instagram
+## Assetsについて
 
-<img src="https://github.com/fummicc1/flutter-instagram-clone/blob/main/doc/img/20210707.gif" width="720px">
-
+[公式のアセット](https://en.facebookbrand.com/instagram/assets/instagram?audience=instagram-landing)を利用しています
