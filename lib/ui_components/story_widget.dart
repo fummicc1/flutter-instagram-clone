@@ -3,7 +3,7 @@ import 'package:flutter_instagram/models/story.dart';
 import 'package:flutter_instagram/ui_components/user_image_widget.dart';
 
 class StoryWidget extends StatelessWidget {
-  final Story story;
+  final StoryModel story;
   final VoidCallback? onPressed;
 
   const StoryWidget({Key? key, required this.story, this.onPressed})

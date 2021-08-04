@@ -5,7 +5,7 @@ import 'package:flutter_instagram/ui_components/user_image_widget.dart';
 
 class TimelineCardWidget extends StatelessWidget {
 
-  final Post post;
+  final PostModel post;
 
   TimelineCardWidget({Key? key, required this.post}) : super(key: key);
 
@@ -67,13 +67,12 @@ class TimelineCardWidget extends StatelessWidget {
     );
   }
 
-  Image buildPostImage(Post post) {
-    if (post.postImage.isLocal) {
-      return Image(
-        image: AssetImage(post.postImage.resource),
-      );
+  // TODO: 複数の画像を表示する
+  Image buildPostImage(PostModel post) {
+    if (post.postImageList.first != null) {
+      return Image.network(post.postImageList.first.resource);
     } else {
-      return Image.network(post.postImage.resource);
+      throw UnimplementedError();
     }
   }
 }

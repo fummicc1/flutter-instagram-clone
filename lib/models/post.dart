@@ -1,19 +1,30 @@
 import 'package:flutter_instagram/models/image_model.dart';
 
-class Post {
+class PostModel {
+  // 投稿ID
+  final String id;
+  // ユーザー情報
   final String userName;
   final ImageModel? userImage;
-  final ImageModel postImage;
+
+  final List<ImageModel> postImageList;
+  // 投稿内容
   final String message;
+
   final int likeCount;
+  // 自分がいいねを押したか
   final bool isFavorite;
+
+  // Metadata
   final DateTime createdAt;
   final DateTime updatedAt;
 
-  Post(
-      {required this.userName,
+  PostModel(
+      {
+        required this.id,
+        required this.userName,
       required this.userImage,
-      required this.postImage,
+      required this.postImageList,
       required this.message,
       required this.likeCount,
       required this.isFavorite,

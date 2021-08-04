@@ -14,11 +14,7 @@ class UserImageWidget extends StatelessWidget {
 
     final ImageProvider image;
     if (imageModel != null) {
-      if (imageModel!.isLocal) {
-        image = AssetImage(imageModel!.resource);
-      } else {
-        image = NetworkImage(imageModel!.resource);
-      }
+      image = NetworkImage(imageModel!.resource);
     } else {
       image = AssetImage("assets/images/instagram_icon.png");
     }

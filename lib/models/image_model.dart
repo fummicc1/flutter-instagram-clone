@@ -1,6 +1,6 @@
 class ImageModel {
-  final bool isLocal;
+  // URL
   final String resource;
 
-  ImageModel({required this.isLocal, required this.resource});
+  ImageModel({required this.resource});
 }
