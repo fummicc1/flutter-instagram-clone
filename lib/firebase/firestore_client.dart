@@ -7,11 +7,11 @@ class FirestoreClient {
 
   Stream<List<Map<String, dynamic>>> listenCollection(String collectionName) =>
       _firebaseFirestore.collection(collectionName).snapshots().map(
-              (snapshot) =>
+          (snapshot) =>
               snapshot.docs.map((document) => document.data()).toList());
 
   Stream<Map<String, dynamic>> listenDoc(
-      {required String collectionName, required String documentName}) =>
+          {required String collectionName, required String documentName}) =>
       _firebaseFirestore
           .collection(collectionName)
           .doc(documentName)
@@ -38,10 +38,10 @@ class FirestoreClient {
     return data;
   }
 
-  Future createDoc({
-    required String collectionName,
-    String? documentId,
-    required Map<String, dynamic> data}) async {
+  Future createDoc(
+      {required String collectionName,
+      String? documentId,
+      required Map<String, dynamic> data}) async {
     final DocumentReference ref;
     if (documentId != null) {
       ref = _firebaseFirestore.collection(collectionName).doc(documentId);
@@ -51,16 +51,16 @@ class FirestoreClient {
     ref.set(data);
   }
 
-  Future updateDocWithReference({
-    required DocumentReference reference,
-    required Map<String, dynamic> data}) async {
+  Future updateDocWithReference(
+      {required DocumentReference reference,
+      required Map<String, dynamic> data}) async {
     reference.set(data, SetOptions(merge: true));
   }
 
-  Future updateDocWithPath({
-    required String collection,
-    required String documentId,
-    required Map<String, dynamic> data}) async {
+  Future updateDocWithPath(
+      {required String collection,
+      required String documentId,
+      required Map<String, dynamic> data}) async {
     final reference = _firebaseFirestore.collection(collection).doc(documentId);
     await updateDocWithReference(reference: reference, data: data);
   }
