@@ -1,3 +1,4 @@
+import 'package:flutter_instagram/common/exception.dart';
 import 'package:flutter_instagram/entities/user.dart';
 import 'package:flutter_instagram/firebase/firestore_client.dart';
 
@@ -36,7 +37,7 @@ class UserRepository implements IUserRepository {
     try {
       final UserEntity userEntity = UserEntity.fromData(data);
       return userEntity;
-    } on UserEntityParseException catch (e) {
+    } on EntityParserException catch (e) {
       return Future.error(e);
     }
   }

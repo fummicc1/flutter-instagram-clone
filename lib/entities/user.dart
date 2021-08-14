@@ -1,11 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_instagram/common/exception.dart';
 import 'package:flutter_instagram/firebase/firestore_model.dart';
-
-class UserEntityParseException implements Exception {
-  String cause;
-  UserEntityParseException(this.cause);
-}
 
 @immutable
 class UserEntity with FirestoreModel {
@@ -27,7 +23,7 @@ class UserEntity with FirestoreModel {
     final profileImageReference =
         data["profile_image_reference"] as DocumentReference?;
     if (id == null || displayName == null || userId == null || profileImageReference == null) {
-      throw UserEntityParseException("null value found: $data");
+      throw EntityParserException(data);
     }
     return UserEntity(
         id: id,
