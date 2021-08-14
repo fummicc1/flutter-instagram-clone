@@ -1,6 +1,37 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class FirestoreClient {
+abstract class IFirestoreClient {
+  Stream<List<Map<String, dynamic>>> listenCollection(String collectionName);
+
+  Stream<Map<String, dynamic>> listenDoc(
+      {required String collectionName, required String documentName});
+
+  Future<List<Map<String, dynamic>>> getCollection(String collectionName);
+
+  Future<Map<String, dynamic>> getDoc(
+      {required String collectionName, required String documentName});
+
+  Future createDoc(
+      {required String collectionName,
+      String? documentId,
+      required Map<String, dynamic> data});
+
+  Future updateDocWithReference(
+      {required DocumentReference reference,
+      required Map<String, dynamic> data});
+
+  Future updateDocWithPath(
+      {required String collection,
+      required String documentId,
+      required Map<String, dynamic> data});
+
+  Future deleteDocWithReference(DocumentReference reference);
+
+  Future deleteDocWithPath(
+      {required String collection, required String documentId});
+}
+
+class FirestoreClient implements IFirestoreClient {
   final FirebaseFirestore _firebaseFirestore;
 
   FirestoreClient(this._firebaseFirestore);
