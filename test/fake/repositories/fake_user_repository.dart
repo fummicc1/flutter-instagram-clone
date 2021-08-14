@@ -5,11 +5,13 @@ class FakeUserRepository implements IUserRepository {
   Map<String, UserEntity> userData = {};
 
   @override
-  Future save(UserEntity user) async {
-    if (userData.keys.contains(user.id)) {
-      return Future.error(UserRepositoryError.AlreadyExistsUserID);
-    }
-    userData[user.id] = user;
+  Future create(UserEntity userEntity) async {
+    userData[userEntity.id] = userEntity;
+  }
+
+  @override
+  Future update({required String id, required UserEntity newEntity}) async {
+    userData[id] = newEntity;
   }
 
   Future<UserEntity?> findWithID(String userID) async {
