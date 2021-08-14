@@ -1,29 +1,39 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
 
-class StorageClient {
+abstract class IStorageClient {
+  // ファイルをアップロードする
+  // Taskを返すけど使い方がよくわかっていない
+  Future<UploadTask> uploadFile(
+      {required File file, required String path, required String contentType});
+
+  // ダウンロード先の一時ファイルを返す
+  Future<File> downloadFile(Reference ref);
+
+  // Image.network()で直接セットできるURLを取得する
+  Future<String> getLink(Reference ref);
+
+  Future<Reference> getStorageRef(String path);
+}
+
+class StorageClient implements IStorageClient {
   final FirebaseStorage _storage;
   StorageClient(this._storage);
 
-  // ファイルをアップロードする
-  // Taskを返すけど使い方がよくわかっていない
-  Future<UploadTask?> uploadFile(
-    File? file,
-    String storePath,
-    String contentType,
-  ) async {
-    if (file == null) {
-      return Future.error("Invalid File Path");
-    }
-
-    final ref = _storage.ref(storePath);
+  @override
+  Future<UploadTask> uploadFile({
+    required File file,
+    required String path,
+    required String contentType,
+  }) async {
+    final ref = _storage.ref(path);
     final metadata = SettableMetadata(contentType: contentType);
 
     return Future.value(ref.putFile(file, metadata));
   }
 
-  // ダウンロード先の一時ファイルを返す
-  Future<File?> downloadFile(Reference ref) async {
+  @override
+  Future<File> downloadFile(Reference ref) async {
     final Directory systemTempDir = Directory.systemTemp;
     final File tempFile = File("${systemTempDir.path}/temp-${ref.name}");
     if (tempFile.existsSync()) await tempFile.delete();
@@ -35,12 +45,13 @@ class StorageClient {
     return Future.error("Failed to download");
   }
 
-  // Image.network()で直接セットできるURLを取得する
-  Future<String?> getLink(Reference ref) async {
+  @override
+  Future<String> getLink(Reference ref) async {
     return await ref.getDownloadURL();
   }
 
-  Future<Reference> getStorageRef(String dir, String fileName) async {
-    return _storage.ref("$dir/$fileName");
+  @override
+  Future<Reference> getStorageRef(String path) async {
+    return _storage.ref(path);
   }
 }
