@@ -36,11 +36,13 @@ class FirestoreClient implements IFirestoreClient {
 
   FirestoreClient(this._firebaseFirestore);
 
+  @override
   Stream<List<Map<String, dynamic>>> listenCollection(String collectionName) =>
       _firebaseFirestore.collection(collectionName).snapshots().map(
           (snapshot) =>
               snapshot.docs.map((document) => document.data()).toList());
 
+  @override
   Stream<Map<String, dynamic>> listenDoc(
           {required String collectionName, required String documentName}) =>
       _firebaseFirestore
@@ -49,6 +51,7 @@ class FirestoreClient implements IFirestoreClient {
           .snapshots()
           .map((snapshot) => snapshot.data() ?? {});
 
+  @override
   Future<List<Map<String, dynamic>>> getCollection(
       String collectionName) async {
     final snapshots = await _firebaseFirestore.collection(collectionName).get();
@@ -56,6 +59,7 @@ class FirestoreClient implements IFirestoreClient {
     return data;
   }
 
+  @override
   Future<Map<String, dynamic>> getDoc(
       {required String collectionName, required String documentName}) async {
     final snapshot = await _firebaseFirestore
@@ -69,6 +73,7 @@ class FirestoreClient implements IFirestoreClient {
     return data;
   }
 
+  @override
   Future createDoc(
       {required String collectionName,
       String? documentId,
@@ -82,12 +87,14 @@ class FirestoreClient implements IFirestoreClient {
     ref.set(data);
   }
 
+  @override
   Future updateDocWithReference(
       {required DocumentReference reference,
       required Map<String, dynamic> data}) async {
     reference.set(data, SetOptions(merge: true));
   }
 
+  @override
   Future updateDocWithPath(
       {required String collection,
       required String documentId,
@@ -96,10 +103,12 @@ class FirestoreClient implements IFirestoreClient {
     await updateDocWithReference(reference: reference, data: data);
   }
 
+  @override
   Future deleteDocWithReference(DocumentReference reference) async {
     reference.delete();
   }
 
+  @override
   Future deleteDocWithPath(
       {required String collection, required String documentId}) async {
     final reference = _firebaseFirestore.collection(collection).doc(documentId);
