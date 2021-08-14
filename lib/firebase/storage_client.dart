@@ -1,6 +1,17 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
 
+abstract class IStorageClient {
+  Future<UploadTask> uploadFile(
+      {required File file, required String path, required String contentType});
+
+  Future<File> downloadFile(Reference ref);
+
+  Future<String> getLink(Reference ref);
+
+  Future<Reference> getStorageRef(String path);
+}
+
 class StorageClient {
   final FirebaseStorage _storage;
   StorageClient(this._storage);
