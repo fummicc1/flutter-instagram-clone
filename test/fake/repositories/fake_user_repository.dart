@@ -14,14 +14,6 @@ class FakeUserRepository implements IUserRepository {
     userData[id] = newEntity;
   }
 
-  @override
-  Future save(UserEntity user) async {
-    if (userData.keys.contains(user.id)) {
-      return Future.error(UserRepositoryError.AlreadyExistsUserID);
-    }
-
-  }
-
   Future<UserEntity?> findWithID(String userID) async {
     final user = userData[userID];
     return user;
