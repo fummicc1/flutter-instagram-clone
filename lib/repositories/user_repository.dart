@@ -2,7 +2,9 @@ import 'package:flutter_instagram/entities/user.dart';
 import 'package:flutter_instagram/firebase/firestore_client.dart';
 
 abstract class IUserRepository {
-  Future save(UserEntity user);
+  Future create(UserEntity userEntity);
+
+  Future update({required String id, required UserEntity newEntity});
 
   Future<UserEntity?> findWithID(String userID);
 }
@@ -13,16 +15,17 @@ class UserRepository implements IUserRepository {
   UserRepository(this._firestoreClient);
 
   @override
-  Future save(UserEntity user) async {
-    final previous = await findWithID(user.id);
-    if (previous.isEmpty) {
-      return _firestoreClient.createDoc(
-          collectionName: UserEntity.collectionName, data: user.data);
-    }
+  Future create(UserEntity userEntity) async {
+    return _firestoreClient.createDoc(
+        collectionName: UserEntity.collectionName, data: userEntity.data);
+  }
+
+  @override
+  Future update({required String id, required UserEntity newEntity}) {
     return _firestoreClient.updateDocWithPath(
         collection: UserEntity.collectionName,
-        documentId: user.id,
-        data: user.data);
+        documentId: id,
+        data: newEntity.data);
   }
 
   @override
