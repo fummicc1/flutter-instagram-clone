@@ -10,11 +10,15 @@ class GenericException with Messagable implements Exception {
 }
 
 class EntityParserException extends GenericException {
-
   final Map<String, dynamic> data;
 
   EntityParserException(this.data);
 
   @override
   String message() => 'Failed to parse data: $data';
+}
+
+class AuthException extends GenericException {
+  @override
+  String message() => "Failed to auth";
 }
