@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_instagram/common/exception.dart';
 import 'package:flutter_instagram/firebase/auth_client.dart';
 
