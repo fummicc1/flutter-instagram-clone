@@ -11,6 +11,8 @@ abstract class IFirestoreClient {
   Future<Map<String, dynamic>> getDoc(
       {required String collectionName, required String documentName});
 
+  Future<List<Map<String, dynamic>>> getWithQuery(Query query);
+
   Future createDoc(
       {required String collectionName,
       String? documentId,
@@ -29,6 +31,8 @@ abstract class IFirestoreClient {
 
   Future deleteDocWithPath(
       {required String collection, required String documentId});
+
+  CollectionReference buildCollectionReference({required String collectionName});
 }
 
 class FirestoreClient implements IFirestoreClient {
@@ -74,6 +78,13 @@ class FirestoreClient implements IFirestoreClient {
   }
 
   @override
+  Future<List<Map<String, dynamic>>> getWithQuery(Query<Object?> query) async {
+    final response = await query.get();
+    final mapList = response.docs.map((document) => document.data() as Map<String, dynamic>? ?? {}).toList();
+    return mapList;
+  }
+
+  @override
   Future createDoc(
       {required String collectionName,
       String? documentId,
@@ -113,5 +124,10 @@ class FirestoreClient implements IFirestoreClient {
       {required String collection, required String documentId}) async {
     final reference = _firebaseFirestore.collection(collection).doc(documentId);
     await deleteDocWithReference(reference);
+  }
+
+  @override
+  CollectionReference<Object?> buildCollectionReference({required String collectionName}) {
+    return _firebaseFirestore.collection(collectionName);
   }
 }
