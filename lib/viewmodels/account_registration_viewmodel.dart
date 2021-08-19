@@ -1,15 +1,16 @@
 import 'dart:async';
 
 import 'package:email_validator/email_validator.dart';
-import 'package:flutter_instagram/repositories/user_repository.dart';
+import 'package:flutter_instagram/common/exception.dart';
+import 'package:flutter_instagram/repositories/auth_repository.dart';
 import 'package:flutter_instagram/states/account_registration_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AccountRegistrationViewModel
     extends StateNotifier<AccountRegistrationState> {
-  IUserRepository _userRepository;
+  IAuthRepository _authRepository;
   late StreamController<Exception> errorStream;
-  AccountRegistrationViewModel(this._userRepository)
+  AccountRegistrationViewModel(this._authRepository)
       : super(AccountRegistrationState()) {
     errorStream = StreamController();
   }
@@ -28,8 +29,11 @@ class AccountRegistrationViewModel
     } on EmailInputException catch (e) {
       errorStream.sink.add(e);
       return false;
+    } on Messagable catch (e) {
+      errorStream.sink.add(SimpleException(e.message()));
+      return false;
     } catch (e) {
-      errorStream.sink.add(SimpleException());
+      errorStream.sink.add(SimpleException(e.toString()));
       return false;
     }
   }
@@ -41,13 +45,8 @@ class AccountRegistrationViewModel
   }
 
   Future _signUp() async {
-    // TODO: implement
+    var uid = await _authRepository.signUp(
+        email: state.email, password: state.password);
+    state = state.copyWith(uid: uid);
   }
 }
-
-class EmailInputException implements Exception {
-  String message;
-  EmailInputException([this.message = ""]);
-}
-
-class SimpleException implements Exception {}

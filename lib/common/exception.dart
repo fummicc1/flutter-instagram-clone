@@ -9,6 +9,13 @@ class GenericException with Messagable implements Exception {
   }
 }
 
+class SimpleException extends GenericException {
+  final String cause;
+  SimpleException(this.cause);
+  @override
+  String message() => cause;
+}
+
 class EntityParserException extends GenericException {
   final Map<String, dynamic> data;
 
@@ -23,4 +30,9 @@ class AuthException extends GenericException {
   AuthException(this.cause);
   @override
   String message() => "Failed to auth: $cause";
+}
+
+class EmailInputException extends GenericException {
+  @override
+  String message() => "Invalid Email Address";
 }
