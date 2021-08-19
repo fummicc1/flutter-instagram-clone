@@ -19,6 +19,8 @@ class EntityParserException extends GenericException {
 }
 
 class AuthException extends GenericException {
+  final String cause;
+  AuthException(this.cause);
   @override
-  String message() => "Failed to auth";
+  String message() => "Failed to auth: $cause";
 }

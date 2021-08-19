@@ -4,7 +4,8 @@ import 'package:flutter_instagram/firebase/auth_client.dart';
 abstract class IAuthRepository {
   Future<bool> isLoggedIn();
   String? getCurrentUserId();
-  // return the current uid if the authentication succeeded
+
+  /// return the current uid if the authentication succeeded
   Future<String> signUp({required String email, required String password});
   Future<String> signIn({required String email, required String password});
   Future signOut();
@@ -29,7 +30,7 @@ class AuthRepository implements IAuthRepository {
     if (user != null) {
       return user.uid;
     }
-    throw AuthException();
+    throw AuthException("Sign up failed");
   }
 
   @override
@@ -40,7 +41,7 @@ class AuthRepository implements IAuthRepository {
     if (user != null) {
       return user.uid;
     }
-    throw AuthException();
+    throw AuthException("Sign in failed");
   }
 
   @override
