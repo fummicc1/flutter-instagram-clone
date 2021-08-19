@@ -27,7 +27,7 @@ class FakePostRepository extends IPostRepository {
         final element = queryModel.element;
         data.removeWhere( (key, value) {
           final list = value.data[fieldName] as List;
-          return list.contains(element);
+          return !list.contains(element);
         });
       }
     }
