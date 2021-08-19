@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_instagram/entities/image.dart';
 import 'package:flutter_instagram/repositories/query.dart';
 
@@ -10,10 +12,10 @@ abstract class IImageRepository {
   Future<List<ImageEntity>> findWithQueries(List<QueryModel> queries);
 
   /// Get url to download image from File-Storage
-  Future<String> getURL();
+  Future<String> getURL(String path);
 
   /// Create new resource
-  Future create(ImageEntity imageEntity);
+  Future create({required ImageEntity imageEntity, required File file});
   /// Delete existing resource
-  Future delete(ImageEntity imageEntity);
+  Future delete({required ImageEntity imageEntity, File? file});
 }
