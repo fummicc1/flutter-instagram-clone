@@ -11,7 +11,7 @@ abstract class IUserRepository {
 }
 
 class UserRepository implements IUserRepository {
-  final FirestoreClient _firestoreClient;
+  final IFirestoreClient _firestoreClient;
 
   UserRepository(this._firestoreClient);
 
