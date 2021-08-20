@@ -12,7 +12,7 @@ abstract class IImageRepository {
   Future<List<ImageEntity>> findWithQueries(List<QueryModel> queries);
 
   /// Get url to download image from File-Storage
-  Future<String> getURL(String path);
+  Future<String> getURL({required String path, required ImageMetadata imageMetadata});
 
   /// Create new resource
   Future create({required ImageEntity imageEntity, required File file});
