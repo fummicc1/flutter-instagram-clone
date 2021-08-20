@@ -20,26 +20,63 @@ class ImageContentType {
   }
 }
 
+class ImageFileExtension {
+  final String fileExtension;
+
+  ImageFileExtension(this.fileExtension);
+
+  static final ImageFileExtension png = ImageFileExtension("png");
+  static final ImageFileExtension jpeg = ImageFileExtension("jpeg");
+
+  factory ImageFileExtension.fromFileExtension(String fileExtension) {
+    if (fileExtension == "png") {
+      return ImageFileExtension.png;
+    } else if (fileExtension == "jpeg") {
+      return ImageFileExtension.jpeg;
+    }
+    // TODO: Use SimpleException
+    throw UnimplementedError();
+  }
+}
+
 @immutable
 class ImageMetadata {
   final ImageContentType imageContentType;
+  final ImageFileExtension imageFileExtension;
 
-  ImageMetadata({required this.imageContentType});
+  ImageMetadata(
+      {required this.imageContentType, required this.imageFileExtension});
 
-  String? get contentType => imageContentType.contentType;
+  String get contentType => imageContentType.contentType;
+
+  String get fileExtension => imageFileExtension.fileExtension;
+
+  static final ImageMetadata png = ImageMetadata(
+      imageContentType: ImageContentType.png,
+      imageFileExtension: ImageFileExtension.png);
+
+  static final ImageMetadata jpeg = ImageMetadata(
+      imageContentType: ImageContentType.png,
+      imageFileExtension: ImageFileExtension.png);
 
   factory ImageMetadata.fromData(Map<String, dynamic> data) {
     final imageContentTypeText = data["image_content_type"] as String?;
-    if (imageContentTypeText == null) {
+    final imageFileExtensionText = data["image_file_extension"] as String?;
+    if (imageContentTypeText == null || imageFileExtensionText == null) {
       throw EntityParserException(data);
     }
     final imageContentType =
-        ImageContentType.fromContentType(imageContentTypeText);
-    return ImageMetadata(imageContentType: imageContentType);
+    ImageContentType.fromContentType(imageContentTypeText);
+    final imageFileExtension =
+    ImageFileExtension.fromFileExtension(imageFileExtensionText);
+    return ImageMetadata(
+        imageContentType: imageContentType,
+        imageFileExtension: imageFileExtension);
   }
 
   Map<String, dynamic> get data => {
-    "image_content_type": imageContentType.contentType
+    "image_content_type": imageContentType.contentType,
+    "image_file_extension": imageFileExtension.fileExtension,
   };
 }
 
@@ -51,8 +88,8 @@ class ImageEntity {
 
   ImageEntity(
       {required this.id,
-      required this.storageRef,
-      required this.imageMetadata});
+        required this.storageRef,
+        required this.imageMetadata});
 
   factory ImageEntity.fromData(Map<String, dynamic> data) {
     final id = data["id"] as String?;
@@ -74,4 +111,6 @@ class ImageEntity {
     "storage_ref": storageRef,
     "image_metadata": imageMetadata.data
   };
+
+  static const collectionName = "images";
 }
