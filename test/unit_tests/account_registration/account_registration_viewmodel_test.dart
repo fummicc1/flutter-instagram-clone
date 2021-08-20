@@ -24,10 +24,8 @@ void main() {
     viewModel.updateEmail("fake@fastriver.dev");
     viewModel.updatePassword("foo");
     var errorStream = viewModel.errorStream.stream;
-    expectLater(
-        errorStream,
-        emits(GenericExceptionMatcher(
-            SimpleException("Failed to auth: User already exists"))));
+    expectLater(errorStream,
+        emits(GenericExceptionMatcher(AuthException("User already exists"))));
     var result = await viewModel.onClickNextButton();
     expect(result, false);
   });
