@@ -2,7 +2,7 @@ mixin Messagable {
   String message();
 }
 
-class GenericException with Messagable implements Exception {
+abstract class GenericException with Messagable implements Exception {
   @override
   String message() {
     throw UnimplementedError();
