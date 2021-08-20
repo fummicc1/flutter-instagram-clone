@@ -1,20 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_instagram/common/exception.dart';
 
-enum ImageFileType { PNG, JPEG }
+class ImageContentType {
+  final String contentType;
+
+  ImageContentType(this.contentType);
+
+  static final ImageContentType png = ImageContentType("image/png");
+  static final ImageContentType jpeg = ImageContentType("image/jpeg");
+
+  factory ImageContentType.fromContentType(String contentType) {
+    if (contentType == "image/png") {
+      return ImageContentType.png;
+    } else if (contentType == "image/jpeg") {
+      return ImageContentType.jpeg;
+    }
+    // TODO: Use SimpleException
+    throw UnimplementedError();
+  }
+}
 
 @immutable
 class ImageMetadata {
-  final ImageFileType fileType;
+  final ImageContentType imageContentType;
 
-  ImageMetadata({required this.fileType});
+  ImageMetadata({required this.imageContentType});
 
-  String? get contentType {
-    if (fileType == ImageFileType.JPEG) {
-      return "image/jpeg";
-    } else if (fileType == ImageFileType.PNG) {
-      return "image/png";
+  String? get contentType => imageContentType.contentType;
+
+  factory ImageMetadata.fromData(Map<String, dynamic> data) {
+    final imageContentTypeText = data["image_content_type"] as String?;
+    if (imageContentTypeText == null) {
+      throw EntityParserException(data);
     }
-    return null;
+    final imageContentType =
+        ImageContentType.fromContentType(imageContentTypeText);
+    return ImageMetadata(imageContentType: imageContentType);
   }
 }
 
@@ -28,4 +49,19 @@ class ImageEntity {
       {required this.id,
       required this.storageRef,
       required this.imageMetadata});
+
+  factory ImageEntity.fromData(Map<String, dynamic> data) {
+    final id = data["id"] as String?;
+    final storageRef = data["storage_ref"] as String?;
+
+    if (id == null || storageRef == null) {
+      throw EntityParserException(data);
+    }
+
+    final imageMetadataData = data["image_metadata"];
+    final imageMetadata = ImageMetadata.fromData(imageMetadataData);
+
+    return ImageEntity(
+        id: id, storageRef: storageRef, imageMetadata: imageMetadata);
+  }
 }
