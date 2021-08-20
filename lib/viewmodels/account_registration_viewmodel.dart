@@ -21,6 +21,14 @@ class AccountRegistrationViewModel
     errorStream.close();
   }
 
+  void updateEmail(String newValue) {
+    state = state.copyWith(email: newValue);
+  }
+
+  void updatePassword(String newValue) {
+    state = state.copyWith(password: newValue);
+  }
+
   Future<bool> onClickNextButton() async {
     try {
       await _validateEmail();
