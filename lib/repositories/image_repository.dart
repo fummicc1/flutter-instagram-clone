@@ -15,5 +15,7 @@ abstract class IImageRepository {
   Future<String> getURL({required String path, required ImageMetadata imageMetadata});
 
   /// Create new resource
-  Future create({required ImageEntity imageEntity, required File file});
+  /// Create new document in DataStore
+  /// Return ID of new imageEntity.
+  Future<String> create(File file);
 }
