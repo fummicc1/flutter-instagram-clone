@@ -37,6 +37,10 @@ class ImageMetadata {
         ImageContentType.fromContentType(imageContentTypeText);
     return ImageMetadata(imageContentType: imageContentType);
   }
+
+  Map<String, dynamic> get data => {
+    "image_content_type": imageContentType.contentType
+  };
 }
 
 @immutable
@@ -64,4 +68,10 @@ class ImageEntity {
     return ImageEntity(
         id: id, storageRef: storageRef, imageMetadata: imageMetadata);
   }
+
+  Map<String, dynamic> get data => {
+    "id": id,
+    "storage_ref": storageRef,
+    "image_metadata": imageMetadata.data
+  };
 }
