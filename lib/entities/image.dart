@@ -74,4 +74,6 @@ class ImageEntity {
     "storage_ref": storageRef,
     "image_metadata": imageMetadata.data
   };
+
+  static const collectionName = "images";
 }
