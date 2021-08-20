@@ -17,8 +17,7 @@ abstract class IImageRepository {
   Future<List<ImageEntity>> findWithQueries(List<QueryModel> queries);
 
   /// Get url to download image from File-Storage
-  Future<String> getURL(
-      {required String path, required ImageMetadata imageMetadata});
+  Future<String> getURL(ImageEntity imageEntity);
 
   /// Create new resource
   /// Create new document in DataStore
@@ -40,7 +39,7 @@ class ImageRepository implements IImageRepository {
     final documentReference =
         FirebaseFirestore.instance.collection(ImageEntity.collectionName).doc();
 
-    final fileName = documentReference.id + "";
+    final fileName = documentReference.id + "." + imageMetadata.imageFileExtension.fileExtension;
 
     final storagePath = folderName + fileName;
 
@@ -62,27 +61,33 @@ class ImageRepository implements IImageRepository {
   }
 
   @override
-  Future<ImageEntity> find(String id) {
-    // TODO: implement find
-    throw UnimplementedError();
+  Future<ImageEntity> find(String id) async {
+    final response = await _firestoreClient.getDoc(collectionName: ImageEntity.collectionName, documentName: id);
+    final image = ImageEntity.fromData(response);
+    return image;
   }
 
   @override
-  Future<List<ImageEntity>> findWithQueries(List<QueryModel> queries) {
-    // TODO: implement findWithQueries
-    throw UnimplementedError();
+  Future<List<ImageEntity>> findWithQueries(List<QueryModel> queries) async {
+    Query query = FirebaseFirestore.instance.collection(ImageEntity.collectionName);
+    for (QueryModel model in queries) {
+      query = model.build(query);
+    }
+    final response = await _firestoreClient.getWithQuery(query);
+    final images = response.map((data) => ImageEntity.fromData(data)).toList();
+    return images;
   }
 
   @override
   Future<List<ImageEntity>> findWithQuery(QueryModel queryModel) {
-    // TODO: implement findWithQuery
-    throw UnimplementedError();
+    return findWithQueries([queryModel]);
   }
 
+
   @override
-  Future<String> getURL(
-      {required String path, required ImageMetadata imageMetadata}) {
-    // TODO: implement getURL
-    throw UnimplementedError();
+  Future<String> getURL(ImageEntity imageEntity) async {
+    final path = imageEntity.storageRef + "." + imageEntity.imageMetadata.imageFileExtension.fileExtension;
+    final ref = await _storageClient.getStorageRef(path);
+    return _storageClient.getLink(ref);
   }
 }
