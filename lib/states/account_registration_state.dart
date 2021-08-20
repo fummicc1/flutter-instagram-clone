@@ -8,7 +8,6 @@ class AccountRegistrationState with _$AccountRegistrationState {
     // String phoneNumber,
     @Default("") String email,
     @Default("") String password,
-    @Default("") String uid,
     // int selectedIndex,
     // String? facebookUserName,
   }) = _AccountRegistrationState;
