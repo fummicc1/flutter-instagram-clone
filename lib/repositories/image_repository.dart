@@ -16,6 +16,4 @@ abstract class IImageRepository {
 
   /// Create new resource
   Future create({required ImageEntity imageEntity, required File file});
-  /// Delete existing resource
-  Future delete({required ImageEntity imageEntity, File? file});
 }
