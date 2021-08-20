@@ -49,6 +49,16 @@ class ImageMetadata {
 
   String get contentType => imageContentType.contentType;
 
+  String get fileExtension => imageFileExtension.fileExtension;
+
+  static final ImageMetadata png = ImageMetadata(
+      imageContentType: ImageContentType.png,
+      imageFileExtension: ImageFileExtension.png);
+
+  static final ImageMetadata jpeg = ImageMetadata(
+      imageContentType: ImageContentType.png,
+      imageFileExtension: ImageFileExtension.png);
+
   factory ImageMetadata.fromData(Map<String, dynamic> data) {
     final imageContentTypeText = data["image_content_type"] as String?;
     final imageFileExtensionText = data["image_file_extension"] as String?;

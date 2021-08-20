@@ -21,7 +21,8 @@ abstract class IImageRepository {
   /// Create new resource
   /// Create new document in DataStore
   /// Return ID of new imageEntity.
-  Future<String> create({required File file, required ImageMetadata imageMetadata});
+  Future<String> create(
+      {required File file, required ImageMetadata imageMetadata});
 }
 
 class ImageRepository implements IImageRepository {
@@ -38,7 +39,9 @@ class ImageRepository implements IImageRepository {
     final documentReference =
         FirebaseFirestore.instance.collection(ImageEntity.collectionName).doc();
 
-    final fileName = documentReference.id + "." + imageMetadata.imageFileExtension.fileExtension;
+    final fileName = documentReference.id +
+        "." +
+        imageMetadata.imageFileExtension.fileExtension;
 
     final storagePath = folderName + fileName;
 
@@ -61,14 +64,16 @@ class ImageRepository implements IImageRepository {
 
   @override
   Future<ImageEntity> find(String id) async {
-    final response = await _firestoreClient.getDoc(collectionName: ImageEntity.collectionName, documentName: id);
+    final response = await _firestoreClient.getDoc(
+        collectionName: ImageEntity.collectionName, documentName: id);
     final image = ImageEntity.fromData(response);
     return image;
   }
 
   @override
   Future<List<ImageEntity>> findWithQueries(List<QueryModel> queries) async {
-    Query query = FirebaseFirestore.instance.collection(ImageEntity.collectionName);
+    Query query =
+        FirebaseFirestore.instance.collection(ImageEntity.collectionName);
     for (QueryModel model in queries) {
       query = model.build(query);
     }
@@ -82,10 +87,10 @@ class ImageRepository implements IImageRepository {
     return findWithQueries([queryModel]);
   }
 
-
   @override
   Future<String> getURL(ImageEntity imageEntity) async {
-    final path = imageEntity.storageRef + "." + imageEntity.imageMetadata.imageFileExtension.fileExtension;
+    final path =
+        imageEntity.storageRef + "." + imageEntity.imageMetadata.fileExtension;
     final ref = await _storageClient.getStorageRef(path);
     return _storageClient.getLink(ref);
   }
