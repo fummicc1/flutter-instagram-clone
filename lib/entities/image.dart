@@ -66,36 +66,39 @@ class ImageMetadata {
       throw EntityParserException(data);
     }
     final imageContentType =
-    ImageContentType.fromContentType(imageContentTypeText);
+        ImageContentType.fromContentType(imageContentTypeText);
     final imageFileExtension =
-    ImageFileExtension.fromFileExtension(imageFileExtensionText);
+        ImageFileExtension.fromFileExtension(imageFileExtensionText);
     return ImageMetadata(
         imageContentType: imageContentType,
         imageFileExtension: imageFileExtension);
   }
 
   Map<String, dynamic> get data => {
-    "image_content_type": imageContentType.contentType,
-    "image_file_extension": imageFileExtension.fileExtension,
-  };
+        "image_content_type": imageContentType.contentType,
+        "image_file_extension": imageFileExtension.fileExtension,
+      };
 }
 
 @immutable
 class ImageEntity {
   final String? id;
-  final String storageRef;
+  final String path;
+  final String fileName;
   final ImageMetadata imageMetadata;
 
   ImageEntity(
       {required this.id,
-        required this.storageRef,
-        required this.imageMetadata});
+      required this.path,
+      required this.fileName,
+      required this.imageMetadata});
 
   factory ImageEntity.fromData(Map<String, dynamic> data) {
     final id = data["id"] as String?;
-    final storageRef = data["storage_ref"] as String?;
+    final path = data["path"] as String?;
+    final fileName = data["file_name"] as String?;
 
-    if (id == null || storageRef == null) {
+    if (id == null || path == null || fileName == null) {
       throw EntityParserException(data);
     }
 
@@ -103,14 +106,17 @@ class ImageEntity {
     final imageMetadata = ImageMetadata.fromData(imageMetadataData);
 
     return ImageEntity(
-        id: id, storageRef: storageRef, imageMetadata: imageMetadata);
+        id: id, path: path, fileName: fileName, imageMetadata: imageMetadata);
   }
 
   Map<String, dynamic> get data => {
-    "id": id,
-    "storage_ref": storageRef,
-    "image_metadata": imageMetadata.data
-  };
+        "id": id,
+        "file_name": fileName,
+        "path": path,
+        "image_metadata": imageMetadata.data
+      };
 
   static const collectionName = "images";
+
+  String getFileURL() => path + fileName + "." + imageMetadata.fileExtension;
 }
