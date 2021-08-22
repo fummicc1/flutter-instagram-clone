@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_instagram/pages/account_registration_page.dart';
+import 'package:flutter_instagram/pages/account_registration_start_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: AccountRegistrationPage(),
+      home: AccountRegistrationStartPage(),
     );
   }
 }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_instagram/pages/account_registration_sign_up_page.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class AccountRegistrationPage extends StatelessWidget {
-  const AccountRegistrationPage({Key? key}) : super(key: key);
+class AccountRegistrationStartPage extends StatelessWidget {
+  const AccountRegistrationStartPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +79,10 @@ class AccountRegistrationPage extends StatelessWidget {
                       ],
                     ),
                     TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (_) => AccountRegistrationSignUpPage()));
+                        },
                         child: Text(
                           "電話番号またはメールアドレスで登録",
                           style: TextStyle(fontWeight: FontWeight.bold),
