@@ -9,15 +9,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class AccountRegistrationViewModel
     extends StateNotifier<AccountRegistrationState> {
   IAuthRepository _authRepository;
-  StreamController<GenericException> errorStream = StreamController();
-  AccountRegistrationViewModel(this._authRepository)
+  StateNotifier<GenericException?> errorStateNotifier;
+  AccountRegistrationViewModel(this._authRepository, this.errorStateNotifier)
       : super(AccountRegistrationState());
-
-  @override
-  void dispose() {
-    super.dispose();
-    errorStream.close();
-  }
 
   void updateEmail(String newValue) {
     state = state.copyWith(email: newValue);
@@ -33,10 +27,10 @@ class AccountRegistrationViewModel
       await _signUp();
       return true;
     } on GenericException catch (e) {
-      errorStream.sink.add(e);
+      errorStateNotifier.state = e;
       return false;
     } catch (e) {
-      errorStream.sink.add(SimpleException(e.toString()));
+      errorStateNotifier.state = SimpleException(e.toString());
       return false;
     }
   }
