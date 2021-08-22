@@ -16,3 +16,5 @@ extension QueryModelTest on QueryModel {
     return false;
   }
 }
+
+void main() { }
