@@ -11,12 +11,18 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
   final IUserRepository _userRepository;
   final IPostRepository _postRepository;
   final IImageRepository _imageRepository;
+  final StateNotifier<GenericException?> _exceptionNotifier;
   final String userID;
 
-  ProfileViewModel(
-      this._userRepository, this._postRepository, this._imageRepository,
+  ProfileViewModel(this._userRepository, this._postRepository,
+      this._imageRepository, this._exceptionNotifier,
       {required this.userID})
-      : super(ProfileState());
+      : super(ProfileState()) {
+    try {
+
+    } on GenericException catch (exception) {
+    }
+  }
 
   Future<UserModel> fetchUser() async {
     final userEntity = await _userRepository.findWithID(userID);
@@ -29,15 +35,7 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
 
     final imageEntity = await _imageRepository.find(imageReference.id);
 
-    if (imageEntity == null) {
-      throw SimpleException("No ImageEntity");
-    }
-
     final avatarURL = await _imageRepository.getURL(imageEntity);
-
-    if (avatarURL == null) {
-      throw SimpleException("No avatarURL");
-    }
 
     final avatar = ImageModel(resource: avatarURL);
 
