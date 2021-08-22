@@ -46,8 +46,7 @@ class FakeImageRepository implements IImageRepository {
   Future<List<ImageEntity>> findWithQuery(QueryModel queryModel) => findWithQueries([queryModel]);
 
   @override
-  Future<String> getURL(ImageEntity imageEntity) {
-    // FIXME: How to implement?
-    throw UnimplementedError();
+  Future<String> getURL(ImageEntity imageEntity) async {
+    return "https://via.placeholder.com/150";
   }
 }
