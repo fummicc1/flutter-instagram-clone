@@ -25,6 +25,7 @@ abstract class IImageRepository {
       {required File file, required ImageMetadata imageMetadata});
 }
 
+
 class ImageRepository implements IImageRepository {
   IStorageClient _storageClient;
   IFirestoreClient _firestoreClient;
@@ -37,21 +38,19 @@ class ImageRepository implements IImageRepository {
     final folderName = "images/";
 
     final documentReference =
-        FirebaseFirestore.instance.collection(ImageEntity.collectionName).doc();
+    FirebaseFirestore.instance.collection(ImageEntity.collectionName).doc();
 
-    final fileName = documentReference.id +
-        "." +
-        imageMetadata.imageFileExtension.fileExtension;
-
-    final storagePath = folderName + fileName;
-
-    await _storageClient.uploadFile(
-        file: file, path: storagePath, contentType: imageMetadata.contentType);
+    final fileName = documentReference.id;
 
     final ImageEntity imageEntity = ImageEntity(
         id: documentReference.id,
-        storageRef: storagePath,
+        fileName: fileName,
+        path: folderName,
         imageMetadata: imageMetadata);
+
+    await _storageClient.uploadFile(
+        file: file, path: imageEntity.getFileURL(), contentType: imageMetadata.contentType);
+
     await _createImageEntity(imageEntity);
 
     return documentReference.id;
@@ -73,7 +72,7 @@ class ImageRepository implements IImageRepository {
   @override
   Future<List<ImageEntity>> findWithQueries(List<QueryModel> queries) async {
     Query query =
-        FirebaseFirestore.instance.collection(ImageEntity.collectionName);
+    FirebaseFirestore.instance.collection(ImageEntity.collectionName);
     for (QueryModel model in queries) {
       query = model.build(query);
     }
@@ -90,7 +89,7 @@ class ImageRepository implements IImageRepository {
   @override
   Future<String> getURL(ImageEntity imageEntity) async {
     final path =
-        imageEntity.storageRef + "." + imageEntity.imageMetadata.fileExtension;
+        imageEntity.getFileURL();
     final ref = await _storageClient.getStorageRef(path);
     return _storageClient.getLink(ref);
   }

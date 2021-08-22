@@ -83,19 +83,22 @@ class ImageMetadata {
 @immutable
 class ImageEntity {
   final String? id;
-  final String storageRef;
+  final String path;
+  final String fileName;
   final ImageMetadata imageMetadata;
 
   ImageEntity(
       {required this.id,
-      required this.storageRef,
+      required this.path,
+      required this.fileName,
       required this.imageMetadata});
 
   factory ImageEntity.fromData(Map<String, dynamic> data) {
     final id = data["id"] as String?;
-    final storageRef = data["storage_ref"] as String?;
+    final path = data["path"] as String?;
+    final fileName = data["file_name"] as String?;
 
-    if (id == null || storageRef == null) {
+    if (id == null || path == null || fileName == null) {
       throw EntityParserException(data);
     }
 
@@ -103,14 +106,17 @@ class ImageEntity {
     final imageMetadata = ImageMetadata.fromData(imageMetadataData);
 
     return ImageEntity(
-        id: id, storageRef: storageRef, imageMetadata: imageMetadata);
+        id: id, path: path, fileName: fileName, imageMetadata: imageMetadata);
   }
 
   Map<String, dynamic> get data => {
         "id": id,
-        "storage_ref": storageRef,
+        "file_name": fileName,
+        "path": path,
         "image_metadata": imageMetadata.data
       };
 
   static const collectionName = "images";
+
+  String getFileURL() => path + fileName + "." + imageMetadata.fileExtension;
 }
