@@ -33,3 +33,5 @@ jobs:
         run: echo $GOOGLE_SERVICE_JSON_BASE64 | base64 --decode > ./android/app/google-services.json
       - name: Build Android App
         run: flutter build appbundle --debug
+      - name: Test
+        run: flutter test

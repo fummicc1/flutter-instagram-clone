@@ -21,6 +21,9 @@ class FakeAuthRepository implements IAuthRepository {
   @override
   Future<String> signUp(
       {required String email, required String password}) async {
+    if (_users.indexWhere((u) => u.email == email) >= 0) {
+      throw AuthException("User already exists");
+    }
     final newUid = "FAKE_USER_${_uidCounter++}";
     final newUser = _FakeAuthUserData(newUid, email, password);
     _currentUser = newUser;
