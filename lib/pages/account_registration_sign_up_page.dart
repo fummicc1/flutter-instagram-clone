@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram/pages/account_registration_name_page.dart';
+import 'package:flutter_instagram/providers/providers.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class AccountRegistrationSignUpPage extends StatelessWidget {
+class AccountRegistrationSignUpPage extends ConsumerWidget {
   const AccountRegistrationSignUpPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final viewModel = ref.watch(accountRegistrationViewModel.notifier);
     return DefaultTabController(
       length: 2,
       child: SafeArea(
@@ -37,8 +40,27 @@ class AccountRegistrationSignUpPage extends StatelessWidget {
                     margin: EdgeInsets.symmetric(vertical: 16),
                     height: 48,
                     child: TextField(
+                      onChanged: (value) => viewModel.updateEmail(value),
                       decoration: InputDecoration(
                           hintText: "メールアドレス",
+                          filled: true,
+                          fillColor: Color(0xFFFAFAFA),
+                          contentPadding: EdgeInsets.only(
+                              left: 8, right: 8, bottom: 48 / 2),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFFEDEDED))),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Color(0xFFEDEDED)))),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 16),
+                    height: 48,
+                    child: TextField(
+                      onChanged: (value) => viewModel.updatePassword(value),
+                      decoration: InputDecoration(
+                          hintText: "パスワード",
                           filled: true,
                           fillColor: Color(0xFFFAFAFA),
                           contentPadding: EdgeInsets.only(
@@ -54,9 +76,13 @@ class AccountRegistrationSignUpPage extends StatelessWidget {
                     children: [
                       Expanded(
                         child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => AccountRegistrationNamePage()));
+                          onPressed: () async {
+                            final res = await viewModel.onClickNextButton();
+                            if (res) {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (_) =>
+                                      AccountRegistrationNamePage()));
+                            }
                           },
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 12),
