@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_instagram/models/image_model.dart';
 
+@immutable
 class PostModel {
   // 投稿ID
   final String id;
