@@ -19,11 +19,13 @@ class _$ProfileStateTearOff {
   _ProfileState call(
       {List<PostModel> posts = const [],
       UserModel? user,
-      List<StoryModel> stories = const []}) {
+      List<StoryModel> highlightedStories = const [],
+      bool hasNewStory = false}) {
     return _ProfileState(
       posts: posts,
       user: user,
-      stories: stories,
+      highlightedStories: highlightedStories,
+      hasNewStory: hasNewStory,
     );
   }
 }
@@ -33,9 +35,17 @@ const $ProfileState = _$ProfileStateTearOff();
 
 /// @nodoc
 mixin _$ProfileState {
+  /// 投稿データ
   List<PostModel> get posts => throw _privateConstructorUsedError;
+
+  /// プロフィールデータ
   UserModel? get user => throw _privateConstructorUsedError;
-  List<StoryModel> get stories => throw _privateConstructorUsedError;
+
+  /// プロフィールのBIO欄に表示されるストーリーズ
+  List<StoryModel> get highlightedStories => throw _privateConstructorUsedError;
+
+  /// 新規ストーリがあるか
+  bool get hasNewStory => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProfileStateCopyWith<ProfileState> get copyWith =>
@@ -47,7 +57,11 @@ abstract class $ProfileStateCopyWith<$Res> {
   factory $ProfileStateCopyWith(
           ProfileState value, $Res Function(ProfileState) then) =
       _$ProfileStateCopyWithImpl<$Res>;
-  $Res call({List<PostModel> posts, UserModel? user, List<StoryModel> stories});
+  $Res call(
+      {List<PostModel> posts,
+      UserModel? user,
+      List<StoryModel> highlightedStories,
+      bool hasNewStory});
 }
 
 /// @nodoc
@@ -62,7 +76,8 @@ class _$ProfileStateCopyWithImpl<$Res> implements $ProfileStateCopyWith<$Res> {
   $Res call({
     Object? posts = freezed,
     Object? user = freezed,
-    Object? stories = freezed,
+    Object? highlightedStories = freezed,
+    Object? hasNewStory = freezed,
   }) {
     return _then(_value.copyWith(
       posts: posts == freezed
@@ -73,10 +88,14 @@ class _$ProfileStateCopyWithImpl<$Res> implements $ProfileStateCopyWith<$Res> {
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserModel?,
-      stories: stories == freezed
-          ? _value.stories
-          : stories // ignore: cast_nullable_to_non_nullable
+      highlightedStories: highlightedStories == freezed
+          ? _value.highlightedStories
+          : highlightedStories // ignore: cast_nullable_to_non_nullable
               as List<StoryModel>,
+      hasNewStory: hasNewStory == freezed
+          ? _value.hasNewStory
+          : hasNewStory // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -88,7 +107,11 @@ abstract class _$ProfileStateCopyWith<$Res>
           _ProfileState value, $Res Function(_ProfileState) then) =
       __$ProfileStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<PostModel> posts, UserModel? user, List<StoryModel> stories});
+  $Res call(
+      {List<PostModel> posts,
+      UserModel? user,
+      List<StoryModel> highlightedStories,
+      bool hasNewStory});
 }
 
 /// @nodoc
@@ -105,7 +128,8 @@ class __$ProfileStateCopyWithImpl<$Res> extends _$ProfileStateCopyWithImpl<$Res>
   $Res call({
     Object? posts = freezed,
     Object? user = freezed,
-    Object? stories = freezed,
+    Object? highlightedStories = freezed,
+    Object? hasNewStory = freezed,
   }) {
     return _then(_ProfileState(
       posts: posts == freezed
@@ -116,10 +140,14 @@ class __$ProfileStateCopyWithImpl<$Res> extends _$ProfileStateCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserModel?,
-      stories: stories == freezed
-          ? _value.stories
-          : stories // ignore: cast_nullable_to_non_nullable
+      highlightedStories: highlightedStories == freezed
+          ? _value.highlightedStories
+          : highlightedStories // ignore: cast_nullable_to_non_nullable
               as List<StoryModel>,
+      hasNewStory: hasNewStory == freezed
+          ? _value.hasNewStory
+          : hasNewStory // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -128,20 +156,34 @@ class __$ProfileStateCopyWithImpl<$Res> extends _$ProfileStateCopyWithImpl<$Res>
 
 class _$_ProfileState implements _ProfileState {
   const _$_ProfileState(
-      {this.posts = const [], this.user, this.stories = const []});
+      {this.posts = const [],
+      this.user,
+      this.highlightedStories = const [],
+      this.hasNewStory = false});
 
   @JsonKey(defaultValue: const [])
   @override
+
+  /// 投稿データ
   final List<PostModel> posts;
   @override
+
+  /// プロフィールデータ
   final UserModel? user;
   @JsonKey(defaultValue: const [])
   @override
-  final List<StoryModel> stories;
+
+  /// プロフィールのBIO欄に表示されるストーリーズ
+  final List<StoryModel> highlightedStories;
+  @JsonKey(defaultValue: false)
+  @override
+
+  /// 新規ストーリがあるか
+  final bool hasNewStory;
 
   @override
   String toString() {
-    return 'ProfileState(posts: $posts, user: $user, stories: $stories)';
+    return 'ProfileState(posts: $posts, user: $user, highlightedStories: $highlightedStories, hasNewStory: $hasNewStory)';
   }
 
   @override
@@ -152,8 +194,12 @@ class _$_ProfileState implements _ProfileState {
                 const DeepCollectionEquality().equals(other.posts, posts)) &&
             (identical(other.user, user) ||
                 const DeepCollectionEquality().equals(other.user, user)) &&
-            (identical(other.stories, stories) ||
-                const DeepCollectionEquality().equals(other.stories, stories)));
+            (identical(other.highlightedStories, highlightedStories) ||
+                const DeepCollectionEquality()
+                    .equals(other.highlightedStories, highlightedStories)) &&
+            (identical(other.hasNewStory, hasNewStory) ||
+                const DeepCollectionEquality()
+                    .equals(other.hasNewStory, hasNewStory)));
   }
 
   @override
@@ -161,7 +207,8 @@ class _$_ProfileState implements _ProfileState {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(posts) ^
       const DeepCollectionEquality().hash(user) ^
-      const DeepCollectionEquality().hash(stories);
+      const DeepCollectionEquality().hash(highlightedStories) ^
+      const DeepCollectionEquality().hash(hasNewStory);
 
   @JsonKey(ignore: true)
   @override
@@ -173,14 +220,25 @@ abstract class _ProfileState implements ProfileState {
   const factory _ProfileState(
       {List<PostModel> posts,
       UserModel? user,
-      List<StoryModel> stories}) = _$_ProfileState;
+      List<StoryModel> highlightedStories,
+      bool hasNewStory}) = _$_ProfileState;
 
   @override
+
+  /// 投稿データ
   List<PostModel> get posts => throw _privateConstructorUsedError;
   @override
+
+  /// プロフィールデータ
   UserModel? get user => throw _privateConstructorUsedError;
   @override
-  List<StoryModel> get stories => throw _privateConstructorUsedError;
+
+  /// プロフィールのBIO欄に表示されるストーリーズ
+  List<StoryModel> get highlightedStories => throw _privateConstructorUsedError;
+  @override
+
+  /// 新規ストーリがあるか
+  bool get hasNewStory => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ProfileStateCopyWith<_ProfileState> get copyWith =>

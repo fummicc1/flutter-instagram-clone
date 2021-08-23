@@ -7,10 +7,18 @@ part 'profile_state.freezed.dart';
 
 @freezed
 class ProfileState with _$ProfileState {
-  const factory ProfileState({
-    @Default([]) List<PostModel> posts,
-    UserModel? user,
-    @Default([]) List<StoryModel> highlightedStories,
-    @Default(false) bool hasStory
-}) = _ProfileState;
+  const factory ProfileState(
+      {
+
+      /// 投稿データ
+      @Default([]) List<PostModel> posts,
+
+      /// プロフィールデータ
+      UserModel? user,
+
+      /// プロフィールのBIO欄に表示されるストーリーズ
+      @Default([]) List<StoryModel> highlightedStories,
+
+      /// 新規ストーリがあるか
+      @Default(false) bool hasNewStory}) = _ProfileState;
 }
