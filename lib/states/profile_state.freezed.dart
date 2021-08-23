@@ -17,7 +17,7 @@ class _$ProfileStateTearOff {
   const _$ProfileStateTearOff();
 
   _ProfileState call(
-      {List<PostModel> posts = const [],
+      {List<GridPostModel> posts = const [],
       UserModel? user,
       List<StoryModel> highlightedStories = const [],
       bool hasNewStory = false}) {
@@ -36,7 +36,7 @@ const $ProfileState = _$ProfileStateTearOff();
 /// @nodoc
 mixin _$ProfileState {
   /// 投稿データ
-  List<PostModel> get posts => throw _privateConstructorUsedError;
+  List<GridPostModel> get posts => throw _privateConstructorUsedError;
 
   /// プロフィールデータ
   UserModel? get user => throw _privateConstructorUsedError;
@@ -58,7 +58,7 @@ abstract class $ProfileStateCopyWith<$Res> {
           ProfileState value, $Res Function(ProfileState) then) =
       _$ProfileStateCopyWithImpl<$Res>;
   $Res call(
-      {List<PostModel> posts,
+      {List<GridPostModel> posts,
       UserModel? user,
       List<StoryModel> highlightedStories,
       bool hasNewStory});
@@ -83,7 +83,7 @@ class _$ProfileStateCopyWithImpl<$Res> implements $ProfileStateCopyWith<$Res> {
       posts: posts == freezed
           ? _value.posts
           : posts // ignore: cast_nullable_to_non_nullable
-              as List<PostModel>,
+              as List<GridPostModel>,
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -108,7 +108,7 @@ abstract class _$ProfileStateCopyWith<$Res>
       __$ProfileStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {List<PostModel> posts,
+      {List<GridPostModel> posts,
       UserModel? user,
       List<StoryModel> highlightedStories,
       bool hasNewStory});
@@ -135,7 +135,7 @@ class __$ProfileStateCopyWithImpl<$Res> extends _$ProfileStateCopyWithImpl<$Res>
       posts: posts == freezed
           ? _value.posts
           : posts // ignore: cast_nullable_to_non_nullable
-              as List<PostModel>,
+              as List<GridPostModel>,
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -165,7 +165,7 @@ class _$_ProfileState implements _ProfileState {
   @override
 
   /// 投稿データ
-  final List<PostModel> posts;
+  final List<GridPostModel> posts;
   @override
 
   /// プロフィールデータ
@@ -218,7 +218,7 @@ class _$_ProfileState implements _ProfileState {
 
 abstract class _ProfileState implements ProfileState {
   const factory _ProfileState(
-      {List<PostModel> posts,
+      {List<GridPostModel> posts,
       UserModel? user,
       List<StoryModel> highlightedStories,
       bool hasNewStory}) = _$_ProfileState;
@@ -226,7 +226,7 @@ abstract class _ProfileState implements ProfileState {
   @override
 
   /// 投稿データ
-  List<PostModel> get posts => throw _privateConstructorUsedError;
+  List<GridPostModel> get posts => throw _privateConstructorUsedError;
   @override
 
   /// プロフィールデータ

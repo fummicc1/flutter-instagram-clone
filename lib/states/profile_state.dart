@@ -1,3 +1,4 @@
+import 'package:flutter_instagram/models/grid_post_model.dart';
 import 'package:flutter_instagram/models/post.dart';
 import 'package:flutter_instagram/models/story.dart';
 import 'package:flutter_instagram/models/user_model.dart';
@@ -11,7 +12,7 @@ class ProfileState with _$ProfileState {
       {
 
       /// 投稿データ
-      @Default([]) List<PostModel> posts,
+      @Default([]) List<GridPostModel> posts,
 
       /// プロフィールデータ
       UserModel? user,

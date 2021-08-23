@@ -5,8 +5,8 @@ import 'package:flutter_instagram/models/image_model.dart';
 class PostModel {
   // 投稿ID
   final String id;
-  // ユーザー情報
-  final String userName;
+  // ユーザーID
+  final String userID;
   final ImageModel? userImage;
 
   final List<ImageModel> postImageList;
@@ -24,7 +24,7 @@ class PostModel {
   PostModel(
       {
         required this.id,
-        required this.userName,
+        required this.userID,
       required this.userImage,
       required this.postImageList,
       required this.message,

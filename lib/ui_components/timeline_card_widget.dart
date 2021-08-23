@@ -27,7 +27,7 @@ class TimelineCardWidget extends StatelessWidget {
                         size: Size(32, 32),
                         hasNewStory: false),
                     SizedBox(width: 8),
-                    Text(post.userName),
+                    Text(post.userID),
                   ]),
                   Positioned(
                       top: 0,
