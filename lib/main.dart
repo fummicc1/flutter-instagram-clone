@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_instagram/pages/account_registration_start_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
@@ -27,7 +28,7 @@ class _MyAppState extends State<MyApp> {
           builder: (context, snapshot) {
             if (snapshot.hasError) return Container(); // something went wrong
             if (snapshot.connectionState == ConnectionState.done)
-              return Container(); // complete
+              return AccountRegistrationStartPage(); // complete
             return Container(); // loading
           },
         ));

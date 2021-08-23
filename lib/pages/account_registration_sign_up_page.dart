@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_instagram/common/exception.dart';
 import 'package:flutter_instagram/pages/account_registration_name_page.dart';
 import 'package:flutter_instagram/providers/providers.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AccountRegistrationSignUpPage extends ConsumerWidget {
   const AccountRegistrationSignUpPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen<StateNotifier<GenericException?>>(errorStateProvider,
+        (notifier) {
+      print("Error in View: ${notifier.state?.message()}");
+    });
     final viewModel = ref.watch(accountRegistrationViewModel.notifier);
     return DefaultTabController(
       length: 2,
@@ -77,6 +82,7 @@ class AccountRegistrationSignUpPage extends ConsumerWidget {
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () async {
+                            print("Button Clicked");
                             final res = await viewModel.onClickNextButton();
                             if (res) {
                               Navigator.of(context).push(MaterialPageRoute(

@@ -17,6 +17,7 @@ final authRepository = Provider<AuthRepository>((ref) {
 
 final accountRegistrationViewModel = StateNotifierProvider<
     AccountRegistrationViewModel, AccountRegistrationState>((ref) {
+  // return AccountRegistrationViewModel(ref.watch(authRepository), ref.read);
   return AccountRegistrationViewModel(
-      ref.watch(authRepository), ref.watch(errorStateProvider));
+      ref.watch(authRepository), ref.read(errorStateProvider));
 });
