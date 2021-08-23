@@ -4,12 +4,28 @@ import 'package:flutter_instagram/models/grid_post_model.dart';
 import 'package:flutter_instagram/models/image_model.dart';
 import 'package:flutter_instagram/models/story.dart';
 import 'package:flutter_instagram/models/user_model.dart';
+import 'package:flutter_instagram/providers/providers.dart';
 import 'package:flutter_instagram/repositories/image_repository.dart';
 import 'package:flutter_instagram/repositories/post_repository.dart';
 import 'package:flutter_instagram/repositories/query.dart';
 import 'package:flutter_instagram/repositories/user_repository.dart';
 import 'package:flutter_instagram/states/profile_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+final myProfileUserIDProvider =
+    StateProvider<String>((_) => throw UnimplementedError());
+
+final myProfileStateProvider =
+    StateNotifierProvider<ProfileViewModel, ProfileState>((ref) {
+  final userRepository = ref.watch(userRepositoryProvider).state;
+  final postRepository = ref.watch(postRepositoryProvider).state;
+  final imageRepository = ref.watch(imageRepositoryProvider).state;
+
+  final String userID = ref.watch(myProfileUserIDProvider).state;
+
+  return ProfileViewModel(userRepository, postRepository, imageRepository,
+      userID: userID);
+});
 
 class ProfileViewModel extends StateNotifier<ProfileState> {
   final IUserRepository _userRepository;

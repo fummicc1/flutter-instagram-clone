@@ -10,7 +10,6 @@ part 'profile_state.freezed.dart';
 class ProfileState with _$ProfileState {
   const factory ProfileState(
       {
-
       /// 投稿データ
       @Default([]) List<GridPostModel> posts,
 
