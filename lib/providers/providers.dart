@@ -55,13 +55,13 @@ final _userRepository = Provider<IUserRepository>((ref) {
 
 /// States
 final myProfileUserIDProvider =
-StateProvider<String>((_) => throw UnimplementedError());
+    StateProvider<String>((_) => throw UnimplementedError());
 
 final myProfileStateProvider =
-StateNotifierProvider<ProfileViewModel, ProfileState>((ref) {
-  final userRepository = ref.watch(_userRepository.notifier).state;
-  final postRepository = ref.watch(_postRepository.notifier).state;
-  final imageRepository = ref.watch(_imageRepository.notifier).state;
+    StateNotifierProvider<ProfileViewModel, ProfileState>((ref) {
+  final userRepository = ref.watch(_userRepository);
+  final postRepository = ref.watch(_postRepository);
+  final imageRepository = ref.watch(_imageRepository);
 
   final String userID = ref.watch(myProfileUserIDProvider).state;
 

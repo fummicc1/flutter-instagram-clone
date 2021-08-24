@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram/models/user_model.dart';
-import 'package:flutter_instagram/states/profile_state.dart';
 import 'package:flutter_instagram/ui_components/user_image_widget.dart';
-import 'package:flutter_instagram/viewmodels/profile_viewmodel.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 /// プロフィールに表示する数字データをまとめたクラス
 class _ProfileNumericStatusModel {
@@ -17,25 +14,32 @@ class _ProfileNumericStatusModel {
       required this.followeeCount});
 }
 
-class ProfileStatusWidget extends ConsumerWidget {
-  const ProfileStatusWidget({Key? key, required}) : super(key: key);
+class ProfileStatusWidget extends StatelessWidget {
+  ProfileStatusWidget(
+      {Key? key,
+      required this.user,
+      required this.hasNewStory,
+      required this.avatarSize,
+      required this.isMyAccount})
+      : super(key: key);
 
-  Future<Widget> buildProfileWidget(
-      BuildContext buildContext, WidgetRef ref) async {
+  final UserModel user;
+  final bool hasNewStory;
+  final Size avatarSize;
+  final bool isMyAccount;
 
-    final state = ref.watch(myProfileStateProvider);
-
+  Widget buildProfileWidget(BuildContext buildContext) {
     final numericStat = _ProfileNumericStatusModel(
-        postCount: state.userModel?.posts.length,
-        followerCount: userModel.followerCount,
-        followeeCount: userModel.followeeCount);
+        postCount: user.posts.length,
+        followerCount: user.followerCount,
+        followeeCount: user.followeeCount);
 
     return Column(
       children: [
         Row(
           children: [
-            UserImageWidget(userModel.avatar,
-                hasNewStory: hasNewStory, size: imageSize),
+            UserImageWidget(user.avatar,
+                hasNewStory: hasNewStory, size: avatarSize),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -61,8 +65,8 @@ class ProfileStatusWidget extends ConsumerWidget {
           ],
         ),
         SizedBox(height: 8),
-        Text(userModel.displayName ?? userModel.userID),
-        Text(userModel.bio ?? "")
+        Text(user.displayName ?? user.userID),
+        Text(user.bio ?? "")
       ],
     );
   }
@@ -96,8 +100,7 @@ class ProfileStatusWidget extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    // TODO: implement build
-    throw UnimplementedError();
+  Widget build(BuildContext context) {
+    return buildProfileWidget(context);
   }
 }
