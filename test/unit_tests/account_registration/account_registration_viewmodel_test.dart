@@ -1,6 +1,3 @@
-import 'dart:async';
-import 'dart:io';
-
 import 'package:flutter_instagram/common/exception.dart';
 import 'package:flutter_instagram/viewmodels/account_registration_viewmodel.dart';
 import 'package:flutter_test/flutter_test.dart';
