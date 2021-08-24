@@ -2,27 +2,21 @@ import 'dart:async';
 
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter_instagram/common/exception.dart';
+import 'package:flutter_instagram/entities/user.dart';
 import 'package:flutter_instagram/providers/providers.dart';
 import 'package:flutter_instagram/repositories/auth_repository.dart';
+import 'package:flutter_instagram/repositories/user_repository.dart';
 import 'package:flutter_instagram/states/account_registration_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AccountRegistrationViewModel
     extends StateNotifier<AccountRegistrationState> {
   IAuthRepository _authRepository;
+  IUserRepository _userRepository;
   StateNotifier<GenericException?> errorStateNotifier;
-  AccountRegistrationViewModel(this._authRepository, this.errorStateNotifier)
+  AccountRegistrationViewModel(
+      this._authRepository, this._userRepository, this.errorStateNotifier)
       : super(AccountRegistrationState());
-  // final Reader read;
-  // AccountRegistrationViewModel(this._authRepository, this.read)
-  //     : super(AccountRegistrationState());
-
-  @override
-  void dispose() {
-    print("DISPOSE: AccountRegistrationViewModel");
-
-    super.dispose();
-  }
 
   void updateEmail(String newValue) {
     print("new email: $newValue");
