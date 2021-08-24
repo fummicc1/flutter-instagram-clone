@@ -41,12 +41,12 @@ final _imageRepository = Provider<IImageRepository>((ref) {
   return imageRepository;
 });
 
-final _postRepository = StateProvider<IPostRepository>((ref) {
+final _postRepository = Provider<IPostRepository>((ref) {
   final firestore = ref.watch(_firestoreClient);
   return PostRepository(firestore);
 });
 
-final _userRepository = StateProvider<IUserRepository>((ref) {
+final _userRepository = Provider<IUserRepository>((ref) {
   final firestore = ref.watch(_firestoreClient);
   return UserRepository(firestore);
 });
