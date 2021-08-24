@@ -82,7 +82,6 @@ class AccountRegistrationSignUpPage extends ConsumerWidget {
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () async {
-                            print("Button Clicked");
                             final res = await viewModel.onClickNextButton();
                             if (res) {
                               Navigator.of(context).push(MaterialPageRoute(
