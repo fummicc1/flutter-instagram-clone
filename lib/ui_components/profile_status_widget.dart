@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram/models/user_model.dart';
+import 'package:flutter_instagram/states/profile_state.dart';
 import 'package:flutter_instagram/ui_components/user_image_widget.dart';
+import 'package:flutter_instagram/viewmodels/profile_viewmodel.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 /// プロフィールに表示する数字データをまとめたクラス
@@ -16,22 +18,15 @@ class _ProfileNumericStatusModel {
 }
 
 class ProfileStatusWidget extends ConsumerWidget {
-  const ProfileStatusWidget(
-      {Key? key,
-      required this.userModel,
-      required this.hasNewStory,
-      required this.isMyAccount})
-      : super(key: key);
-
-  final UserModel userModel;
-  final bool hasNewStory;
-  final imageSize = Size(44, 44);
-  final bool isMyAccount;
+  const ProfileStatusWidget({Key? key, required}) : super(key: key);
 
   Future<Widget> buildProfileWidget(
       BuildContext buildContext, WidgetRef ref) async {
+
+    final state = ref.watch(myProfileStateProvider);
+
     final numericStat = _ProfileNumericStatusModel(
-        postCount: userModel.posts.length,
+        postCount: state.userModel?.posts.length,
         followerCount: userModel.followerCount,
         followeeCount: userModel.followeeCount);
 

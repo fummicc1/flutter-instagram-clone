@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_instagram/models/grid_post_model.dart';
 import 'package:flutter_instagram/models/post.dart';
 import 'package:flutter_instagram/models/story.dart';
@@ -8,17 +9,23 @@ part 'profile_state.freezed.dart';
 
 @freezed
 class ProfileState with _$ProfileState {
-  const factory ProfileState(
-      {
-      /// 投稿データ
-      @Default([]) List<GridPostModel> posts,
+  const factory ProfileState({
+    /// 投稿データ
+    @Default([]) List<GridPostModel> posts,
 
-      /// プロフィールデータ
-      UserModel? user,
+    /// プロフィールデータ
+    UserModel? user,
 
-      /// プロフィールのBIO欄に表示されるストーリーズ
-      @Default([]) List<StoryModel> highlightedStories,
+    /// プロフィールのBIO欄に表示されるストーリーズ
+    @Default([]) List<StoryModel> highlightedStories,
 
-      /// 新規ストーリがあるか
-      @Default(false) bool hasNewStory}) = _ProfileState;
+    /// 新規ストーリがあるか
+    @Default(false) bool hasNewStory,
+
+    /// アバターのImageの大きさ
+    @Default(Size(44, 44)) avatarSize,
+
+    /// `user`が自分のアカウントであるかどうか
+    @Default(false) bool isMyAccount;
+  }) = _ProfileState;
 }

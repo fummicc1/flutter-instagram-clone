@@ -12,21 +12,6 @@ import 'package:flutter_instagram/repositories/user_repository.dart';
 import 'package:flutter_instagram/states/profile_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final myProfileUserIDProvider =
-    StateProvider<String>((_) => throw UnimplementedError());
-
-final myProfileStateProvider =
-    StateNotifierProvider<ProfileViewModel, ProfileState>((ref) {
-  final userRepository = ref.watch(userRepositoryProvider).state;
-  final postRepository = ref.watch(postRepositoryProvider).state;
-  final imageRepository = ref.watch(imageRepositoryProvider).state;
-
-  final String userID = ref.watch(myProfileUserIDProvider).state;
-
-  return ProfileViewModel(userRepository, postRepository, imageRepository,
-      userID: userID);
-});
-
 class ProfileViewModel extends StateNotifier<ProfileState> {
   final IUserRepository _userRepository;
   final IPostRepository _postRepository;
