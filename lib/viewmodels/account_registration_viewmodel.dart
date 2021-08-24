@@ -19,26 +19,41 @@ class AccountRegistrationViewModel
       : super(AccountRegistrationState());
 
   void updateEmail(String newValue) {
-    print("new email: $newValue");
     state = state.copyWith(email: newValue);
   }
 
   void updatePassword(String newValue) {
-    print("new password: $newValue");
     state = state.copyWith(password: newValue);
   }
 
+  void updateUserName(String newValue) {
+    state = state.copyWith(userName: newValue);
+  }
+
+  void updateUserId(String newValue) {
+    state = state.copyWith(userId: newValue);
+  }
+
   Future<bool> onClickNextButton() async {
-    print("onClickNext: ${state.email} ${state.password}");
     try {
       await _validateEmail();
       await _signUp();
       return true;
     } on GenericException catch (e) {
-      print("onClickNext End: ${state.email} ${state.password}");
       errorStateNotifier.state = e;
-      //errorStateNotifier.state = e;
-      print("onClickNext End: ${state.email} ${state.password}");
+      return false;
+    } catch (e) {
+      errorStateNotifier.state = SimpleException(e.toString());
+      return false;
+    }
+  }
+
+  Future<bool> onClickRegisterButton() async {
+    try {
+      await _registerUser();
+      return true;
+    } on GenericException catch (e) {
+      errorStateNotifier.state = e;
       return false;
     } catch (e) {
       errorStateNotifier.state = SimpleException(e.toString());
@@ -54,5 +69,14 @@ class AccountRegistrationViewModel
 
   Future _signUp() async {
     await _authRepository.signUp(email: state.email, password: state.password);
+  }
+
+  Future _registerUser() async {
+    final id = _authRepository.getCurrentUserId()!;
+    await _userRepository.create(UserEntity(
+        id: id,
+        displayName: state.userName,
+        userId: state.userId,
+        profileImageReference: null));
   }
 }
