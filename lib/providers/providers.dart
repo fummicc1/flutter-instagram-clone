@@ -5,9 +5,11 @@ import 'package:flutter_instagram/common/exception.dart';
 import 'package:flutter_instagram/firebase/auth_client.dart';
 import 'package:flutter_instagram/firebase/firestore_client.dart';
 import 'package:flutter_instagram/firebase/storage_client.dart';
+import 'package:flutter_instagram/repositories/auth_repository.dart';
 import 'package:flutter_instagram/repositories/image_repository.dart';
 import 'package:flutter_instagram/repositories/post_repository.dart';
 import 'package:flutter_instagram/repositories/user_repository.dart';
+import 'package:flutter_instagram/states/account_registration_state.dart';
 import 'package:flutter_instagram/viewmodels/account_registration_viewmodel.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -52,8 +54,13 @@ final _userRepository = Provider<IUserRepository>((ref) {
   return UserRepository(firestore);
 });
 
+final _authRepository = Provider<IAuthRepository>((ref) {
+  final auth = ref.watch(_authClient);
+  return AuthRepository(auth);
+});
+
 final accountRegistrationViewModel = StateNotifierProvider<
-	AccountRegistrationViewModel, AccountRegistrationState>((ref) {
-	return AccountRegistrationViewModel(ref.watch(_authRepository),
-		ref.watch(_userRepository), ref.read(errorStateProvider));
+    AccountRegistrationViewModel, AccountRegistrationState>((ref) {
+  return AccountRegistrationViewModel(ref.watch(_authRepository),
+      ref.watch(_userRepository), ref.read(errorStateProvider));
 });
