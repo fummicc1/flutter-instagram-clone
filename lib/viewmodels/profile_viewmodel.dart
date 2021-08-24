@@ -4,7 +4,6 @@ import 'package:flutter_instagram/models/grid_post_model.dart';
 import 'package:flutter_instagram/models/image_model.dart';
 import 'package:flutter_instagram/models/story.dart';
 import 'package:flutter_instagram/models/user_model.dart';
-import 'package:flutter_instagram/providers/providers.dart';
 import 'package:flutter_instagram/repositories/image_repository.dart';
 import 'package:flutter_instagram/repositories/post_repository.dart';
 import 'package:flutter_instagram/repositories/query.dart';
@@ -18,8 +17,8 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
   final IImageRepository _imageRepository;
   final String userID;
 
-  ProfileViewModel(
-      this._userRepository, this._postRepository, this._imageRepository,
+  ProfileViewModel(this._userRepository, this._postRepository,
+      this._imageRepository,
       {required this.userID})
       : super(ProfileState());
 
@@ -32,11 +31,14 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
 
     final imageReference = userEntity.profileImageReference;
 
-    final imageEntity = await _imageRepository.find(imageReference.id);
-
-    final avatarURL = await _imageRepository.getURL(imageEntity);
-
-    final avatar = ImageModel(resource: avatarURL);
+    // Default Image
+    ImageModel avatar = ImageModel(resource: "https://via.placeholder.com/150");
+    
+    if (imageReference != null) {
+      final imageEntity = await _imageRepository.find(imageReference.id);
+      final avatarURL = await _imageRepository.getURL(imageEntity);
+      avatar = ImageModel(resource: avatarURL);
+    }
 
     final myPosts = await fetchOwnPosts();
 
@@ -54,7 +56,7 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
 
   Future<List<GridPostModel>> fetchOwnPosts() async {
     final EqualQueryModel queryModel =
-        EqualQueryModel(fieldName: "sender_id", fieldValue: userID);
+    EqualQueryModel(fieldName: "sender_id", fieldValue: userID);
     final postEntities = await _postRepository.findWithQuery(queryModel);
     List<GridPostModel> postModels = [];
     for (PostEntity entity in postEntities) {
@@ -74,5 +76,14 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
   Future<List<StoryModel>> fetchOwnStories() async {
     // TODO: Implement Story
     return [];
+  }
+
+  Future setup() async {
+    final user = await fetchUser();
+    state = state.copyWith(user: user,
+        posts: user.posts,
+        storyHighlightsList: [],
+        hasNewStory: false,
+        isMyAccount: user.userID == userID);
   }
 }

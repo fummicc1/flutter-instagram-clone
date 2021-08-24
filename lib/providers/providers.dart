@@ -55,7 +55,7 @@ final _userRepository = Provider<IUserRepository>((ref) {
 
 /// States
 final myProfileUserIDProvider =
-    StateProvider<String>((_) => throw UnimplementedError());
+    StateProvider<String>((_) => "fummicc1");
 
 final myProfileStateProvider =
     StateNotifierProvider<ProfileViewModel, ProfileState>((ref) {

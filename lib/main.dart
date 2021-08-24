@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'pages/profile/my_profile_page.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(ProviderScope(child: MyApp()));
@@ -27,7 +29,7 @@ class _MyAppState extends State<MyApp> {
           builder: (context, snapshot) {
             if (snapshot.hasError) return Container(); // something went wrong
             if (snapshot.connectionState == ConnectionState.done)
-              return Container(); // complete
+              return MyProfilePage(); // complete
             return Container(); // loading
           },
         ));

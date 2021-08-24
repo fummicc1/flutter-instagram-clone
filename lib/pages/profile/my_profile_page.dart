@@ -14,10 +14,12 @@ class MyProfilePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final viewModel = ref.read(myProfileStateProvider.notifier);
     final state = ref.watch(myProfileStateProvider);
     final user = state.user;
 
     if (user == null) {
+      viewModel.setup();
       return CircularProgressIndicator();
     }
 

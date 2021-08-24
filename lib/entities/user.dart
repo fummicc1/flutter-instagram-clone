@@ -9,7 +9,7 @@ class UserEntity with FirestoreModel {
   final String? displayName;
   final String? bio;
   final String userId;
-  final DocumentReference profileImageReference;
+  final DocumentReference? profileImageReference;
 
   UserEntity(
       {required this.id,
@@ -25,7 +25,7 @@ class UserEntity with FirestoreModel {
     final userId = data["user_id"] as String?;
     final profileImageReference =
         data["profile_image_reference"] as DocumentReference?;
-    if (id == null || userId == null || profileImageReference == null) {
+    if (id == null || userId == null) {
       throw EntityParserException(data);
     }
     return UserEntity(
