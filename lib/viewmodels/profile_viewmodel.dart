@@ -53,11 +53,16 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
 
     final avatar = ImageModel(resource: avatarURL);
 
+    final myPosts = await fetchOwnPosts();
+
     final userModel = UserModel(
         userID: userID,
         displayName: userEntity.displayName,
         bio: userEntity.bio,
-        avatar: avatar);
+        avatar: avatar,
+        posts: myPosts,
+        followeeCount: 0,
+        followerCount: 0);
 
     return userModel;
   }
