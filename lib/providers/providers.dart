@@ -50,3 +50,22 @@ final _userRepository = Provider<IUserRepository>((ref) {
   final firestore = ref.watch(_firestoreClient);
   return UserRepository(firestore);
 });
+
+class UserException extends GenericException {
+
+  final String uid;
+  /// 0...notFound
+  final int code;
+
+  UserException({required this.uid, required this.code});
+
+  static UserException notFound(String uid) => UserException(uid: uid, code: 0);
+
+  @override
+  String message() {
+    if (code == 0) {
+      return "idが$uidのユーザーが見つかりませんでした";
+    }
+    return "エラーが発生しました";
+  }
+}
