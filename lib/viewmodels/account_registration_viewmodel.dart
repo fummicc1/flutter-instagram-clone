@@ -77,6 +77,7 @@ class AccountRegistrationViewModel
         id: id,
         displayName: state.userName,
         userId: state.userId,
+        bio: null,
         profileImageReference: null));
   }
 }

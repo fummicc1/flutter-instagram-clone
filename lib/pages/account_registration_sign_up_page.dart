@@ -12,6 +12,7 @@ class AccountRegistrationSignUpPage extends ConsumerWidget {
     final viewModel = ref.watch(accountRegistrationViewModel.notifier);
     return DefaultTabController(
       length: 2,
+      initialIndex: 1,
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
