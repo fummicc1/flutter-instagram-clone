@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_instagram/models/grid_post_model.dart';
 import 'package:flutter_instagram/models/image_model.dart';
-import 'package:flutter_instagram/models/post.dart';
 
 @immutable
 class UserModel {
@@ -28,10 +27,10 @@ class UserModel {
 
   UserModel(
       {required this.userID,
-      required this.displayName,
-      required this.bio,
-      required this.avatar,
-      required this.posts,
-      required this.followerCount,
-      required this.followeeCount});
+        required this.displayName,
+        required this.bio,
+        required this.avatar,
+        required this.posts,
+        required this.followerCount,
+        required this.followeeCount});
 }
