@@ -53,12 +53,11 @@ final _userRepository = Provider<IUserRepository>((ref) {
   return UserRepository(firestore);
 });
 
-/// States
 final myProfileUserIDProvider =
-    StateProvider<String>((_) => "fummicc1");
+StateProvider<String>((_) => "fummicc1");
 
 final myProfileStateProvider =
-    StateNotifierProvider<ProfileViewModel, ProfileState>((ref) {
+StateNotifierProvider<ProfileViewModel, ProfileState>((ref) {
   final userRepository = ref.watch(_userRepository);
   final postRepository = ref.watch(_postRepository);
   final imageRepository = ref.watch(_imageRepository);
