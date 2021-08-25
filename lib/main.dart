@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
           builder: (context, snapshot) {
             if (snapshot.hasError) return Container(); // something went wrong
             if (snapshot.connectionState == ConnectionState.done)
-              return AccountRegistrationStartPage(); // complete
+              return Container(); // complete
             return Container(); // loading
           },
         ));

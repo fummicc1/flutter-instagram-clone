@@ -9,10 +9,6 @@ class AccountRegistrationNamePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.listen<StateNotifier<GenericException?>>(errorStateProvider,
-        (notifier) {
-      print("Error in View: ${notifier.state?.message()}");
-    });
     final viewModel = ref.watch(accountRegistrationViewModel.notifier);
     final state = ref.watch(accountRegistrationViewModel);
     return SafeArea(
