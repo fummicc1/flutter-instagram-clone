@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_instagram/common/exception.dart';
 import 'package:flutter_instagram/entities/user.dart';
 import 'package:flutter_instagram/firebase/firestore_client.dart';
+import 'package:flutter_instagram/repositories/query.dart';
 
 abstract class IUserRepository {
   Future create(UserEntity userEntity);
@@ -31,11 +33,14 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<UserEntity?> findWithID(String userID) async {
-    final Map<String, dynamic> data = await _firestoreClient
-        .getDoc(collectionName: UserEntity.collectionName, documentName: userID)
-        .catchError((_) => Map<String, dynamic>());
+    final query = EqualQueryModel(fieldName: "user_id", fieldValue: userID);
+    final baseReference =
+        FirebaseFirestore.instance.collection(UserEntity.collectionName);
+    final List<Map<String, dynamic>> data = await _firestoreClient
+        .getWithQuery(query.build(baseReference))
+        .catchError((_) => [Map<String, dynamic>()]);
     try {
-      final UserEntity userEntity = UserEntity.fromData(data);
+      final UserEntity userEntity = UserEntity.fromData(data.first);
       return userEntity;
     } on EntityParserException catch (e) {
       return Future.error(e);
