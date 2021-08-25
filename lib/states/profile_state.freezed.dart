@@ -21,7 +21,7 @@ class _$ProfileStateTearOff {
       UserModel? user,
       List<StoryHighlightsModel> storyHighlightsList = const [],
       bool hasNewStory = false,
-      dynamic avatarSize = const Size(44, 44),
+      dynamic avatarSize = const Size(96, 96),
       bool isMyAccount = false}) {
     return _ProfileState(
       posts: posts,
@@ -192,7 +192,7 @@ class _$_ProfileState implements _ProfileState {
       this.user,
       this.storyHighlightsList = const [],
       this.hasNewStory = false,
-      this.avatarSize = const Size(44, 44),
+      this.avatarSize = const Size(96, 96),
       this.isMyAccount = false});
 
   @JsonKey(defaultValue: const [])
@@ -214,7 +214,7 @@ class _$_ProfileState implements _ProfileState {
 
   /// 新規ストーリがあるか
   final bool hasNewStory;
-  @JsonKey(defaultValue: const Size(44, 44))
+  @JsonKey(defaultValue: const Size(96, 96))
   @override
 
   /// アバターのImageの大きさ

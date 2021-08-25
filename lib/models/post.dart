@@ -7,7 +7,7 @@ class PostModel {
   final String id;
   // ユーザーID
   final String userID;
-  final ImageModel? userImage;
+  final ImageModel userImage;
 
   final List<ImageModel> postImageList;
   // 投稿内容

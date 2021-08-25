@@ -24,7 +24,7 @@ class ProfileState with _$ProfileState {
     @Default(false) bool hasNewStory,
 
     /// アバターのImageの大きさ
-    @Default(Size(44, 44)) avatarSize,
+    @Default(Size(96, 96)) avatarSize,
 
     /// `user`が自分のアカウントであるかどうか
     @Default(false) bool isMyAccount

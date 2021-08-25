@@ -3,7 +3,7 @@ import 'package:flutter_instagram/models/video_model.dart';
 
 class StoryModel {
   /// ユーザーの画像
-  final ImageModel? userImage;
+  final ImageModel userImage;
   /// ユーザID
   final String userID;
   /// 動画データ

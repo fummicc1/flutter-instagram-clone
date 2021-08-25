@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_instagram/models/user_model.dart';
 import 'package:flutter_instagram/ui_components/user_image_widget.dart';
 
@@ -28,79 +30,137 @@ class ProfileStatusWidget extends StatelessWidget {
   final Size avatarSize;
   final bool isMyAccount;
 
-  Widget buildProfileWidget(BuildContext buildContext) {
+  Widget _buildProfileWidget(BuildContext context) {
     final numericStat = _ProfileNumericStatusModel(
         postCount: user.posts.length,
         followerCount: user.followerCount,
         followeeCount: user.followeeCount);
 
-    return Column(
-      children: [
-        Row(
-          children: [
-            UserImageWidget(user.avatar,
-                hasNewStory: hasNewStory, size: avatarSize),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
+    return Container(
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 80,
+                height: 80,
+                child: UserImageWidget(imageModel: user.avatar,
+                    hasNewStory: hasNewStory, size: avatarSize),
+              ),
+              SizedBox(width: 24),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    profileNumberStackWidget(
-                        buildContext: buildContext,
-                        number: numericStat.postCount,
-                        label: "posts"),
-                    profileNumberStackWidget(
-                        buildContext: buildContext,
-                        number: numericStat.followerCount,
-                        label: "followers"),
-                    profileNumberStackWidget(
-                        buildContext: buildContext,
-                        number: numericStat.followeeCount,
-                        label: "followings"),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Flexible(
+                          child: profileNumberStackWidget(
+                              context: context,
+                              number: numericStat.postCount,
+                              label: "posts"),
+                        ),
+                        Flexible(
+                          child: profileNumberStackWidget(
+                              context: context,
+                              number: numericStat.followerCount,
+                              label: "followers"),
+                        ),
+                        Flexible(
+                          child: profileNumberStackWidget(
+                              context: context,
+                              number: numericStat.followeeCount,
+                              label: "followings"),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
-                Row(children: profileActionLists(buildContext))
-              ],
-            )
-          ],
-        ),
-        SizedBox(height: 8),
-        Text(user.displayName ?? user.userID),
-        Text(user.bio ?? "")
-      ],
+              )
+            ],
+          ),
+          SizedBox(height: 8),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                user.displayName ?? user.userID,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    ?.apply(fontWeightDelta: 2),
+              ),
+              Text(user.bio ?? "",
+                  style: Theme.of(context).textTheme.bodyText1),
+            ],
+          ),
+          SizedBox(height: 8),
+          Container(
+            height: 32,
+            child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: profileActionLists(context)),
+          )
+        ],
+      ),
     );
   }
 
-  List<Widget> profileActionLists(BuildContext buildContext) {
-    if (isMyAccount) {
-      return [];
-    }
+  List<Widget> profileActionLists(BuildContext context) {
     return [
-      TextButton(onPressed: () {}, child: Text("Message")),
-      TextButton(
-          onPressed: () {},
-          child: Row(
-            children: [Icon(Icons.check), Icon(Icons.person)],
-          )),
-      IconButton(onPressed: () {}, icon: Icon(Icons.arrow_drop_down_rounded))
+      Expanded(
+        child: OutlinedButton(
+            onPressed: () {},
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "フォロー中",
+                ),
+                Icon(Icons.arrow_drop_down_outlined)
+              ],
+            )),
+      ),
+      SizedBox(
+        width: 8,
+      ),
+      Expanded(child: OutlinedButton(onPressed: () {}, child: Text("メッセージ"))),
+      SizedBox(
+        width: 8,
+      ),
+      Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4),
+            border:
+                Border.all(width: 1, color: Theme.of(context).dividerColor)),
+        width: 28,
+        child: InkWell(
+            onTap: () {},
+            child: Icon(
+              Icons.arrow_drop_down_rounded,
+            )),
+      )
     ];
   }
 
   Widget profileNumberStackWidget(
-      {required BuildContext buildContext,
+      {required BuildContext context,
       required int number,
       required String label}) {
     return Column(
       children: [
-        Text(number.toString(),
-            style: Theme.of(buildContext).textTheme.headline4),
-        Text(label, style: Theme.of(buildContext).textTheme.bodyText2)
+        Text(number.toString(), style: Theme.of(context).textTheme.headline6),
+        Text(label, style: Theme.of(context).textTheme.bodyText2)
       ],
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return buildProfileWidget(context);
+    return _buildProfileWidget(context);
   }
 }

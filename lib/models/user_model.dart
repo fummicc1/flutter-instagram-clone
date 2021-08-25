@@ -15,7 +15,7 @@ class UserModel {
   final String? bio;
 
   /// プロフィール写真
-  final ImageModel? avatar;
+  final ImageModel avatar;
 
   /// フォロワー数
   final int followerCount;

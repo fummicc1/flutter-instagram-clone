@@ -13,10 +13,11 @@ class ProfileStoryListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+        scrollDirection: Axis.horizontal,
         itemCount: storyHighlightList.length,
         itemBuilder: (context, index) {
-          final highlight = storyHighlightList[index];
-          return StoryHighlightWidget(model: highlight);
+          final story = storyHighlightList[index];
+          return StoryHighlightWidget(model: story);
         });
   }
 }

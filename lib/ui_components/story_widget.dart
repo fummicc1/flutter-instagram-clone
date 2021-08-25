@@ -20,7 +20,7 @@ class StoryWidget extends StatelessWidget {
                 tag: story.userID,
                 child: Material(
                     child:
-                        UserImageWidget(story.userImage, size: Size(56, 56), hasNewStory: true,))),
+                        UserImageWidget(imageModel: story.userImage, size: Size(56, 56), hasNewStory: true,))),
             SizedBox(
               height: 4,
             ),
