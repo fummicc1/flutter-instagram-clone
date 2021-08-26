@@ -54,7 +54,7 @@ class AccountRegistrationIdPage extends ConsumerWidget {
                       children: [
                         Expanded(
                           child: ElevatedButton(
-                            onPressed: state.userName.isNotEmpty
+                            onPressed: state.userId.isNotEmpty
                                 ? () async {
                                     final res =
                                         await viewModel.onClickRegisterButton();
