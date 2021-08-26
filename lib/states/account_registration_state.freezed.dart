@@ -16,10 +16,16 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$AccountRegistrationStateTearOff {
   const _$AccountRegistrationStateTearOff();
 
-  _AccountRegistrationState call({String email = "", String password = ""}) {
+  _AccountRegistrationState call(
+      {String email = "",
+      String password = "",
+      String userName = "",
+      String userId = ""}) {
     return _AccountRegistrationState(
       email: email,
       password: password,
+      userName: userName,
+      userId: userId,
     );
   }
 }
@@ -32,6 +38,8 @@ mixin _$AccountRegistrationState {
 // String phoneNumber,
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
+  String get userName => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AccountRegistrationStateCopyWith<AccountRegistrationState> get copyWith =>
@@ -43,7 +51,7 @@ abstract class $AccountRegistrationStateCopyWith<$Res> {
   factory $AccountRegistrationStateCopyWith(AccountRegistrationState value,
           $Res Function(AccountRegistrationState) then) =
       _$AccountRegistrationStateCopyWithImpl<$Res>;
-  $Res call({String email, String password});
+  $Res call({String email, String password, String userName, String userId});
 }
 
 /// @nodoc
@@ -59,6 +67,8 @@ class _$AccountRegistrationStateCopyWithImpl<$Res>
   $Res call({
     Object? email = freezed,
     Object? password = freezed,
+    Object? userName = freezed,
+    Object? userId = freezed,
   }) {
     return _then(_value.copyWith(
       email: email == freezed
@@ -68,6 +78,14 @@ class _$AccountRegistrationStateCopyWithImpl<$Res>
       password: password == freezed
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      userName: userName == freezed
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -80,7 +98,7 @@ abstract class _$AccountRegistrationStateCopyWith<$Res>
           $Res Function(_AccountRegistrationState) then) =
       __$AccountRegistrationStateCopyWithImpl<$Res>;
   @override
-  $Res call({String email, String password});
+  $Res call({String email, String password, String userName, String userId});
 }
 
 /// @nodoc
@@ -99,6 +117,8 @@ class __$AccountRegistrationStateCopyWithImpl<$Res>
   $Res call({
     Object? email = freezed,
     Object? password = freezed,
+    Object? userName = freezed,
+    Object? userId = freezed,
   }) {
     return _then(_AccountRegistrationState(
       email: email == freezed
@@ -109,6 +129,14 @@ class __$AccountRegistrationStateCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      userName: userName == freezed
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -116,7 +144,11 @@ class __$AccountRegistrationStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_AccountRegistrationState implements _AccountRegistrationState {
-  const _$_AccountRegistrationState({this.email = "", this.password = ""});
+  const _$_AccountRegistrationState(
+      {this.email = "",
+      this.password = "",
+      this.userName = "",
+      this.userId = ""});
 
   @JsonKey(defaultValue: "")
   @override // String phoneNumber,
@@ -124,10 +156,16 @@ class _$_AccountRegistrationState implements _AccountRegistrationState {
   @JsonKey(defaultValue: "")
   @override
   final String password;
+  @JsonKey(defaultValue: "")
+  @override
+  final String userName;
+  @JsonKey(defaultValue: "")
+  @override
+  final String userId;
 
   @override
   String toString() {
-    return 'AccountRegistrationState(email: $email, password: $password)';
+    return 'AccountRegistrationState(email: $email, password: $password, userName: $userName, userId: $userId)';
   }
 
   @override
@@ -138,14 +176,21 @@ class _$_AccountRegistrationState implements _AccountRegistrationState {
                 const DeepCollectionEquality().equals(other.email, email)) &&
             (identical(other.password, password) ||
                 const DeepCollectionEquality()
-                    .equals(other.password, password)));
+                    .equals(other.password, password)) &&
+            (identical(other.userName, userName) ||
+                const DeepCollectionEquality()
+                    .equals(other.userName, userName)) &&
+            (identical(other.userId, userId) ||
+                const DeepCollectionEquality().equals(other.userId, userId)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(email) ^
-      const DeepCollectionEquality().hash(password);
+      const DeepCollectionEquality().hash(password) ^
+      const DeepCollectionEquality().hash(userName) ^
+      const DeepCollectionEquality().hash(userId);
 
   @JsonKey(ignore: true)
   @override
@@ -155,13 +200,20 @@ class _$_AccountRegistrationState implements _AccountRegistrationState {
 }
 
 abstract class _AccountRegistrationState implements AccountRegistrationState {
-  const factory _AccountRegistrationState({String email, String password}) =
-      _$_AccountRegistrationState;
+  const factory _AccountRegistrationState(
+      {String email,
+      String password,
+      String userName,
+      String userId}) = _$_AccountRegistrationState;
 
   @override // String phoneNumber,
   String get email => throw _privateConstructorUsedError;
   @override
   String get password => throw _privateConstructorUsedError;
+  @override
+  String get userName => throw _privateConstructorUsedError;
+  @override
+  String get userId => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$AccountRegistrationStateCopyWith<_AccountRegistrationState> get copyWith =>

@@ -5,9 +5,12 @@ import 'package:flutter_instagram/common/exception.dart';
 import 'package:flutter_instagram/firebase/auth_client.dart';
 import 'package:flutter_instagram/firebase/firestore_client.dart';
 import 'package:flutter_instagram/firebase/storage_client.dart';
+import 'package:flutter_instagram/repositories/auth_repository.dart';
 import 'package:flutter_instagram/repositories/image_repository.dart';
 import 'package:flutter_instagram/repositories/post_repository.dart';
 import 'package:flutter_instagram/repositories/user_repository.dart';
+import 'package:flutter_instagram/states/account_registration_state.dart';
+import 'package:flutter_instagram/viewmodels/account_registration_viewmodel.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 /// flow errors from ViewModels.
@@ -51,21 +54,13 @@ final _userRepository = Provider<IUserRepository>((ref) {
   return UserRepository(firestore);
 });
 
-class UserException extends GenericException {
+final _authRepository = Provider<IAuthRepository>((ref) {
+  final auth = ref.watch(_authClient);
+  return AuthRepository(auth);
+});
 
-  final String uid;
-  /// 0...notFound
-  final int code;
-
-  UserException({required this.uid, required this.code});
-
-  static UserException notFound(String uid) => UserException(uid: uid, code: 0);
-
-  @override
-  String message() {
-    if (code == 0) {
-      return "idが$uidのユーザーが見つかりませんでした";
-    }
-    return "エラーが発生しました";
-  }
-}
+final accountRegistrationViewModel = StateNotifierProvider<
+    AccountRegistrationViewModel, AccountRegistrationState>((ref) {
+  return AccountRegistrationViewModel(ref.watch(_authRepository),
+      ref.watch(_userRepository), ref.read(errorStateProvider));
+});
