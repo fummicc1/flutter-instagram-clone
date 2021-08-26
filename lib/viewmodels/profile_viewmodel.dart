@@ -16,14 +16,16 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
   final IUserRepository _userRepository;
   final IPostRepository _postRepository;
   final IImageRepository _imageRepository;
+
+  final StateNotifier<GenericException?> _errorStateNotifier;
   final String userID;
 
   ProfileViewModel(this._userRepository, this._postRepository,
-      this._imageRepository,
+      this._imageRepository, this._errorStateNotifier,
       {required this.userID})
       : super(ProfileState());
 
-  Future<UserModel> fetchUser() async {
+  Future<UserModel> _fetchUser() async {
     final userEntity = await _userRepository.findWithID(userID);
 
     if (userEntity == null) {
@@ -34,14 +36,14 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
 
     // Default Image
     ImageModel avatar = ImageModel(resource: "https://via.placeholder.com/150");
-    
+
     if (imageReference != null) {
       final imageEntity = await _imageRepository.find(imageReference.id);
       final avatarURL = await _imageRepository.getURL(imageEntity);
       avatar = ImageModel(resource: avatarURL);
     }
 
-    final myPosts = await fetchOwnPosts();
+    final myPosts = await _fetchOwnPosts();
 
     final userModel = UserModel(
         userID: userID,
@@ -55,9 +57,9 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
     return userModel;
   }
 
-  Future<List<GridPostModel>> fetchOwnPosts() async {
+  Future<List<GridPostModel>> _fetchOwnPosts() async {
     final EqualQueryModel queryModel =
-    EqualQueryModel(fieldName: "sender_id", fieldValue: userID);
+        EqualQueryModel(fieldName: "sender_id", fieldValue: userID);
     final postEntities = await _postRepository.findWithQuery(queryModel);
     List<GridPostModel> postModels = [];
     for (PostEntity entity in postEntities) {
@@ -74,17 +76,24 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
     return postModels;
   }
 
-  Future<List<StoryModel>> fetchOwnStories() async {
+  Future<List<StoryModel>> _fetchOwnStories() async {
     // TODO: Implement Story
     return [];
   }
 
   Future setup() async {
-    final user = await fetchUser();
-    state = state.copyWith(user: user,
-        posts: user.posts,
-        storyHighlightsList: [],
-        hasNewStory: false,
-        isMyAccount: user.userID == userID);
+    try {
+      final user = await _fetchUser();
+      state = state.copyWith(
+          user: user,
+          posts: user.posts,
+          storyHighlightsList: [],
+          hasNewStory: false,
+          isMyAccount: user.userID == userID);
+    } on GenericException catch (err) {
+      _errorStateNotifier.state = err;
+    } catch (e) {
+      _errorStateNotifier.state = SimpleException(e.toString());
+    }
   }
 }
