@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_instagram/common/exception.dart';
 import 'package:flutter_instagram/repositories/auth_repository.dart';
 
@@ -7,9 +9,14 @@ class FakeAuthRepository implements IAuthRepository {
   ];
   _FakeAuthUserData? _currentUser;
   int _uidCounter = 0;
+  final StreamController<String?> _userIdStreamController = StreamController();
 
   FakeAuthRepository() {
     _uidCounter = _users.length;
+  }
+
+  void dispose() {
+    _userIdStreamController.close();
   }
 
   @override
@@ -17,6 +24,9 @@ class FakeAuthRepository implements IAuthRepository {
 
   @override
   String? getCurrentUserId() => _currentUser?.uid;
+
+  @override
+  Stream<String?> get userIdStream => _userIdStreamController.stream;
 
   @override
   Future<String> signUp(
@@ -28,6 +38,7 @@ class FakeAuthRepository implements IAuthRepository {
     final newUser = _FakeAuthUserData(newUid, email, password);
     _currentUser = newUser;
     _users.add(newUser);
+    _userIdStreamController.sink.add(newUid);
     return newUid;
   }
 
@@ -37,12 +48,14 @@ class FakeAuthRepository implements IAuthRepository {
     final match =
         _users.indexWhere((u) => u.email == email && u.password == password);
     if (match < 0) throw AuthException("User not found");
+    _userIdStreamController.sink.add(_users[match].uid);
     return _users[match].uid;
   }
 
   @override
   Future signOut() async {
     _currentUser = null;
+    _userIdStreamController.sink.add(null);
   }
 }
 
