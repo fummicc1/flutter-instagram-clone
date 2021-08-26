@@ -60,6 +60,34 @@ final _authRepository = Provider<IAuthRepository>((ref) {
   return AuthRepository(auth, firestore);
 });
 
+final _uidStreamProvider = StreamProvider<String?>((ref) {
+  final auth = ref.watch(_authRepository);
+  return auth.uIdStream;
+});
+
+final _needToLoginProvider = FutureProvider<bool>((ref) async {
+  return (await ref.watch(_uidStreamProvider.last)) == null;
+});
+
+final userIdCacheMapProvider = StateProvider<Map<String, String?>>((_) => {});
+
+final _cachedUserIdProvider = StateProvider.family<String?, String>((ref, uid) {
+  return ref.watch(userIdCacheMapProvider).state[uid];
+});
+
+final _myUserIdProvider = FutureProvider<String?>((ref) async {
+  final uid = await ref.watch(_uidStreamProvider.last);
+  if (uid == null) return null;
+  final cached = ref.watch(_cachedUserIdProvider(uid)).state;
+  if (cached != null) return cached;
+  final userId = await ref.watch(_authRepository).uidToUserId(uid);
+  ref.read(userIdCacheMapProvider).state = {
+    ...ref.read(userIdCacheMapProvider).state,
+    uid: userId
+  };
+  return userId;
+});
+
 final accountRegistrationViewModel = StateNotifierProvider<
     AccountRegistrationViewModel, AccountRegistrationState>((ref) {
   return AccountRegistrationViewModel(ref.watch(_authRepository),
