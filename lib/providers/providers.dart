@@ -65,7 +65,7 @@ final _uidStreamProvider = StreamProvider<String?>((ref) {
   return auth.uIdStream;
 });
 
-final _needToLoginProvider = FutureProvider<bool>((ref) async {
+final needToLoginProvider = FutureProvider<bool>((ref) async {
   return (await ref.watch(_uidStreamProvider.last)) == null;
 });
 

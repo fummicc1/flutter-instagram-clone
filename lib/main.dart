@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram/pages/account_registration_id_page.dart';
 import 'package:flutter_instagram/pages/account_registration_start_page.dart';
+import 'package:flutter_instagram/pages/after_login_page.dart';
+import 'package:flutter_instagram/providers/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
@@ -29,7 +31,17 @@ class _MyAppState extends State<MyApp> {
           builder: (context, snapshot) {
             if (snapshot.hasError) return Container(); // something went wrong
             if (snapshot.connectionState == ConnectionState.done)
-              return Container(); // complete
+              return Consumer(
+                builder: (context, ref, child) {
+                  final needToLogin = ref.watch(needToLoginProvider);
+                  return needToLogin.when(
+                      loading: () => Container(),
+                      error: (err, stack) => Container(),
+                      data: (value) => value
+                          ? AccountRegistrationStartPage()
+                          : AfterLoginPage());
+                },
+              ); // complete
             return Container(); // loading
           },
         ));
