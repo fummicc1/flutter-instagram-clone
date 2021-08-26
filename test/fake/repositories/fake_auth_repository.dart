@@ -26,7 +26,7 @@ class FakeAuthRepository implements IAuthRepository {
   String? getCurrentUserId() => _currentUser?.uid;
 
   @override
-  Stream<String?> get userIdStream => _userIdStreamController.stream;
+  Stream<String?> get uIdStream => _userIdStreamController.stream;
 
   @override
   Future<String> signUp(
@@ -57,6 +57,9 @@ class FakeAuthRepository implements IAuthRepository {
     _currentUser = null;
     _userIdStreamController.sink.add(null);
   }
+
+  @override
+  Future<String?> uidToUserId(String uid) => throw UnimplementedError();
 }
 
 class _FakeAuthUserData {

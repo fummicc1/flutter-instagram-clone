@@ -56,7 +56,8 @@ final _userRepository = Provider<IUserRepository>((ref) {
 
 final _authRepository = Provider<IAuthRepository>((ref) {
   final auth = ref.watch(_authClient);
-  return AuthRepository(auth);
+  final firestore = ref.watch(_firestoreClient);
+  return AuthRepository(auth, firestore);
 });
 
 final accountRegistrationViewModel = StateNotifierProvider<
