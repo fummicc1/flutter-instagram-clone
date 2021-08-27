@@ -57,8 +57,7 @@ final _userRepository = Provider<IUserRepository>((ref) {
 
 final _authRepository = Provider<IAuthRepository>((ref) {
   final auth = ref.watch(_authClient);
-  final firestore = ref.watch(_firestoreClient);
-  return AuthRepository(auth, firestore);
+  return AuthRepository(auth);
 });
 
 final _uidStreamProvider = StreamProvider<String?>((ref) {
@@ -74,7 +73,7 @@ final _userIdFutureProvider = FutureProvider<String?>((ref) async {
   final uid = await ref.watch(_uidStreamProvider.last);
   if (uid == null) return null;
   try {
-    return await ref.watch(_authRepository).uidToUserId(uid);
+    return await ref.watch(_userRepository).uidToUserId(uid);
   } catch (e) {
     print("uid=$uidのユーザが存在しません $e");
     return null;

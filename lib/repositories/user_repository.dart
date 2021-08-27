@@ -10,6 +10,8 @@ abstract class IUserRepository {
   Future update({required String id, required UserEntity newEntity});
 
   Future<UserEntity?> findWithID(String userID);
+
+  Future<String?> uidToUserId(String uid);
 }
 
 class UserRepository implements IUserRepository {
@@ -42,6 +44,22 @@ class UserRepository implements IUserRepository {
     try {
       final UserEntity userEntity = UserEntity.fromData(data.first);
       return userEntity;
+    } on EntityParserException catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  @override
+  Future<String?> uidToUserId(String uid) async {
+    final query = EqualQueryModel(fieldName: "id", fieldValue: uid);
+    final baseReference =
+        FirebaseFirestore.instance.collection(UserEntity.collectionName);
+    final List<Map<String, dynamic>> data = await _firestoreClient
+        .getWithQuery(query.build(baseReference))
+        .catchError((_) => [Map<String, dynamic>()]);
+    try {
+      final UserEntity userEntity = UserEntity.fromData(data.first);
+      return userEntity.userId;
     } on EntityParserException catch (e) {
       return Future.error(e);
     }
