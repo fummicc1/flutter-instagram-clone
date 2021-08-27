@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_instagram/pages/account_registration_start_page.dart';
+import 'package:flutter_instagram/providers/providers.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class AfterLoginPage extends StatelessWidget {
+class AfterLoginPage extends ConsumerWidget {
   const AfterLoginPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(context, ref) {
+    final appViewModel = ref.watch(appViewModelProvider);
     return Scaffold(
-      appBar: AppBar(title: Text("AfterLoginPage"),),
+      appBar: AppBar(
+        title: Text("AfterLoginPage"),
+      ),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -16,6 +22,16 @@ class AfterLoginPage extends StatelessWidget {
             TextButton(onPressed: null, child: Text("Stories")),
             TextButton(onPressed: null, child: Text("Shop")),
             TextButton(onPressed: null, child: Text("Profile")),
+            ElevatedButton(
+              onPressed: () async {
+                final res = await appViewModel.logout();
+                if (res) {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (_) => AccountRegistrationStartPage()));
+                }
+              },
+              child: Text("Logout"),
+            )
           ],
         ),
       ),

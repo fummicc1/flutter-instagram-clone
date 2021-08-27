@@ -11,6 +11,7 @@ import 'package:flutter_instagram/repositories/post_repository.dart';
 import 'package:flutter_instagram/repositories/user_repository.dart';
 import 'package:flutter_instagram/states/account_registration_state.dart';
 import 'package:flutter_instagram/viewmodels/account_registration_viewmodel.dart';
+import 'package:flutter_instagram/viewmodels/app_viewmodel.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 /// flow errors from ViewModels.
@@ -79,4 +80,8 @@ final accountRegistrationViewModel = StateNotifierProvider<
     AccountRegistrationViewModel, AccountRegistrationState>((ref) {
   return AccountRegistrationViewModel(ref.watch(_authRepository),
       ref.watch(_userRepository), ref.read(errorStateProvider));
+});
+
+final appViewModelProvider = Provider<AppViewModel>((ref) {
+  return AppViewModel(ref.watch(_authRepository), ref.read(errorStateProvider));
 });
