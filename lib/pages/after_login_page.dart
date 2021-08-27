@@ -9,6 +9,7 @@ class AfterLoginPage extends ConsumerWidget {
   @override
   Widget build(context, ref) {
     final appViewModel = ref.watch(appViewModelProvider);
+    final userId = ref.watch(myProfileStateProvider).state;
     return Scaffold(
       appBar: AppBar(
         title: Text("AfterLoginPage"),
@@ -22,6 +23,10 @@ class AfterLoginPage extends ConsumerWidget {
             TextButton(onPressed: null, child: Text("Stories")),
             TextButton(onPressed: null, child: Text("Shop")),
             TextButton(onPressed: null, child: Text("Profile")),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("My userId is $userId"),
+            ),
             ElevatedButton(
               onPressed: () async {
                 final res = await appViewModel.logout();

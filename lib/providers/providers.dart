@@ -70,16 +70,27 @@ final needToLoginProvider = FutureProvider<bool>((ref) async {
   return (await ref.watch(_uidStreamProvider.last)) == null;
 });
 
-final _myUserIdProvider = FutureProvider<String?>((ref) async {
+final _userIdFutureProvider = FutureProvider<String?>((ref) async {
   final uid = await ref.watch(_uidStreamProvider.last);
   if (uid == null) return null;
-  return await ref.watch(_authRepository).uidToUserId(uid);
+  try {
+    return await ref.watch(_authRepository).uidToUserId(uid);
+  } catch (e) {
+    print("uid=$uidのユーザが存在しません $e");
+    return null;
+  }
+});
+
+final myProfileStateProvider = StateProvider<String?>((ref) {
+  return ref
+      .watch(_userIdFutureProvider)
+      .when(data: (d) => d, loading: () => null, error: (err, trace) => null);
 });
 
 final accountRegistrationViewModel = StateNotifierProvider<
     AccountRegistrationViewModel, AccountRegistrationState>((ref) {
   return AccountRegistrationViewModel(ref.watch(_authRepository),
-      ref.watch(_userRepository), ref.read(errorStateProvider));
+      ref.watch(_userRepository), ref.read, ref.read(errorStateProvider));
 });
 
 final appViewModelProvider = Provider<AppViewModel>((ref) {

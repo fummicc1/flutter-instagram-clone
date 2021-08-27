@@ -13,10 +13,10 @@ class AccountRegistrationViewModel
     extends StateNotifier<AccountRegistrationState> {
   IAuthRepository _authRepository;
   IUserRepository _userRepository;
-  StateNotifier<String?> _myUserIdStateNotifier;
+  Reader read;
   StateNotifier<GenericException?> _errorStateNotifier;
   AccountRegistrationViewModel(this._authRepository, this._userRepository,
-      this._myUserIdStateNotifier, this._errorStateNotifier)
+      this.read, this._errorStateNotifier)
       : super(AccountRegistrationState());
 
   void updateEmail(String newValue) {
@@ -52,7 +52,8 @@ class AccountRegistrationViewModel
   Future<bool> onClickRegisterButton() async {
     try {
       await _registerUser();
-      _myUserIdStateNotifier.state = state.userId;
+      read(myProfileStateProvider).state =
+          state.userId; // StateNotifier渡すと呼び出す前にdisposeされてしまった
       return true;
     } on GenericException catch (e) {
       _errorStateNotifier.state = e;
