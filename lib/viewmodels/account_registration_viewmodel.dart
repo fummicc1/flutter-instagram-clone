@@ -13,9 +13,10 @@ class AccountRegistrationViewModel
     extends StateNotifier<AccountRegistrationState> {
   IAuthRepository _authRepository;
   IUserRepository _userRepository;
-  StateNotifier<GenericException?> errorStateNotifier;
-  AccountRegistrationViewModel(
-      this._authRepository, this._userRepository, this.errorStateNotifier)
+  StateNotifier<String?> _myUserIdStateNotifier;
+  StateNotifier<GenericException?> _errorStateNotifier;
+  AccountRegistrationViewModel(this._authRepository, this._userRepository,
+      this._myUserIdStateNotifier, this._errorStateNotifier)
       : super(AccountRegistrationState());
 
   void updateEmail(String newValue) {
@@ -40,10 +41,10 @@ class AccountRegistrationViewModel
       await _signUp();
       return true;
     } on GenericException catch (e) {
-      errorStateNotifier.state = e;
+      _errorStateNotifier.state = e;
       return false;
     } catch (e) {
-      errorStateNotifier.state = SimpleException(e.toString());
+      _errorStateNotifier.state = SimpleException(e.toString());
       return false;
     }
   }
@@ -51,12 +52,13 @@ class AccountRegistrationViewModel
   Future<bool> onClickRegisterButton() async {
     try {
       await _registerUser();
+      _myUserIdStateNotifier.state = state.userId;
       return true;
     } on GenericException catch (e) {
-      errorStateNotifier.state = e;
+      _errorStateNotifier.state = e;
       return false;
     } catch (e) {
-      errorStateNotifier.state = SimpleException(e.toString());
+      _errorStateNotifier.state = SimpleException(e.toString());
       return false;
     }
   }
