@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter_instagram/common/exception.dart';
+import 'package:flutter_instagram/common/exception_notifier.dart';
 import 'package:flutter_instagram/entities/user.dart';
 import 'package:flutter_instagram/providers/providers.dart';
 import 'package:flutter_instagram/repositories/auth_repository.dart';
@@ -13,9 +14,9 @@ class AccountRegistrationViewModel
     extends StateNotifier<AccountRegistrationState> {
   IAuthRepository _authRepository;
   IUserRepository _userRepository;
-  StateNotifier<GenericException?> errorStateNotifier;
+  ExceptionStorable _exceptionStorable;
   AccountRegistrationViewModel(
-      this._authRepository, this._userRepository, this.errorStateNotifier)
+      this._authRepository, this._userRepository, this._exceptionStorable)
       : super(AccountRegistrationState());
 
   void updateEmail(String newValue) {
@@ -40,10 +41,11 @@ class AccountRegistrationViewModel
       await _signUp();
       return true;
     } on GenericException catch (e) {
-      errorStateNotifier.state = e;
+      _exceptionStorable.send(e);
       return false;
     } catch (e) {
-      errorStateNotifier.state = SimpleException(e.toString());
+      final exception = SimpleException(e.toString());
+      _exceptionStorable.send(exception);
       return false;
     }
   }
@@ -53,10 +55,11 @@ class AccountRegistrationViewModel
       await _registerUser();
       return true;
     } on GenericException catch (e) {
-      errorStateNotifier.state = e;
+      _exceptionStorable.send(e);
       return false;
     } catch (e) {
-      errorStateNotifier.state = SimpleException(e.toString());
+      final exception = SimpleException(e.toString());
+      _exceptionStorable.send(exception);
       return false;
     }
   }

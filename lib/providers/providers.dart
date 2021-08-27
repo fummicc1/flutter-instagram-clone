@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_instagram/common/exception.dart';
+import 'package:flutter_instagram/common/exception_notifier.dart';
 import 'package:flutter_instagram/firebase/auth_client.dart';
 import 'package:flutter_instagram/firebase/firestore_client.dart';
 import 'package:flutter_instagram/firebase/storage_client.dart';
@@ -14,7 +15,9 @@ import 'package:flutter_instagram/viewmodels/account_registration_viewmodel.dart
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 /// flow errors from ViewModels.
-final errorStateProvider = StateProvider<GenericException?>((_) => null);
+final errorStateProvider =
+    StateNotifierProvider<ExceptionNotifier, GenericException?>(
+        (ref) => ExceptionNotifier(null));
 
 /// IFirestoreClient
 final _firestoreClient = Provider<IFirestoreClient>((ref) {
@@ -61,6 +64,7 @@ final _authRepository = Provider<IAuthRepository>((ref) {
 
 final accountRegistrationViewModel = StateNotifierProvider<
     AccountRegistrationViewModel, AccountRegistrationState>((ref) {
+  final exceptionStorable = ref.watch(errorStateProvider.notifier);
   return AccountRegistrationViewModel(ref.watch(_authRepository),
-      ref.watch(_userRepository), ref.read(errorStateProvider));
+      ref.watch(_userRepository), exceptionStorable);
 });
