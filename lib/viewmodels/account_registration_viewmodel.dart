@@ -13,10 +13,10 @@ class AccountRegistrationViewModel
     extends StateNotifier<AccountRegistrationState> {
   IAuthRepository _authRepository;
   IUserRepository _userRepository;
-  Reader read;
   StateNotifier<GenericException?> _errorStateNotifier;
-  AccountRegistrationViewModel(this._authRepository, this._userRepository,
-      this.read, this._errorStateNotifier)
+
+  AccountRegistrationViewModel(
+      this._authRepository, this._userRepository, this._errorStateNotifier)
       : super(AccountRegistrationState());
 
   void updateEmail(String newValue) {
@@ -51,9 +51,8 @@ class AccountRegistrationViewModel
 
   Future<bool> onClickRegisterButton() async {
     try {
-      await _registerUser();
-      read(myProfileStateProvider).state =
-          state.userId; // StateNotifier渡すと呼び出す前にdisposeされてしまった
+      final me = await _registerUser();
+      await _userRepository.setMe(me);
       return true;
     } on GenericException catch (e) {
       _errorStateNotifier.state = e;
@@ -74,13 +73,15 @@ class AccountRegistrationViewModel
     await _authRepository.signUp(email: state.email, password: state.password);
   }
 
-  Future _registerUser() async {
+  Future<UserEntity> _registerUser() async {
     final id = _authRepository.getCurrentUserId()!;
-    await _userRepository.create(UserEntity(
+    final UserEntity me = UserEntity(
         id: id,
         displayName: state.userName,
         userId: state.userId,
         bio: null,
-        profileImageReference: null));
+        profileImageReference: null);
+    await _userRepository.create(me);
+    return me;
   }
 }

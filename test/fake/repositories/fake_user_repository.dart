@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_instagram/entities/user.dart';
 import 'package:flutter_instagram/repositories/query.dart';
 import 'package:flutter_instagram/repositories/user_repository.dart';
@@ -5,6 +7,8 @@ import './query_test.dart';
 
 class FakeUserRepository implements IUserRepository {
   Map<String, UserEntity> userData = {};
+
+  final StreamController<UserEntity?> _me = StreamController();
 
   @override
   Future create(UserEntity userEntity) async {
@@ -17,13 +21,22 @@ class FakeUserRepository implements IUserRepository {
   }
 
   Future<UserEntity?> findWithID(String userID) async {
-    final equalQueryModel = EqualQueryModel(fieldName: "user_id", fieldValue: userID);
-    final copyData = userData;
+    final equalQueryModel =
+        EqualQueryModel(fieldName: "user_id", fieldValue: userID);
+    return userData.values
+        .where((entity) => equalQueryModel.validate(entity.data))
+        .first;
+  }
 
-    for (final entity in copyData.values) {
-      if (equalQueryModel.validate(entity.data)) copyData.remove(entity);
-    }
+  @override
+  Stream<UserEntity?> onChangeMe() => _me.stream;
 
-    return copyData.values.first;
+  @override
+  Future setMe(UserEntity? userEntity) async => _me.add(userEntity);
+
+  @override
+  Future<UserEntity?> findWithAuthID(String uid) async {
+    final query = EqualQueryModel(fieldName: "id", fieldValue: uid);
+    return userData.values.where((entity) => query.validate(entity.data)).first;
   }
 }

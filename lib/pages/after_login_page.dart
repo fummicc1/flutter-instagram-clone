@@ -9,7 +9,7 @@ class AfterLoginPage extends ConsumerWidget {
   @override
   Widget build(context, ref) {
     final appViewModel = ref.watch(appViewModelProvider);
-    final userId = ref.watch(myProfileStateProvider).state;
+    final userId = ref.watch(meProvider).state;
     return Scaffold(
       appBar: AppBar(
         title: Text("AfterLoginPage"),

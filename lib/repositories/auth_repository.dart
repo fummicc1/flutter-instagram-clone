@@ -1,11 +1,7 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_instagram/common/exception.dart';
-import 'package:flutter_instagram/entities/user.dart';
 import 'package:flutter_instagram/firebase/auth_client.dart';
-import 'package:flutter_instagram/firebase/firestore_client.dart';
-import 'package:flutter_instagram/repositories/query.dart';
 
 abstract class IAuthRepository {
   Future<bool> isLoggedIn();
@@ -16,14 +12,11 @@ abstract class IAuthRepository {
   Future<String> signUp({required String email, required String password});
   Future<String> signIn({required String email, required String password});
   Future signOut();
-
-  Future<String?> uidToUserId(String uid);
 }
 
 class AuthRepository implements IAuthRepository {
   final IAuthClient _authClient;
-  final IFirestoreClient _firestoreClient;
-  AuthRepository(this._authClient, this._firestoreClient);
+  AuthRepository(this._authClient);
 
   @override
   Future<bool> isLoggedIn() async =>
@@ -63,21 +56,5 @@ class AuthRepository implements IAuthRepository {
   @override
   Future signOut() async {
     await _authClient.signOut();
-  }
-
-  @override
-  Future<String?> uidToUserId(String uid) async {
-    final query = EqualQueryModel(fieldName: "id", fieldValue: uid);
-    final baseReference =
-        FirebaseFirestore.instance.collection(UserEntity.collectionName);
-    final List<Map<String, dynamic>> data = await _firestoreClient
-        .getWithQuery(query.build(baseReference))
-        .catchError((_) => [Map<String, dynamic>()]);
-    try {
-      final UserEntity userEntity = UserEntity.fromData(data.first);
-      return userEntity.userId;
-    } on EntityParserException catch (e) {
-      return Future.error(e);
-    }
   }
 }

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_instagram/common/exception.dart';
+import 'package:flutter_instagram/entities/user.dart';
 import 'package:flutter_instagram/firebase/auth_client.dart';
 import 'package:flutter_instagram/firebase/firestore_client.dart';
 import 'package:flutter_instagram/firebase/storage_client.dart';
@@ -52,45 +53,46 @@ final _postRepository = Provider<IPostRepository>((ref) {
 
 final _userRepository = Provider<IUserRepository>((ref) {
   final firestore = ref.watch(_firestoreClient);
-  return UserRepository(firestore);
+  final userRepo = UserRepository(firestore);
+  ref.onDispose(() async {
+    await userRepo.dispose();
+  });
+  return userRepo;
 });
 
 final _authRepository = Provider<IAuthRepository>((ref) {
   final auth = ref.watch(_authClient);
-  final firestore = ref.watch(_firestoreClient);
-  return AuthRepository(auth, firestore);
+  return AuthRepository(auth);
 });
 
-final _uidStreamProvider = StreamProvider<String?>((ref) {
+final _myUidStreamProvider = StreamProvider<String?>((ref) {
   final auth = ref.watch(_authRepository);
   return auth.uIdStream;
 });
 
 final needToLoginProvider = FutureProvider<bool>((ref) async {
-  return (await ref.watch(_uidStreamProvider.last)) == null;
+  return (await ref.watch(_myUidStreamProvider.last)) == null;
 });
 
-final _userIdFutureProvider = FutureProvider<String?>((ref) async {
-  final uid = await ref.watch(_uidStreamProvider.last);
-  if (uid == null) return null;
-  try {
-    return await ref.watch(_authRepository).uidToUserId(uid);
-  } catch (e) {
-    print("uid=$uidのユーザが存在しません $e");
-    return null;
-  }
-});
-
-final myProfileStateProvider = StateProvider<String?>((ref) {
-  return ref
-      .watch(_userIdFutureProvider)
-      .when(data: (d) => d, loading: () => null, error: (err, trace) => null);
+final meProvider = StateProvider<UserEntity?>((ref) {
+  final uidStream = ref.watch(_myUidStreamProvider);
+  final userRepo = ref.watch(_userRepository);
+  uidStream.when(
+      data: (uid) async {
+        if (uid == null) {
+          return null;
+        }
+        final me = await userRepo.findWithAuthID(uid);
+        return me;
+      },
+      loading: () => null,
+      error: (err, trace) => null);
 });
 
 final accountRegistrationViewModel = StateNotifierProvider<
     AccountRegistrationViewModel, AccountRegistrationState>((ref) {
   return AccountRegistrationViewModel(ref.watch(_authRepository),
-      ref.watch(_userRepository), ref.read, ref.read(errorStateProvider));
+      ref.watch(_userRepository), ref.read(errorStateProvider));
 });
 
 final appViewModelProvider = Provider<AppViewModel>((ref) {
