@@ -1,11 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_instagram/models/image_model.dart';
 
+@immutable
 class PostModel {
   // 投稿ID
   final String id;
-  // ユーザー情報
-  final String userName;
-  final ImageModel? userImage;
+  // ユーザーID
+  final String userID;
+  final ImageModel userImage;
 
   final List<ImageModel> postImageList;
   // 投稿内容
@@ -22,7 +24,7 @@ class PostModel {
   PostModel(
       {
         required this.id,
-        required this.userName,
+        required this.userID,
       required this.userImage,
       required this.postImageList,
       required this.message,

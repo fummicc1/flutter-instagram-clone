@@ -40,6 +40,7 @@ class UserEntity with FirestoreModel {
   Map<String, dynamic> get data => {
         "id": id,
         "display_name": displayName,
+        "bio": bio,
         "user_id": userId,
         "profile_image_reference": profileImageReference
       };

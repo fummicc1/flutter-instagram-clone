@@ -4,7 +4,6 @@ import 'package:flutter_instagram/ui_components/blacked_icon.dart';
 import 'package:flutter_instagram/ui_components/user_image_widget.dart';
 
 class TimelineCardWidget extends StatelessWidget {
-
   final PostModel post;
 
   TimelineCardWidget({Key? key, required this.post}) : super(key: key);
@@ -23,11 +22,12 @@ class TimelineCardWidget extends StatelessWidget {
               child: Stack(
                 children: [
                   Row(children: [
-                    UserImageWidget(post.userImage,
+                    UserImageWidget(
+                        imageModel: post.userImage,
                         size: Size(32, 32),
                         hasNewStory: false),
                     SizedBox(width: 8),
-                    Text(post.userName),
+                    Text(post.userID),
                   ]),
                   Positioned(
                       top: 0,
