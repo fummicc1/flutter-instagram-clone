@@ -17,14 +17,14 @@ class StoryWidget extends StatelessWidget {
         child: Column(
           children: [
             Hero(
-                tag: story.userName,
+                tag: story.userID,
                 child: Material(
                     child:
-                        UserImageWidget(story.userImage, size: Size(56, 56), hasNewStory: true,))),
+                        UserImageWidget(imageModel: story.userImage, size: Size(56, 56), hasNewStory: true,))),
             SizedBox(
               height: 4,
             ),
-            Text(story.userName)
+            Text(story.userID)
           ],
         ),
       ),
