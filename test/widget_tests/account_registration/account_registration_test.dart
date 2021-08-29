@@ -28,11 +28,14 @@ class TestApp extends StatelessWidget {
 void main() {
   testWidgets("Register account", (tester) async {
     // set up page
-    final container = ProviderContainer(overrides: [
+    // viewModelにref.readを渡す必要があるためparentを用意
+    // overrideは初期化時に行うためcontainerは渡せない
+    final parent = ProviderContainer();
+    final container = ProviderContainer(parent: parent, overrides: [
       accountRegistrationViewModelProvider
           .overrideWithProvider(StateNotifierProvider((ref) {
-        return AccountRegistrationViewModel(FakeAuthRepository(),
-            FakeUserRepository(), FakeErrorStateNotifier());
+        return AccountRegistrationViewModel(
+            FakeAuthRepository(), FakeUserRepository(), parent.read);
       }))
     ]);
     addTearDown(container.dispose);

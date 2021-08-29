@@ -1,20 +1,26 @@
 import 'package:flutter_instagram/common/exception.dart';
+import 'package:flutter_instagram/providers/providers.dart';
 import 'package:flutter_instagram/viewmodels/account_registration_viewmodel.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../fake/notifiers/fake_error_state_notifier.dart';
 import '../../fake/repositories/fake_auth_repository.dart';
 import '../../fake/repositories/fake_user_repository.dart';
 import '../common/exception_matcher.dart';
 
 void main() {
   late AccountRegistrationViewModel viewModel;
-  late StateNotifier<GenericException?> errorStateNotifier;
+  late ProviderContainer container;
   setUp(() {
-    errorStateNotifier = FakeErrorStateNotifier();
+    container = ProviderContainer();
+    // container.updateOverrides([
+    //   errorStateProvider
+    //       .overrideWithProvider(StateProvider<GenericException?>((_) => null)),
+    //   myProfileStateProvider
+    //       .overrideWithProvider(StateProvider<String?>((_) => null))
+    // ]);
     viewModel = AccountRegistrationViewModel(
-        FakeAuthRepository(), FakeUserRepository(), errorStateNotifier);
+        FakeAuthRepository(), FakeUserRepository(), container.read);
   });
   test("valid_account", () async {
     viewModel.updateEmail("foo@fastriver.dev");
@@ -26,7 +32,7 @@ void main() {
   test("conflict_account", () async {
     viewModel.updateEmail("fake@fastriver.dev");
     viewModel.updatePassword("foo");
-    var errorStream = errorStateNotifier.stream;
+    var errorStream = container.read(errorStateProvider).stream;
     expectLater(errorStream,
         emits(GenericExceptionMatcher(AuthException("User already exists"))));
     var result = await viewModel.onClickNextButton();
@@ -35,7 +41,7 @@ void main() {
 
   test("invalid_email", () async {
     viewModel.updateEmail("unknown");
-    var errorStream = errorStateNotifier.stream;
+    var errorStream = container.read(errorStateProvider).stream;
     expectLater(
         errorStream, emits(GenericExceptionMatcher(EmailInputException())));
     var result = await viewModel.onClickNextButton();
