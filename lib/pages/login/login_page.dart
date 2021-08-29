@@ -22,111 +22,115 @@ class LoginPage extends ConsumerWidget {
         body: Column(
           children: [
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 48),
-                child: Column(
-                  children: [
-                    AspectRatio(
-                      aspectRatio: 2.8,
-                      child: SvgPicture.asset(
-                        "assets/images/Instagram_logo.svg",
-                        color: Colors.black,
-                        semanticsLabel: "Instagram Logo",
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 48),
+                  child: Column(
+                    children: [
+                      AspectRatio(
+                        aspectRatio: 2.8,
+                        child: SvgPicture.asset(
+                          "assets/images/Instagram_logo.svg",
+                          color: Colors.black,
+                          semanticsLabel: "Instagram Logo",
+                        ),
                       ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.symmetric(vertical: 16),
-                      height: 48,
-                      child: TextField(
-                        onChanged: (value) => viewModel.updateEmail(value),
-                        decoration: InputDecoration(
-                            hintText: "メールアドレス",
-                            filled: true,
-                            fillColor: Color(0xFFFAFAFA),
-                            contentPadding: EdgeInsets.only(
-                                left: 8, right: 8, bottom: 48 / 2),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Color(0xFFEDEDED))),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Color(0xFFEDEDED)))),
+                      Container(
+                        margin: EdgeInsets.symmetric(vertical: 16),
+                        height: 48,
+                        child: TextField(
+                          onChanged: (value) => viewModel.updateEmail(value),
+                          decoration: InputDecoration(
+                              hintText: "メールアドレス",
+                              filled: true,
+                              fillColor: Color(0xFFFAFAFA),
+                              contentPadding: EdgeInsets.only(
+                                  left: 8, right: 8, bottom: 48 / 2),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Color(0xFFEDEDED))),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Color(0xFFEDEDED)))),
+                        ),
                       ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.symmetric(vertical: 16),
-                      height: 48,
-                      child: TextField(
-                        onChanged: (value) => viewModel.updatePassword(value),
-                        decoration: InputDecoration(
-                            hintText: "パスワード",
-                            filled: true,
-                            fillColor: Color(0xFFFAFAFA),
-                            contentPadding: EdgeInsets.only(
-                                left: 8, right: 8, bottom: 48 / 2),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Color(0xFFEDEDED))),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Color(0xFFEDEDED)))),
+                      Container(
+                        margin: EdgeInsets.symmetric(vertical: 16),
+                        height: 48,
+                        child: TextField(
+                          onChanged: (value) => viewModel.updatePassword(value),
+                          decoration: InputDecoration(
+                              hintText: "パスワード",
+                              filled: true,
+                              fillColor: Color(0xFFFAFAFA),
+                              contentPadding: EdgeInsets.only(
+                                  left: 8, right: 8, bottom: 48 / 2),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Color(0xFFEDEDED))),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Color(0xFFEDEDED)))),
+                        ),
                       ),
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              final res = await viewModel.onClickLoginButton();
-                              if (res) {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (_) => AfterLoginPage()));
-                              }
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 12),
-                              child: Text("ログイン"),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                final res =
+                                    await viewModel.onClickLoginButton();
+                                if (res) {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (_) => AfterLoginPage()));
+                                }
+                              },
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 12),
+                                child: Text("ログイン"),
+                              ),
+                              style: ElevatedButton.styleFrom(elevation: 0),
                             ),
-                            style: ElevatedButton.styleFrom(elevation: 0),
                           ),
-                        ),
-                      ],
-                    ),
-                    RichText(
-                      text: TextSpan(children: [
-                        TextSpan(text: "ログイン情報を忘れた場合は、"),
-                        TextSpan(
-                            text: "ログインに関するヘルプ",
-                            style: TextStyle(color: Colors.black)),
-                        TextSpan(text: "をご確認ください。")
-                      ]),
-                    ),
-                    Row(
-                      children: [
-                        Flexible(
-                            child: Container(
-                          height: 1,
-                          color: Colors.grey,
-                        )),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 36),
-                          child: Text("または"),
-                        ),
-                        Flexible(
-                            child: Container(
-                          height: 1,
-                          color: Colors.grey,
-                        )),
-                      ],
-                    ),
-                    TextButton.icon(
-                        onPressed: () {},
-                        icon: Text("f"),
-                        label: Text(
-                          "Facebookでログイン",
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        )),
-                  ],
+                        ],
+                      ),
+                      RichText(
+                        text: TextSpan(children: [
+                          TextSpan(text: "ログイン情報を忘れた場合は、"),
+                          TextSpan(
+                              text: "ログインに関するヘルプ",
+                              style: TextStyle(color: Colors.black)),
+                          TextSpan(text: "をご確認ください。")
+                        ]),
+                      ),
+                      Row(
+                        children: [
+                          Flexible(
+                              child: Container(
+                            height: 1,
+                            color: Colors.grey,
+                          )),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 36),
+                            child: Text("または"),
+                          ),
+                          Flexible(
+                              child: Container(
+                            height: 1,
+                            color: Colors.grey,
+                          )),
+                        ],
+                      ),
+                      TextButton.icon(
+                          onPressed: () {},
+                          icon: Text("f"),
+                          label: Text(
+                            "Facebookでログイン",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          )),
+                    ],
+                  ),
                 ),
               ),
             ),

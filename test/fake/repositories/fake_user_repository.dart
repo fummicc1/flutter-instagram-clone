@@ -4,7 +4,14 @@ import 'package:flutter_instagram/repositories/user_repository.dart';
 import './query_test.dart';
 
 class FakeUserRepository implements IUserRepository {
-  Map<String, UserEntity> userData = {};
+  Map<String, UserEntity> userData = {
+    "FAKE_USER_0": UserEntity(
+        id: "FAKE_USER_0",
+        userId: "fake_user_fast",
+        displayName: "Fake KCSちゃん",
+        bio: null,
+        profileImageReference: null)
+  };
 
   @override
   Future create(UserEntity userEntity) async {
