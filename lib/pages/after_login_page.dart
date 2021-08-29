@@ -32,8 +32,9 @@ class AfterLoginPage extends ConsumerWidget {
                 final res = await appViewModel.logout();
                 if (res) {
                   print("ログアウトしたと思う");
-                  // Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  //     builder: (_) => AccountRegistrationStartPage()));
+                  // 遷移元によってはMyAppを基底に持たないので書いておく
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (_) => AccountRegistrationStartPage()));
                 }
               },
               child: Text("Logout"),

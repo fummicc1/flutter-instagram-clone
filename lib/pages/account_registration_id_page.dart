@@ -1,6 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram/common/exception.dart';
 import 'package:flutter_instagram/pages/after_login_page.dart';
+import 'package:flutter_instagram/pages/login/login_page.dart';
 import 'package:flutter_instagram/providers/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -94,12 +96,20 @@ class AccountRegistrationIdPage extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("すでにアカウントをお持ちの場合"),
-                TextButton(
-                  onPressed: null,
-                  child: Text("ログイン"),
-                  style: TextButton.styleFrom(padding: EdgeInsets.zero),
-                )
+                RichText(
+                  text: TextSpan(children: [
+                    TextSpan(text: "すでにアカウントをお持ちの場合は、"),
+                    TextSpan(
+                        text: "ログイン",
+                        style: TextStyle(color: Colors.black),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.of(context).push(
+                                MaterialPageRoute(builder: (_) => LoginPage()));
+                          }),
+                    TextSpan(text: "してください。")
+                  ]),
+                ),
               ],
             )
           ],
