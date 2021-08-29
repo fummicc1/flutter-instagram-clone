@@ -29,7 +29,7 @@ void main() {
   testWidgets("Register account", (tester) async {
     // set up page
     final container = ProviderContainer(overrides: [
-      accountRegistrationViewModel
+      accountRegistrationViewModelProvider
           .overrideWithProvider(StateNotifierProvider((ref) {
         return AccountRegistrationViewModel(FakeAuthRepository(),
             FakeUserRepository(), FakeErrorStateNotifier());
@@ -49,10 +49,11 @@ void main() {
 
     // 入力の確認
     await tester.enterText(find.byType(TextField).first, "test@fastriver.dev");
-    expect(container.read(accountRegistrationViewModel).email,
+    expect(container.read(accountRegistrationViewModelProvider).email,
         "test@fastriver.dev");
     await tester.enterText(find.byType(TextField).last, "password");
-    expect(container.read(accountRegistrationViewModel).password, "password");
+    expect(container.read(accountRegistrationViewModelProvider).password,
+        "password");
 
     await tester.tap(find.text("次へ"));
     await tester.pumpAndSettle();
@@ -64,7 +65,8 @@ void main() {
             .enabled,
         isFalse);
     await tester.enterText(find.byType(TextField), "KCSちゃん");
-    expect(container.read(accountRegistrationViewModel).userName, "KCSちゃん");
+    expect(container.read(accountRegistrationViewModelProvider).userName,
+        "KCSちゃん");
     await tester.pumpAndSettle();
     expect(
         tester
@@ -77,6 +79,7 @@ void main() {
     expect(find.byType(AccountRegistrationIdPage), findsOneWidget);
 
     await tester.enterText(find.byType(TextField), "kcs_chan");
-    expect(container.read(accountRegistrationViewModel).userId, "kcs_chan");
+    expect(container.read(accountRegistrationViewModelProvider).userId,
+        "kcs_chan");
   });
 }

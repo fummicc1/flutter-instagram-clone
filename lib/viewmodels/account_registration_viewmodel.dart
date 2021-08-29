@@ -13,10 +13,9 @@ class AccountRegistrationViewModel
     extends StateNotifier<AccountRegistrationState> {
   IAuthRepository _authRepository;
   IUserRepository _userRepository;
-  Reader read;
-  StateNotifier<GenericException?> _errorStateNotifier;
-  AccountRegistrationViewModel(this._authRepository, this._userRepository,
-      this.read, this._errorStateNotifier)
+  Reader _read;
+  AccountRegistrationViewModel(
+      this._authRepository, this._userRepository, this._read)
       : super(AccountRegistrationState());
 
   void updateEmail(String newValue) {
@@ -41,10 +40,10 @@ class AccountRegistrationViewModel
       await _signUp();
       return true;
     } on GenericException catch (e) {
-      _errorStateNotifier.state = e;
+      _read(errorStateProvider).state = e;
       return false;
     } catch (e) {
-      _errorStateNotifier.state = SimpleException(e.toString());
+      _read(errorStateProvider).state = SimpleException(e.toString());
       return false;
     }
   }
@@ -52,14 +51,14 @@ class AccountRegistrationViewModel
   Future<bool> onClickRegisterButton() async {
     try {
       await _registerUser();
-      read(myProfileStateProvider).state =
+      _read(myProfileStateProvider).state =
           state.userId; // StateNotifier渡すと呼び出す前にdisposeされてしまった
       return true;
     } on GenericException catch (e) {
-      _errorStateNotifier.state = e;
+      _read(errorStateProvider).state = e;
       return false;
     } catch (e) {
-      _errorStateNotifier.state = SimpleException(e.toString());
+      _read(errorStateProvider).state = SimpleException(e.toString());
       return false;
     }
   }

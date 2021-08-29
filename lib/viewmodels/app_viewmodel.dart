@@ -1,20 +1,21 @@
 import 'package:flutter_instagram/common/exception.dart';
+import 'package:flutter_instagram/providers/providers.dart';
 import 'package:flutter_instagram/repositories/auth_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AppViewModel {
   final IAuthRepository _authRepository;
-  final StateNotifier<GenericException?> _errorStateNotifier;
-  AppViewModel(this._authRepository, this._errorStateNotifier);
+  final Reader _read;
+  AppViewModel(this._authRepository, this._read);
   Future<bool> logout() async {
     try {
       await _authRepository.signOut();
       return true;
     } on GenericException catch (e) {
-      _errorStateNotifier.state = e;
+      _read(errorStateProvider).state = e;
       return false;
     } catch (e) {
-      _errorStateNotifier.state = SimpleException("$e");
+      _read(errorStateProvider).state = SimpleException("$e");
       return false;
     }
   }

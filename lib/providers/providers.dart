@@ -86,12 +86,12 @@ final myProfileStateProvider = StateProvider<String?>((ref) {
       .when(data: (d) => d, loading: () => null, error: (err, trace) => null);
 });
 
-final accountRegistrationViewModel = StateNotifierProvider<
+final accountRegistrationViewModelProvider = StateNotifierProvider<
     AccountRegistrationViewModel, AccountRegistrationState>((ref) {
-  return AccountRegistrationViewModel(ref.watch(_authRepository),
-      ref.watch(_userRepository), ref.read, ref.read(errorStateProvider));
+  return AccountRegistrationViewModel(
+      ref.watch(_authRepository), ref.watch(_userRepository), ref.read);
 });
 
 final appViewModelProvider = Provider<AppViewModel>((ref) {
-  return AppViewModel(ref.watch(_authRepository), ref.read(errorStateProvider));
+  return AppViewModel(ref.watch(_authRepository), ref.read);
 });
