@@ -51,7 +51,7 @@ class AccountRegistrationViewModel
   Future<bool> onClickRegisterButton() async {
     try {
       await _registerUser();
-      _read(myProfileStateProvider).state =
+      _read(myProfileUserIdStateProvider).state =
           state.userId; // StateNotifier渡すと呼び出す前にdisposeされてしまった
       return true;
     } on GenericException catch (e) {

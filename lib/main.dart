@@ -41,14 +41,11 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: materialWhite,
-          textButtonTheme: TextButtonThemeData(
-            style: TextButton.styleFrom(primary: Colors.black)
-          ),
-          outlinedButtonTheme: OutlinedButtonThemeData(
-            style: OutlinedButton.styleFrom(primary: Colors.black)
-          )
-        ),
+            primarySwatch: materialWhite,
+            textButtonTheme: TextButtonThemeData(
+                style: TextButton.styleFrom(primary: Colors.black)),
+            outlinedButtonTheme: OutlinedButtonThemeData(
+                style: OutlinedButton.styleFrom(primary: Colors.black))),
         darkTheme: ThemeData.dark(),
         home: FutureBuilder(
           future: _initialization,

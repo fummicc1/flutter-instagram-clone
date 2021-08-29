@@ -82,7 +82,7 @@ final _userIdFutureProvider = FutureProvider<String?>((ref) async {
   }
 });
 
-final myProfileStateProvider = StateProvider<String?>((ref) {
+final myProfileUserIdStateProvider = StateProvider<String?>((ref) {
   return ref
       .watch(_userIdFutureProvider)
       .when(data: (d) => d, loading: () => null, error: (err, trace) => null);
@@ -98,8 +98,6 @@ final appViewModelProvider = Provider<AppViewModel>((ref) {
   return AppViewModel(ref.watch(_authRepository), ref.read);
 });
 
-final myProfileUserIDProvider = StateProvider<String>((_) => "fummicc1");
-
 final myProfileStateProvider =
     StateNotifierProvider<ProfileViewModel, ProfileState>((ref) {
   final userRepository = ref.watch(_userRepository);
@@ -107,7 +105,8 @@ final myProfileStateProvider =
   final imageRepository = ref.watch(_imageRepository);
   final errorState = ref.read(errorStateProvider);
 
-  final String userID = ref.watch(myProfileUserIDProvider).state;
+  final String userID =
+      ref.watch(myProfileUserIdStateProvider).state ?? "unknown userId";
 
   return ProfileViewModel(
       userRepository, postRepository, imageRepository, errorState,
