@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_instagram/common/exception.dart';
 import 'package:flutter_instagram/providers/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -10,6 +9,7 @@ class AccountRegistrationIdPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.watch(accountRegistrationViewModel.notifier);
     final state = ref.watch(accountRegistrationViewModel);
+
     return SafeArea(
       child: Scaffold(
         body: Column(

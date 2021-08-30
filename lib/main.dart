@@ -1,6 +1,5 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_instagram/pages/account_registration_start_page.dart';
+import 'package:flutter_instagram/pages/root_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
@@ -8,13 +7,12 @@ void main() {
   runApp(ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends ConsumerStatefulWidget {
   @override
-  State<StatefulWidget> createState() => _MyAppState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
-  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+class _MyAppState extends ConsumerState<MyApp> {
 
   final MaterialColor materialWhite = const MaterialColor(
     0xFFFFFFFF,
@@ -47,14 +45,6 @@ class _MyAppState extends State<MyApp> {
           )
         ),
         darkTheme: ThemeData.dark(),
-        home: FutureBuilder(
-          future: _initialization,
-          builder: (context, snapshot) {
-            if (snapshot.hasError) return Container(); // something went wrong
-            if (snapshot.connectionState == ConnectionState.done)
-              return AccountRegistrationStartPage(); // complete
-            return Container(); // loading
-          },
-        ));
+        home: RootPage());
   }
 }
