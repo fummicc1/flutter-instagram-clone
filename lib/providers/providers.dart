@@ -105,8 +105,7 @@ final myProfileStateProvider =
   final imageRepository = ref.watch(_imageRepository);
   final errorState = ref.read(errorStateProvider);
 
-  final String userID =
-      ref.watch(myProfileUserIdStateProvider).state ?? "unknown userId";
+  final String? userID = ref.watch(myProfileUserIdStateProvider).state;
 
   return ProfileViewModel(
       userRepository, postRepository, imageRepository, errorState,
