@@ -9,8 +9,8 @@ class AccountRegistrationNamePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.watch(accountRegistrationViewModel.notifier);
-    final state = ref.watch(accountRegistrationViewModel);
+    final viewModel = ref.watch(accountRegistrationViewModelProvider.notifier);
+    final state = ref.watch(accountRegistrationViewModelProvider);
     return SafeArea(
       child: Scaffold(
         body: Column(

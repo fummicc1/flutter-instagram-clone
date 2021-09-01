@@ -9,7 +9,7 @@ class AccountRegistrationSignUpPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.watch(accountRegistrationViewModel.notifier);
+    final viewModel = ref.watch(accountRegistrationViewModelProvider.notifier);
     return DefaultTabController(
       length: 2,
       initialIndex: 1,

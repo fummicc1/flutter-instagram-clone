@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram/common/exception.dart';
+import 'package:flutter_instagram/pages/after_login_page.dart';
 import 'package:flutter_instagram/providers/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -8,8 +9,8 @@ class AccountRegistrationIdPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.watch(accountRegistrationViewModel.notifier);
-    final state = ref.watch(accountRegistrationViewModel);
+    final viewModel = ref.watch(accountRegistrationViewModelProvider.notifier);
+    final state = ref.watch(accountRegistrationViewModelProvider);
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -59,7 +60,10 @@ class AccountRegistrationIdPage extends ConsumerWidget {
                                     final res =
                                         await viewModel.onClickRegisterButton();
                                     if (res) {
-                                      print("登録完了！");
+                                      Navigator.of(context).pushReplacement(
+                                          MaterialPageRoute(
+                                              builder: (_) =>
+                                                  AfterLoginPage()));
                                     }
                                   }
                                 : null,

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_instagram/common/exception.dart';
 import 'package:flutter_instagram/entities/post.dart';
 import 'package:flutter_instagram/models/grid_post_model.dart';
@@ -18,7 +17,7 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
   final IImageRepository _imageRepository;
 
   final StateNotifier<GenericException?> _errorStateNotifier;
-  final String userID;
+  final String? userID;
 
   ProfileViewModel(this._userRepository, this._postRepository,
       this._imageRepository, this._errorStateNotifier,
@@ -26,10 +25,13 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
       : super(ProfileState());
 
   Future<UserModel> _fetchUser() async {
-    final userEntity = await _userRepository.findWithID(userID);
+    if (userID == null) {
+      throw UserException.noUserId();
+    }
+    final userEntity = await _userRepository.findWithID(userID!);
 
     if (userEntity == null) {
-      throw UserException.notFound(userID);
+      throw UserException.notFound(userID!);
     }
 
     final imageReference = userEntity.profileImageReference;
@@ -46,7 +48,7 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
     final myPosts = await _fetchOwnPosts();
 
     final userModel = UserModel(
-        userID: userID,
+        userID: userID!,
         displayName: userEntity.displayName,
         bio: userEntity.bio,
         avatar: avatar,
@@ -58,8 +60,11 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
   }
 
   Future<List<GridPostModel>> _fetchOwnPosts() async {
+    if (userID == null) {
+      throw UserException.noUserId();
+    }
     final EqualQueryModel queryModel =
-        EqualQueryModel(fieldName: "sender_id", fieldValue: userID);
+        EqualQueryModel(fieldName: "sender_id", fieldValue: userID!);
     final postEntities = await _postRepository.findWithQuery(queryModel);
     List<GridPostModel> postModels = [];
     for (PostEntity entity in postEntities) {

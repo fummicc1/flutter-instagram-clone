@@ -1,9 +1,16 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_instagram/common/exception.dart';
+import 'package:flutter_instagram/entities/user.dart';
 import 'package:flutter_instagram/firebase/auth_client.dart';
+import 'package:flutter_instagram/firebase/firestore_client.dart';
+import 'package:flutter_instagram/repositories/query.dart';
 
 abstract class IAuthRepository {
   Future<bool> isLoggedIn();
   String? getCurrentUserId();
+  abstract final Stream<String?> uIdStream;
 
   /// return the current uid if the authentication succeeded
   Future<String> signUp({required String email, required String password});
@@ -21,6 +28,12 @@ class AuthRepository implements IAuthRepository {
 
   @override
   String? getCurrentUserId() => _authClient.currentUserId;
+
+  @override
+  Stream<String?> get uIdStream => _authClient.userStream
+          .transform(StreamTransformer.fromHandlers(handleData: (data, sink) {
+        sink.add(data?.uid);
+      }));
 
   @override
   Future<String> signUp(
