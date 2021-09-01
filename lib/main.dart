@@ -37,6 +37,7 @@ class _MyAppState extends ConsumerState<MyApp> {
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: materialWhite,
+          accentColor: Colors.black,
           textButtonTheme: TextButtonThemeData(
             style: TextButton.styleFrom(primary: Colors.black)
           ),
