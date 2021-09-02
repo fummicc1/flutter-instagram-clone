@@ -37,6 +37,7 @@ class AfterLoginPage extends ConsumerWidget {
           // TODO: Use user own icon
           BottomNavigationBarItem(icon: Icon(Icons.person), label: ""), // プロフィール
         ],
+        currentIndex: selectedIndex,
         onTap: (index) {
           ref.read(selectedBottomNavigationIndex).state = index;
         },
