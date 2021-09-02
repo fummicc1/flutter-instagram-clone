@@ -16,8 +16,10 @@ class FakeUserRepository implements IUserRepository {
     userData[id] = newEntity;
   }
 
+  @override
   Future<UserEntity?> findWithID(String userID) async {
-    final equalQueryModel = EqualQueryModel(fieldName: "user_id", fieldValue: userID);
+    final equalQueryModel =
+        EqualQueryModel(fieldName: "user_id", fieldValue: userID);
     final copyData = userData;
 
     for (final entity in copyData.values) {
@@ -25,5 +27,11 @@ class FakeUserRepository implements IUserRepository {
     }
 
     return copyData.values.first;
+  }
+
+  @override
+  Future<String?> uidToUserId(String uid) async {
+    final data = userData[uid];
+    return data?.userId;
   }
 }

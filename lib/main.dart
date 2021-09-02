@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_instagram/pages/root_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -7,13 +8,7 @@ void main() {
   runApp(ProviderScope(child: MyApp()));
 }
 
-class MyApp extends ConsumerStatefulWidget {
-  @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _MyAppState();
-}
-
-class _MyAppState extends ConsumerState<MyApp> {
-
+class MyApp extends StatelessWidget {
   final MaterialColor materialWhite = const MaterialColor(
     0xFFFFFFFF,
     const <int, Color>{
@@ -36,15 +31,12 @@ class _MyAppState extends ConsumerState<MyApp> {
     return MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: materialWhite,
-          accentColor: Colors.black,
-          textButtonTheme: TextButtonThemeData(
-            style: TextButton.styleFrom(primary: Colors.black)
-          ),
-          outlinedButtonTheme: OutlinedButtonThemeData(
-            style: OutlinedButton.styleFrom(primary: Colors.black)
-          )
-        ),
+            primarySwatch: materialWhite,
+            accentColor: Colors.black,
+            textButtonTheme: TextButtonThemeData(
+                style: TextButton.styleFrom(primary: Colors.black)),
+            outlinedButtonTheme: OutlinedButtonThemeData(
+                style: OutlinedButton.styleFrom(primary: Colors.black))),
         darkTheme: ThemeData.dark(),
         home: RootPage());
   }
