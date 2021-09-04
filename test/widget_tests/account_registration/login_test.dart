@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram/pages/after_login_page.dart';
 import 'package:flutter_instagram/pages/login/login_page.dart';
+import 'package:flutter_instagram/pages/root_page.dart';
 import 'package:flutter_instagram/providers/providers.dart';
 import 'package:flutter_instagram/viewmodels/account_registration_viewmodel.dart';
 import 'package:flutter_instagram/viewmodels/app_viewmodel.dart';
@@ -54,6 +55,6 @@ void main() {
 
     await tester.tap(find.text("ログイン"));
     await tester.pumpAndSettle();
-    expect(find.byType(AfterLoginPage), findsOneWidget);
+    expect(find.byType(RootPage), findsOneWidget);
   });
 }
