@@ -25,49 +25,44 @@ class MyProfilePage extends ConsumerWidget {
       return Center(child: CircularProgressIndicator());
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(user.userID),
-      ),
-      body: Column(
-        children: [
-          ProfileStatusWidget(
-              user: user,
-              hasNewStory: state.hasNewStory,
-              avatarSize: state.avatarSize,
-              isMyAccount: state.isMyAccount),
-          SizedBox(
-            height: 16,
+    return Column(
+      children: [
+        ProfileStatusWidget(
+            user: user,
+            hasNewStory: state.hasNewStory,
+            avatarSize: state.avatarSize,
+            isMyAccount: state.isMyAccount),
+        SizedBox(
+          height: 16,
+        ),
+        _buildStoryHighlighView(context, state.storyHighlightsList),
+        Container(
+          height: 56,
+          child: Row(
+            children: [
+              Expanded(
+                  child: IconButton(
+                      onPressed: () {}, icon: Icon(Icons.apps_rounded))),
+              Expanded(
+                  child:
+                  IconButton(onPressed: () {}, icon: Icon(Icons.list))),
+              Expanded(
+                  child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.person_pin_rounded))),
+            ],
           ),
-          _buildStoryHighlighView(context, state.storyHighlightsList),
-          Container(
-            height: 56,
-            child: Row(
-              children: [
-                Expanded(
-                    child: IconButton(
-                        onPressed: () {}, icon: Icon(Icons.apps_rounded))),
-                Expanded(
-                    child:
-                        IconButton(onPressed: () {}, icon: Icon(Icons.list))),
-                Expanded(
-                    child: IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.person_pin_rounded))),
-              ],
-            ),
+        ),
+        Flexible(
+          child: GridView.count(
+            crossAxisCount: 3,
+            children: state.posts
+                .map((model) => GridTimelineCardWidget(
+                gridPostModel: model, onSelect: () {}))
+                .toList(),
           ),
-          Flexible(
-            child: GridView.count(
-              crossAxisCount: 3,
-              children: state.posts
-                  .map((model) => GridTimelineCardWidget(
-                      gridPostModel: model, onSelect: () {}))
-                  .toList(),
-            ),
-          )
-        ],
-      ),
+        )
+      ],
     );
   }
 

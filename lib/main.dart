@@ -1,9 +1,6 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_instagram/pages/account_registration_id_page.dart';
-import 'package:flutter_instagram/pages/account_registration_start_page.dart';
-import 'package:flutter_instagram/pages/after_login_page.dart';
-import 'package:flutter_instagram/providers/providers.dart';
+
+import 'package:flutter_instagram/pages/root_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
@@ -11,14 +8,7 @@ void main() {
   runApp(ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
-
+class MyApp extends StatelessWidget {
   final MaterialColor materialWhite = const MaterialColor(
     0xFFFFFFFF,
     const <int, Color>{
@@ -42,29 +32,21 @@ class _MyAppState extends State<MyApp> {
         title: 'Flutter Demo',
         theme: ThemeData(
             primarySwatch: materialWhite,
+            accentColor: Colors.black,
             textButtonTheme: TextButtonThemeData(
                 style: TextButton.styleFrom(primary: Colors.black)),
             outlinedButtonTheme: OutlinedButtonThemeData(
-                style: OutlinedButton.styleFrom(primary: Colors.black))),
+                style: OutlinedButton.styleFrom(primary: Colors.black)
+            ),
+          iconTheme: IconThemeData(
+            color: Colors.black,
+          ),
+          bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            unselectedItemColor: Colors.black.withAlpha(120),
+            selectedItemColor: Colors.black
+          )
+        ),
         darkTheme: ThemeData.dark(),
-        home: FutureBuilder(
-          future: _initialization,
-          builder: (context, snapshot) {
-            if (snapshot.hasError) return Container(); // something went wrong
-            if (snapshot.connectionState == ConnectionState.done)
-              return Consumer(
-                builder: (context, ref, child) {
-                  final needToLogin = ref.watch(needToLoginProvider);
-                  return needToLogin.when(
-                      loading: () => Container(),
-                      error: (err, stack) => Container(),
-                      data: (value) => value
-                          ? AccountRegistrationStartPage()
-                          : AfterLoginPage());
-                },
-              ); // complete
-            return Container(); // loading
-          },
-        ));
+        home: RootPage());
   }
 }

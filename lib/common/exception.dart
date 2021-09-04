@@ -40,19 +40,23 @@ class EmailInputException extends GenericException {
 }
 
 class UserException extends GenericException {
-
   final String uid;
+
   /// 0...notFound
+  /// 1...noUserId
   final int code;
 
   UserException({required this.uid, required this.code});
 
   static UserException notFound(String uid) => UserException(uid: uid, code: 0);
+  static UserException noUserId() => UserException(uid: "", code: 1);
 
   @override
   String message() {
     if (code == 0) {
       return "idが$uidのユーザーが見つかりませんでした";
+    } else if (code == 1) {
+      return "userIdがセットされていません";
     }
     return "エラーが発生しました";
   }

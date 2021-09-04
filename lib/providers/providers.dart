@@ -64,6 +64,7 @@ final _authRepository = Provider<IAuthRepository>((ref) {
   return AuthRepository(auth);
 });
 
+/// UI
 final _uidStreamProvider = StreamProvider<String?>((ref) {
   final auth = ref.watch(_authRepository);
   return auth.uIdStream;
@@ -113,10 +114,12 @@ final myProfileStateProvider =
   final imageRepository = ref.watch(_imageRepository);
   final errorState = ref.read(errorStateProvider);
 
-  final String userID =
-      ref.watch(myProfileUserIdStateProvider).state ?? "unknown userId";
+  final String? userID = ref.watch(myProfileUserIdStateProvider).state;
 
   return ProfileViewModel(
       userRepository, postRepository, imageRepository, errorState,
       userID: userID);
 });
+
+/// Current selecting bottomNavigation index
+final selectedBottomNavigationIndex = StateProvider<int>((_) => 0);

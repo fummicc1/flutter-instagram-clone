@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_instagram/common/exception.dart';
 import 'package:flutter_instagram/pages/after_login_page.dart';
 import 'package:flutter_instagram/pages/login/login_page.dart';
 import 'package:flutter_instagram/providers/providers.dart';
