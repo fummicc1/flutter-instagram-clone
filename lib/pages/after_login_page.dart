@@ -32,10 +32,13 @@ class AfterLoginPage extends ConsumerWidget {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.house), label: ""), // ホーム
           BottomNavigationBarItem(icon: Icon(Icons.search), label: ""), // 検索
-          BottomNavigationBarItem(icon: Icon(Icons.slow_motion_video), label: ""), // リール
-          BottomNavigationBarItem(icon: Icon(Icons.shopping_bag), label: ""), // バッグ
+          BottomNavigationBarItem(
+              icon: Icon(Icons.slow_motion_video), label: ""), // リール
+          BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_bag), label: ""), // バッグ
           // TODO: Use user own icon
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: ""), // プロフィール
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person), label: ""), // プロフィール
         ],
         showUnselectedLabels: false,
         showSelectedLabels: false,

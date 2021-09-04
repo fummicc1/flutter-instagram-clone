@@ -1,5 +1,7 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram/pages/account_registration_sign_up_page.dart';
+import 'package:flutter_instagram/pages/login/login_page.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AccountRegistrationStartPage extends StatelessWidget {
@@ -98,16 +100,24 @@ class AccountRegistrationStartPage extends StatelessWidget {
                 height: 1,
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("すでにアカウントをお持ちの場合"),
-                TextButton(
-                  onPressed: null,
-                  child: Text("ログイン"),
-                  style: TextButton.styleFrom(padding: EdgeInsets.zero),
-                )
-              ],
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+              child: RichText(
+                text: TextSpan(children: [
+                  TextSpan(text: "すでにアカウントをお持ちの場合は、"),
+                  TextSpan(
+                      text: "ログイン",
+                      style: TextStyle(color: Colors.black),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(builder: (_) => LoginPage()));
+                        }),
+                  TextSpan(text: "してください。")
+                ]),
+                textAlign: TextAlign.center,
+              ),
             )
           ],
         ),

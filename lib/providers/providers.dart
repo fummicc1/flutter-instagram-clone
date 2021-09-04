@@ -9,7 +9,9 @@ import 'package:flutter_instagram/repositories/auth_repository.dart';
 import 'package:flutter_instagram/repositories/image_repository.dart';
 import 'package:flutter_instagram/repositories/post_repository.dart';
 import 'package:flutter_instagram/repositories/user_repository.dart';
+import 'package:flutter_instagram/states/login_state.dart';
 import 'package:flutter_instagram/states/profile_state.dart';
+import 'package:flutter_instagram/viewmodels/login_viewmodel.dart';
 import 'package:flutter_instagram/viewmodels/profile_viewmodel.dart';
 import 'package:flutter_instagram/states/account_registration_state.dart';
 import 'package:flutter_instagram/viewmodels/account_registration_viewmodel.dart';
@@ -92,6 +94,12 @@ final myProfileUserIdStateProvider = StateProvider<String?>((ref) {
 final accountRegistrationViewModelProvider = StateNotifierProvider<
     AccountRegistrationViewModel, AccountRegistrationState>((ref) {
   return AccountRegistrationViewModel(
+      ref.watch(_authRepository), ref.watch(_userRepository), ref.read);
+});
+
+final loginViewModelProvider =
+    StateNotifierProvider<LoginViewModel, LoginState>((ref) {
+  return LoginViewModel(
       ref.watch(_authRepository), ref.watch(_userRepository), ref.read);
 });
 
