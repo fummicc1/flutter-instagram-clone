@@ -36,16 +36,13 @@ class MyApp extends StatelessWidget {
             textButtonTheme: TextButtonThemeData(
                 style: TextButton.styleFrom(primary: Colors.black)),
             outlinedButtonTheme: OutlinedButtonThemeData(
-                style: OutlinedButton.styleFrom(primary: Colors.black)
+                style: OutlinedButton.styleFrom(primary: Colors.black)),
+            iconTheme: IconThemeData(
+              color: Colors.black,
             ),
-          iconTheme: IconThemeData(
-            color: Colors.black,
-          ),
-          bottomNavigationBarTheme: BottomNavigationBarThemeData(
-            unselectedItemColor: Colors.black.withAlpha(120),
-            selectedItemColor: Colors.black
-          )
-        ),
+            bottomNavigationBarTheme: BottomNavigationBarThemeData(
+                unselectedItemColor: Colors.black.withAlpha(120),
+                selectedItemColor: Colors.black)),
         darkTheme: ThemeData.dark(),
         home: RootPage());
   }

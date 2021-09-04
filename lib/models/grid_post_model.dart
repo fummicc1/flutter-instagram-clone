@@ -8,6 +8,6 @@ class GridPostModel {
 
   GridPostModel(
       {required this.postID,
-        required this.topImageURL,
-        required this.hasMultipleImage});
+      required this.topImageURL,
+      required this.hasMultipleImage});
 }

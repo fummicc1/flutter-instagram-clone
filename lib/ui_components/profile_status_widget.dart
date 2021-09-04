@@ -45,8 +45,10 @@ class ProfileStatusWidget extends StatelessWidget {
               Container(
                 width: 80,
                 height: 80,
-                child: UserImageWidget(imageModel: user.avatar,
-                    hasNewStory: hasNewStory, size: avatarSize),
+                child: UserImageWidget(
+                    imageModel: user.avatar,
+                    hasNewStory: hasNewStory,
+                    size: avatarSize),
               ),
               SizedBox(width: 24),
               Expanded(

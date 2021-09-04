@@ -25,7 +25,6 @@ abstract class IImageRepository {
       {required File file, required ImageMetadata imageMetadata});
 }
 
-
 class ImageRepository implements IImageRepository {
   IStorageClient _storageClient;
   IFirestoreClient _firestoreClient;
@@ -38,7 +37,7 @@ class ImageRepository implements IImageRepository {
     final folderName = "images/";
 
     final documentReference =
-    FirebaseFirestore.instance.collection(ImageEntity.collectionName).doc();
+        FirebaseFirestore.instance.collection(ImageEntity.collectionName).doc();
 
     final fileName = documentReference.id;
 
@@ -49,7 +48,9 @@ class ImageRepository implements IImageRepository {
         imageMetadata: imageMetadata);
 
     await _storageClient.uploadFile(
-        file: file, path: imageEntity.getFileURL(), contentType: imageMetadata.contentType);
+        file: file,
+        path: imageEntity.getFileURL(),
+        contentType: imageMetadata.contentType);
 
     await _createImageEntity(imageEntity);
 
@@ -72,7 +73,7 @@ class ImageRepository implements IImageRepository {
   @override
   Future<List<ImageEntity>> findWithQueries(List<QueryModel> queries) async {
     Query query =
-    FirebaseFirestore.instance.collection(ImageEntity.collectionName);
+        FirebaseFirestore.instance.collection(ImageEntity.collectionName);
     for (QueryModel model in queries) {
       query = model.build(query);
     }
@@ -88,8 +89,7 @@ class ImageRepository implements IImageRepository {
 
   @override
   Future<String> getURL(ImageEntity imageEntity) async {
-    final path =
-        imageEntity.getFileURL();
+    final path = imageEntity.getFileURL();
     final ref = await _storageClient.getStorageRef(path);
     return _storageClient.getLink(ref);
   }
