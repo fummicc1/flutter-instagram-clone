@@ -15,6 +15,9 @@ class PostEntity with FirestoreModel {
       imageDocumentReferenceList; // imagesコレクション内にある画像のDocumentReference一覧
 
   PostEntity(
+
+
+
       {required this.id,
       required this.message,
       required this.senderId,
