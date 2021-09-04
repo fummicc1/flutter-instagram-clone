@@ -27,10 +27,10 @@ class UserModel {
 
   UserModel(
       {required this.userID,
-        required this.displayName,
-        required this.bio,
-        required this.avatar,
-        required this.posts,
-        required this.followerCount,
-        required this.followeeCount});
+      required this.displayName,
+      required this.bio,
+      required this.avatar,
+      required this.posts,
+      required this.followerCount,
+      required this.followeeCount});
 }

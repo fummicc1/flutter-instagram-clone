@@ -44,12 +44,10 @@ class MyProfilePage extends ConsumerWidget {
                   child: IconButton(
                       onPressed: () {}, icon: Icon(Icons.apps_rounded))),
               Expanded(
-                  child:
-                  IconButton(onPressed: () {}, icon: Icon(Icons.list))),
+                  child: IconButton(onPressed: () {}, icon: Icon(Icons.list))),
               Expanded(
                   child: IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.person_pin_rounded))),
+                      onPressed: () {}, icon: Icon(Icons.person_pin_rounded))),
             ],
           ),
         ),
@@ -58,7 +56,7 @@ class MyProfilePage extends ConsumerWidget {
             crossAxisCount: 3,
             children: state.posts
                 .map((model) => GridTimelineCardWidget(
-                gridPostModel: model, onSelect: () {}))
+                    gridPostModel: model, onSelect: () {}))
                 .toList(),
           ),
         )
