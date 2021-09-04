@@ -14,11 +14,6 @@ class LoginPage extends ConsumerWidget {
     final viewModel = ref.watch(loginViewModelProvider.notifier);
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          iconTheme: IconThemeData(color: Colors.black),
-        ),
         body: Column(
           children: [
             Expanded(
@@ -27,6 +22,9 @@ class LoginPage extends ConsumerWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 48),
                   child: Column(
                     children: [
+                      SizedBox(
+                        height: 72,
+                      ),
                       AspectRatio(
                         aspectRatio: 2.8,
                         child: SvgPicture.asset(
@@ -81,8 +79,9 @@ class LoginPage extends ConsumerWidget {
                                 final res =
                                     await viewModel.onClickLoginButton();
                                 if (res) {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (_) => AfterLoginPage()));
+                                  Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                          builder: (_) => AfterLoginPage()));
                                 }
                               },
                               child: Padding(
@@ -141,25 +140,26 @@ class LoginPage extends ConsumerWidget {
                 height: 1,
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                RichText(
-                  text: TextSpan(children: [
-                    TextSpan(text: "アカウントを持っていない場合は、"),
-                    TextSpan(
-                        text: "登録",
-                        style: TextStyle(color: Colors.black),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) =>
-                                    AccountRegistrationSignUpPage()));
-                          }),
-                    TextSpan(text: "してください。")
-                  ]),
-                ),
-              ],
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+              child: RichText(
+                text: TextSpan(children: [
+                  TextSpan(text: "アカウントを持っていない場合は、"),
+                  TextSpan(
+                      text: "登録",
+                      style: TextStyle(color: Colors.black),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (_) =>
+                                      AccountRegistrationSignUpPage()));
+                        }),
+                  TextSpan(text: "してください。")
+                ]),
+                textAlign: TextAlign.center,
+              ),
             )
           ],
         ),
