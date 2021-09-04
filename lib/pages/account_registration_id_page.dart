@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram/pages/after_login_page.dart';
 import 'package:flutter_instagram/pages/login/login_page.dart';
+import 'package:flutter_instagram/pages/root_page.dart';
 import 'package:flutter_instagram/providers/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -63,8 +64,7 @@ class AccountRegistrationIdPage extends ConsumerWidget {
                                     if (res) {
                                       Navigator.of(context).pushReplacement(
                                           MaterialPageRoute(
-                                              builder: (_) =>
-                                                  AfterLoginPage()));
+                                              builder: (_) => RootPage()));
                                     }
                                   }
                                 : null,

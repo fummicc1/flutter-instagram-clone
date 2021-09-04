@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram/pages/account_registration_sign_up_page.dart';
 import 'package:flutter_instagram/pages/after_login_page.dart';
+import 'package:flutter_instagram/pages/root_page.dart';
 import 'package:flutter_instagram/providers/providers.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -81,7 +82,7 @@ class LoginPage extends ConsumerWidget {
                                 if (res) {
                                   Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(
-                                          builder: (_) => AfterLoginPage()));
+                                          builder: (_) => RootPage()));
                                 }
                               },
                               child: Padding(
