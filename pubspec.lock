@@ -314,6 +314,15 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_fast_ui_white:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: f5ee35969c7e548da4cfaaf93320a7ce749cb76e
+      url: "https://github.com/organic-nailer/flutter_fast_ui_white"
+    source: git
+    version: "1.0.0+1"
   flutter_hooks:
     dependency: "direct main"
     description:

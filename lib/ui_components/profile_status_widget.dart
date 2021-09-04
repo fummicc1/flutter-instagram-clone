@@ -45,8 +45,10 @@ class ProfileStatusWidget extends StatelessWidget {
               Container(
                 width: 80,
                 height: 80,
-                child: UserImageWidget(imageModel: user.avatar,
-                    hasNewStory: hasNewStory, size: avatarSize),
+                child: UserImageWidget(
+                    imageModel: user.avatar,
+                    hasNewStory: hasNewStory,
+                    size: avatarSize),
               ),
               SizedBox(width: 24),
               Expanded(
@@ -115,6 +117,7 @@ class ProfileStatusWidget extends StatelessWidget {
       Expanded(
         child: OutlinedButton(
             onPressed: () {},
+            style: OutlinedButton.styleFrom(primary: Colors.black),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -128,7 +131,11 @@ class ProfileStatusWidget extends StatelessWidget {
       SizedBox(
         width: 8,
       ),
-      Expanded(child: OutlinedButton(onPressed: () {}, child: Text("メッセージ"))),
+      Expanded(
+          child: OutlinedButton(
+              style: OutlinedButton.styleFrom(primary: Colors.black),
+              onPressed: () {},
+              child: Text("メッセージ"))),
       SizedBox(
         width: 8,
       ),
