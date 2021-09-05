@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_instagram/common/exception.dart';
 import 'package:flutter_instagram/pages/account_registration_name_page.dart';
 import 'package:flutter_instagram/providers/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -37,6 +36,8 @@ class AccountRegistrationSignUpPage extends ConsumerWidget {
                     ],
                     labelColor: Colors.black,
                     unselectedLabelColor: Colors.grey,
+                    indicator: UnderlineTabIndicator(
+                        borderSide: BorderSide(color: Colors.black)),
                   ),
                   Container(
                     margin: EdgeInsets.symmetric(vertical: 16),
@@ -81,9 +82,10 @@ class AccountRegistrationSignUpPage extends ConsumerWidget {
                           onPressed: () async {
                             final res = await viewModel.onClickNextButton();
                             if (res) {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (_) =>
-                                      AccountRegistrationNamePage()));
+                              Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                      builder: (_) =>
+                                          AccountRegistrationNamePage()));
                             }
                           },
                           child: Padding(
