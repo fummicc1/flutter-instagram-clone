@@ -17,7 +17,7 @@ class _ProfileNumericStatusModel {
 }
 
 class ProfileStatusWidget extends StatelessWidget {
-  ProfileStatusWidget(
+  const ProfileStatusWidget(
       {Key? key,
       required this.user,
       required this.hasNewStory,
@@ -50,7 +50,7 @@ class ProfileStatusWidget extends StatelessWidget {
                     hasNewStory: hasNewStory,
                     size: avatarSize),
               ),
-              SizedBox(width: 24),
+              const SizedBox(width: 24),
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -84,7 +84,7 @@ class ProfileStatusWidget extends StatelessWidget {
               )
             ],
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -99,7 +99,7 @@ class ProfileStatusWidget extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyText1),
             ],
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Container(
             height: 32,
             child: Row(
@@ -119,7 +119,7 @@ class ProfileStatusWidget extends StatelessWidget {
             onPressed: () {},
             child: Row(
               mainAxisSize: MainAxisSize.min,
-              children: [
+              children: const [
                 Text(
                   "フォロー中",
                 ),
@@ -127,11 +127,11 @@ class ProfileStatusWidget extends StatelessWidget {
               ],
             )),
       ),
-      SizedBox(
+      const SizedBox(
         width: 8,
       ),
-      Expanded(child: OutlinedButton(onPressed: () {}, child: Text("メッセージ"))),
-      SizedBox(
+      Expanded(child: OutlinedButton(onPressed: () {}, child: const Text("メッセージ"))),
+      const SizedBox(
         width: 8,
       ),
       Container(
@@ -142,7 +142,7 @@ class ProfileStatusWidget extends StatelessWidget {
         width: 28,
         child: InkWell(
             onTap: () {},
-            child: Icon(
+            child: const Icon(
               Icons.arrow_drop_down_rounded,
             )),
       )

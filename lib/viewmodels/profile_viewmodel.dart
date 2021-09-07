@@ -22,7 +22,7 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
   ProfileViewModel(this._userRepository, this._postRepository,
       this._imageRepository, this._errorStateNotifier,
       {required this.userID})
-      : super(ProfileState());
+      : super(const ProfileState());
 
   Future<UserModel> _fetchUser() async {
     if (userID == null) {
@@ -37,7 +37,7 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
     final imageReference = userEntity.profileImageReference;
 
     // Default Image
-    ImageModel avatar = ImageModel(resource: "https://via.placeholder.com/150");
+    ImageModel avatar = const ImageModel(resource: "https://via.placeholder.com/150");
 
     if (imageReference != null) {
       final imageEntity = await _imageRepository.find(imageReference.id);
@@ -79,11 +79,6 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
       postModels.add(model);
     }
     return postModels;
-  }
-
-  Future<List<StoryModel>> _fetchOwnStories() async {
-    // TODO: Implement Story
-    return [];
   }
 
   Future setup() async {

@@ -1,11 +1,7 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_instagram/common/exception.dart';
-import 'package:flutter_instagram/entities/user.dart';
 import 'package:flutter_instagram/firebase/auth_client.dart';
-import 'package:flutter_instagram/firebase/firestore_client.dart';
-import 'package:flutter_instagram/repositories/query.dart';
 
 abstract class IAuthRepository {
   Future<bool> isLoggedIn();

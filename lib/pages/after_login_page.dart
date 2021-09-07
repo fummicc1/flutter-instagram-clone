@@ -11,11 +11,11 @@ class AfterLoginPage extends ConsumerWidget {
   const AfterLoginPage({Key? key}) : super(key: key);
 
   static const List<Widget> pages = [
-    const HomePage(),
-    const SearchPage(),
-    const ReelPage(),
-    const ShopPage(),
-    const MyProfilePage()
+    HomePage(),
+    SearchPage(),
+    ReelPage(),
+    ShopPage(),
+    MyProfilePage()
   ];
 
   @override
@@ -25,7 +25,7 @@ class AfterLoginPage extends ConsumerWidget {
     final selectedIndex = ref.watch(selectedBottomNavigationIndex).state;
     return Scaffold(
       appBar: AppBar(
-        title: Text("AfterLoginPage"),
+        title: const Text("AfterLoginPage"),
       ),
       body: pages[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -48,15 +48,10 @@ class AfterLoginPage extends ConsumerWidget {
         },
       ),
       floatingActionButton: FloatingActionButton.extended(
-        icon: Icon(Icons.no_accounts),
+        icon: const Icon(Icons.no_accounts),
         label: Text("サインアウトする (userID: $userId)"),
         onPressed: () async {
-          final res = await appViewModel.logout();
-          if (res) {
-            print("ログアウトしたと思う");
-            // Navigator.of(context).pushReplacement(MaterialPageRoute(
-            //     builder: (_) => AccountRegistrationStartPage()));
-          }
+          await appViewModel.logout();
         },
       ),
     );

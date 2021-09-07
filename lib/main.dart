@@ -5,23 +5,26 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(ProviderScope(child: MyApp()));
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
+
+  const MyApp({Key? key}) : super(key: key);
+
   final MaterialColor materialWhite = const MaterialColor(
     0xFFFFFFFF,
-    const <int, Color>{
-      50: const Color(0xFFFFFFFF),
-      100: const Color(0xFFFFFFFF),
-      200: const Color(0xFFFFFFFF),
-      300: const Color(0xFFFFFFFF),
-      400: const Color(0xFFFFFFFF),
-      500: const Color(0xFFFFFFFF),
-      600: const Color(0xFFFFFFFF),
-      700: const Color(0xFFFFFFFF),
-      800: const Color(0xFFFFFFFF),
-      900: const Color(0xFFFFFFFF),
+    <int, Color>{
+      50: Color(0xFFFFFFFF),
+      100: Color(0xFFFFFFFF),
+      200: Color(0xFFFFFFFF),
+      300: Color(0xFFFFFFFF),
+      400: Color(0xFFFFFFFF),
+      500: Color(0xFFFFFFFF),
+      600: Color(0xFFFFFFFF),
+      700: Color(0xFFFFFFFF),
+      800: Color(0xFFFFFFFF),
+      900: Color(0xFFFFFFFF),
     },
   );
 
@@ -37,13 +40,13 @@ class MyApp extends StatelessWidget {
                 style: TextButton.styleFrom(primary: Colors.black)),
             outlinedButtonTheme: OutlinedButtonThemeData(
                 style: OutlinedButton.styleFrom(primary: Colors.black)),
-            iconTheme: IconThemeData(
+            iconTheme: const IconThemeData(
               color: Colors.black,
             ),
             bottomNavigationBarTheme: BottomNavigationBarThemeData(
                 unselectedItemColor: Colors.black.withAlpha(120),
                 selectedItemColor: Colors.black)),
         darkTheme: ThemeData.dark(),
-        home: RootPage());
+        home: const RootPage());
   }
 }

@@ -7,8 +7,8 @@ import 'package:flutter_instagram/repositories/query.dart';
 import 'query_test.dart';
 
 class FakeImageRepository implements IImageRepository {
-  Map<String, File> _fileCache = {};
-  Map<DocumentReference, ImageEntity> _entitiesCache = {};
+  final Map<String, File> _fileCache = {};
+  final Map<DocumentReference, ImageEntity> _entitiesCache = {};
 
   @override
   Future<String> create(

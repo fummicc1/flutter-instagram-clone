@@ -25,7 +25,7 @@ class UserModel {
   /// 投稿
   final List<GridPostModel> posts;
 
-  UserModel(
+  const UserModel(
       {required this.userID,
       required this.displayName,
       required this.bio,

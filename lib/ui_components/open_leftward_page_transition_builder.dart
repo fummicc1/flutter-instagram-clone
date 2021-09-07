@@ -8,7 +8,7 @@ class OpenLeftwardPageTransitionBuilder extends PageTransitionsBuilder {
       Animation<double> animation,
       Animation<double> secondaryAnimation,
       Widget child) {
-    final begin = Offset(-1, 0);
+    const begin = Offset(-1, 0);
     final end = Offset.zero;
     final tween = Tween(begin: begin, end: end);
     final offsetAnimation = animation.drive(tween);

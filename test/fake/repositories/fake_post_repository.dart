@@ -5,7 +5,7 @@ import 'package:flutter_instagram/repositories/query.dart';
 
 class FakePostRepository extends IPostRepository {
 
-  Map<DocumentReference, PostEntity> _data = {};
+  final Map<DocumentReference, PostEntity> _data = {};
 
   @override
   Future create(PostEntity postEntity) async {

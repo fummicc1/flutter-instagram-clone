@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 
 mixin Messagable {
   String message();
