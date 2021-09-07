@@ -130,7 +130,8 @@ class ProfileStatusWidget extends StatelessWidget {
       const SizedBox(
         width: 8,
       ),
-      Expanded(child: OutlinedButton(onPressed: () {}, child: const Text("メッセージ"))),
+      Expanded(
+          child: OutlinedButton(onPressed: () {}, child: const Text("メッセージ"))),
       const SizedBox(
         width: 8,
       ),

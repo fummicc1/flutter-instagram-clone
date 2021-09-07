@@ -39,10 +39,12 @@ class MyProfilePage extends ConsumerWidget {
                   child: IconButton(
                       onPressed: () {}, icon: const Icon(Icons.apps_rounded))),
               Expanded(
-                  child: IconButton(onPressed: () {}, icon: const Icon(Icons.list))),
+                  child: IconButton(
+                      onPressed: () {}, icon: const Icon(Icons.list))),
               Expanded(
                   child: IconButton(
-                      onPressed: () {}, icon: const Icon(Icons.person_pin_rounded))),
+                      onPressed: () {},
+                      icon: const Icon(Icons.person_pin_rounded))),
             ],
           ),
         ),

@@ -37,7 +37,8 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
     final imageReference = userEntity.profileImageReference;
 
     // Default Image
-    ImageModel avatar = const ImageModel(resource: "https://via.placeholder.com/150");
+    ImageModel avatar =
+        const ImageModel(resource: "https://via.placeholder.com/150");
 
     if (imageReference != null) {
       final imageEntity = await _imageRepository.find(imageReference.id);
