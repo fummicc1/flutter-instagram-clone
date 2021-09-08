@@ -19,12 +19,9 @@ class StoryWidget extends StatelessWidget {
             Hero(
                 tag: story.userID,
                 child: Material(
-                    child: UserImageWidget(
-                  imageModel: story.userImage,
-                  size: const Size(56, 56),
-                  hasNewStory: true,
-                ))),
-            const SizedBox(
+                    child:
+                        UserImageWidget(imageModel: story.userImage, size: Size(56, 56), hasNewStory: true,))),
+            SizedBox(
               height: 4,
             ),
             Text(story.userID)

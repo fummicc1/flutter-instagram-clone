@@ -5,5 +5,5 @@ class ImageModel {
   // URL
   final String resource;
 
-  const ImageModel({required this.resource});
+  ImageModel({required this.resource});
 }

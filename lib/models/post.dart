@@ -21,9 +21,10 @@ class PostModel {
   final DateTime createdAt;
   final DateTime updatedAt;
 
-  const PostModel(
-      {required this.id,
-      required this.userID,
+  PostModel(
+      {
+        required this.id,
+        required this.userID,
       required this.userImage,
       required this.postImageList,
       required this.message,

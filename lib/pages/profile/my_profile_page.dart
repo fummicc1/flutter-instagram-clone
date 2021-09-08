@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_instagram/models/grid_post_model.dart';
 import 'package:flutter_instagram/models/story_highlights_model.dart';
 import 'package:flutter_instagram/providers/providers.dart';
+import 'package:flutter_instagram/states/profile_state.dart';
 import 'package:flutter_instagram/ui_components/grid_timeline_card_widget.dart';
 import 'package:flutter_instagram/ui_components/profile_status_widget.dart';
 import 'package:flutter_instagram/ui_components/profile_story_list_widget.dart';
+import 'package:flutter_instagram/ui_components/story_highlight_widget.dart';
+import 'package:flutter_instagram/ui_components/user_image_widget.dart';
+import 'package:flutter_instagram/viewmodels/profile_viewmodel.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class MyProfilePage extends ConsumerWidget {
@@ -17,7 +22,7 @@ class MyProfilePage extends ConsumerWidget {
 
     if (user == null) {
       viewModel.setup();
-      return const Center(child: CircularProgressIndicator());
+      return Center(child: CircularProgressIndicator());
     }
 
     return Column(
@@ -27,7 +32,7 @@ class MyProfilePage extends ConsumerWidget {
             hasNewStory: state.hasNewStory,
             avatarSize: state.avatarSize,
             isMyAccount: state.isMyAccount),
-        const SizedBox(
+        SizedBox(
           height: 16,
         ),
         _buildStoryHighlighView(context, state.storyHighlightsList),
@@ -37,14 +42,14 @@ class MyProfilePage extends ConsumerWidget {
             children: [
               Expanded(
                   child: IconButton(
-                      onPressed: () {}, icon: const Icon(Icons.apps_rounded))),
+                      onPressed: () {}, icon: Icon(Icons.apps_rounded))),
               Expanded(
-                  child: IconButton(
-                      onPressed: () {}, icon: const Icon(Icons.list))),
+                  child:
+                  IconButton(onPressed: () {}, icon: Icon(Icons.list))),
               Expanded(
                   child: IconButton(
                       onPressed: () {},
-                      icon: const Icon(Icons.person_pin_rounded))),
+                      icon: Icon(Icons.person_pin_rounded))),
             ],
           ),
         ),
@@ -53,7 +58,7 @@ class MyProfilePage extends ConsumerWidget {
             crossAxisCount: 3,
             children: state.posts
                 .map((model) => GridTimelineCardWidget(
-                    gridPostModel: model, onSelect: () {}))
+                gridPostModel: model, onSelect: () {}))
                 .toList(),
           ),
         )
@@ -64,7 +69,7 @@ class MyProfilePage extends ConsumerWidget {
   Widget _buildStoryHighlighView(
       BuildContext context, List<StoryHighlightsModel> stories) {
     if (stories.isEmpty) {
-      return const SizedBox.shrink();
+      return SizedBox.shrink();
     }
     return Container(
         height: 96, child: ProfileStoryListWidget(storyHighlightList: stories));

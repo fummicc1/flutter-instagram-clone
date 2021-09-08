@@ -24,12 +24,12 @@ class TimelineCardWidget extends StatelessWidget {
                   Row(children: [
                     UserImageWidget(
                         imageModel: post.userImage,
-                        size: const Size(32, 32),
+                        size: Size(32, 32),
                         hasNewStory: false),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8),
                     Text(post.userID),
                   ]),
-                  const Positioned(
+                  Positioned(
                       top: 0,
                       right: 0,
                       bottom: 0,
@@ -49,7 +49,7 @@ class TimelineCardWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Row(
-              children: const [
+              children: [
                 BlackedIcon(Icons.favorite_border),
                 SizedBox(
                   width: 8,

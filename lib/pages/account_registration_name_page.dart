@@ -34,11 +34,11 @@ class AccountRegistrationNamePage extends ConsumerWidget {
                       style: Theme.of(context).textTheme.bodyText1,
                     ),
                     Container(
-                      margin: const EdgeInsets.symmetric(vertical: 16),
+                      margin: EdgeInsets.symmetric(vertical: 16),
                       height: 48,
                       child: TextField(
                         onChanged: (value) => viewModel.updateUserName(value),
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                             hintText: "名前",
                             filled: true,
                             fillColor: Color(0xFFFAFAFA),
@@ -58,9 +58,10 @@ class AccountRegistrationNamePage extends ConsumerWidget {
                           child: ElevatedButton(
                             onPressed: state.userName.isNotEmpty
                                 ? () async {
-                                    Navigator.of(context).push(MaterialPageRoute(
-                                        builder: (_) =>
-                                            const AccountRegistrationIdPage()));
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                AccountRegistrationIdPage()));
                                   }
                                 : null,
                             child: Padding(

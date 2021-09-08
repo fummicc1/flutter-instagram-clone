@@ -6,8 +6,8 @@ class GridPostModel {
   final String topImageURL;
   final bool hasMultipleImage;
 
-  const GridPostModel(
+  GridPostModel(
       {required this.postID,
-      required this.topImageURL,
-      required this.hasMultipleImage});
+        required this.topImageURL,
+        required this.hasMultipleImage});
 }

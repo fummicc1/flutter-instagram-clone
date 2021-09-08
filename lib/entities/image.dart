@@ -44,7 +44,7 @@ class ImageMetadata {
   final ImageContentType imageContentType;
   final ImageFileExtension imageFileExtension;
 
-  const ImageMetadata(
+  ImageMetadata(
       {required this.imageContentType, required this.imageFileExtension});
 
   String get contentType => imageContentType.contentType;
@@ -87,7 +87,7 @@ class ImageEntity {
   final String fileName;
   final ImageMetadata imageMetadata;
 
-  const ImageEntity(
+  ImageEntity(
       {required this.id,
       required this.path,
       required this.fileName,

@@ -5,7 +5,7 @@ import 'package:flutter_instagram/ui_components/story_highlight_widget.dart';
 import 'package:flutter_instagram/ui_components/story_widget.dart';
 
 class ProfileStoryListWidget extends StatelessWidget {
-  const ProfileStoryListWidget({Key? key, required this.storyHighlightList})
+  ProfileStoryListWidget({Key? key, required this.storyHighlightList})
       : super(key: key);
 
   final List<StoryHighlightsModel> storyHighlightList;
