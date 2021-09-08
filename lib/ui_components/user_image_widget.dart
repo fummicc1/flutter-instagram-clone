@@ -6,10 +6,12 @@ class UserImageWidget extends StatelessWidget {
   final bool hasNewStory;
   final Size size;
 
-  UserImageWidget(
-      {required this.imageModel,
+  const UserImageWidget(
+      {Key? key,
+      required this.imageModel,
       required this.hasNewStory,
-      required this.size});
+      required this.size})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class UserImageWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           shape: BoxShape.circle,
-          border: Border.all(color: Color(0xFFFD1D1D), width: 2)),
+          border: Border.all(color: const Color(0xFFFD1D1D), width: 2)),
       child: Container(
         width: size.width,
         height: size.height,

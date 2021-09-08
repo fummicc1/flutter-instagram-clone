@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(ProviderScope(
+  runApp(const ProviderScope(
       child: FastTheme(
     accentColor: Colors.blue,
     child: MyApp(),
