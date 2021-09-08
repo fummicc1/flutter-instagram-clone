@@ -10,23 +10,24 @@ part 'profile_state.freezed.dart';
 
 @freezed
 class ProfileState with _$ProfileState {
-  const factory ProfileState({
-    /// 投稿データ
-    @Default([]) List<GridPostModel> posts,
+  const factory ProfileState(
+      {
 
-    /// プロフィールデータ
-    UserModel? user,
+      /// 投稿データ
+      @Default([]) List<GridPostModel> posts,
 
-    /// プロフィールのBIO欄に表示されるストーリーズ
-    @Default([]) List<StoryHighlightsModel> storyHighlightsList,
+      /// プロフィールデータ
+      UserModel? user,
 
-    /// 新規ストーリがあるか
-    @Default(false) bool hasNewStory,
+      /// プロフィールのBIO欄に表示されるストーリーズ
+      @Default([]) List<StoryHighlightsModel> storyHighlightsList,
 
-    /// アバターのImageの大きさ
-    @Default(Size(96, 96)) avatarSize,
+      /// 新規ストーリがあるか
+      @Default(false) bool hasNewStory,
 
-    /// `user`が自分のアカウントであるかどうか
-    @Default(false) bool isMyAccount
-  }) = _ProfileState;
+      /// アバターのImageの大きさ
+      @Default(Size(96, 96)) avatarSize,
+
+      /// `user`が自分のアカウントであるかどうか
+      @Default(false) bool isMyAccount}) = _ProfileState;
 }

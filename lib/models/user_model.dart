@@ -25,12 +25,12 @@ class UserModel {
   /// 投稿
   final List<GridPostModel> posts;
 
-  UserModel(
+  const UserModel(
       {required this.userID,
-        required this.displayName,
-        required this.bio,
-        required this.avatar,
-        required this.posts,
-        required this.followerCount,
-        required this.followeeCount});
+      required this.displayName,
+      required this.bio,
+      required this.avatar,
+      required this.posts,
+      required this.followerCount,
+      required this.followeeCount});
 }

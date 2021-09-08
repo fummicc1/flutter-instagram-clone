@@ -17,13 +17,13 @@ class GridTimelineCardWidget extends StatelessWidget {
         children: [
           Image.network(gridPostModel.topImageURL),
           gridPostModel.hasMultipleImage
-              ? Positioned(
+              ? const Positioned(
                   top: 0,
                   right: 0,
                   height: 16,
                   width: 16,
                   child: Icon(Icons.photo_library_outlined))
-              : SizedBox.shrink()
+              : const SizedBox.shrink()
         ],
       ),
     );

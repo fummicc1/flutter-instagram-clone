@@ -6,5 +6,5 @@ class StoryHighlightsModel {
   final List<StoryModel> stories;
   final String title;
 
-  StoryHighlightsModel({required this.title, required this.stories});
+  const StoryHighlightsModel({required this.title, required this.stories});
 }

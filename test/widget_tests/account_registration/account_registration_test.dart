@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram/pages/account_registration_id_page.dart';
 import 'package:flutter_instagram/pages/account_registration_name_page.dart';
@@ -10,7 +8,6 @@ import 'package:flutter_instagram/viewmodels/account_registration_viewmodel.dart
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../fake/notifiers/fake_error_state_notifier.dart';
 import '../../fake/repositories/fake_auth_repository.dart';
 import '../../fake/repositories/fake_user_repository.dart';
 
@@ -19,7 +16,7 @@ class TestApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: AccountRegistrationStartPage(),
     );
   }
@@ -41,7 +38,7 @@ void main() {
     addTearDown(container.dispose);
     await tester.pumpWidget(UncontrolledProviderScope(
       container: container,
-      child: TestApp(),
+      child: const TestApp(),
     ));
 
     await tester.tap(find.text("電話番号またはメールアドレスで登録"));
