@@ -25,7 +25,7 @@ extension ShowToast on Widget {
     );
     toast.showToast(
         child: widget,
-        toastDuration: const Duration(seconds: 3),
+        toastDuration: Duration(seconds: 3),
         positionedToastBuilder: (context, child) {
           return Positioned(
             child: child,

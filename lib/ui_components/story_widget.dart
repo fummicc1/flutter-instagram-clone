@@ -21,10 +21,10 @@ class StoryWidget extends StatelessWidget {
                 child: Material(
                     child: UserImageWidget(
                   imageModel: story.userImage,
-                  size: const Size(56, 56),
+                  size: Size(56, 56),
                   hasNewStory: true,
                 ))),
-            const SizedBox(
+            SizedBox(
               height: 4,
             ),
             Text(story.userID)

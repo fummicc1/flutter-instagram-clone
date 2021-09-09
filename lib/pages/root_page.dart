@@ -33,8 +33,8 @@ class RootPage extends ConsumerWidget {
               loading: () => Container(),
               error: (err, stack) => Container(),
               data: (needToLogin) => needToLogin
-                  ? const AccountRegistrationStartPage()
-                  : const AfterLoginPage());
+                  ? AccountRegistrationStartPage()
+                  : AfterLoginPage());
         });
   }
 }
