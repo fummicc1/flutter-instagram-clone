@@ -19,7 +19,7 @@ void main() {
     fakePostRepo = FakePostRepository();
     fakeImageRepo = FakeImageRepository();
     fakeErrorStateNotifier = FakeErrorStateNotifier();
-    const userID = "fummicc1";
+    final userID = "fummicc1";
     profileViewModel = ProfileViewModel(
         fakeUserRepo,
         fakePostRepo,

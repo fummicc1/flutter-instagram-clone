@@ -18,15 +18,15 @@ class AccountRegistrationSignUpPage extends ConsumerWidget {
           appBar: AppBar(
             elevation: 0,
             backgroundColor: Colors.transparent,
-            iconTheme: const IconThemeData(color: Colors.black),
+            iconTheme: IconThemeData(color: Colors.black),
           ),
           body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 48),
               child: Column(
                 children: [
-                  const Text("電話番号またはメールアドレスを入力"),
-                  const TabBar(
+                  Text("電話番号またはメールアドレスを入力"),
+                  TabBar(
                     tabs: [
                       Tab(
                         text: "電話番号",
@@ -39,11 +39,11 @@ class AccountRegistrationSignUpPage extends ConsumerWidget {
                     unselectedLabelColor: Colors.grey,
                   ),
                   Container(
-                    margin: const EdgeInsets.symmetric(vertical: 16),
+                    margin: EdgeInsets.symmetric(vertical: 16),
                     height: 48,
                     child: TextField(
                       onChanged: (value) => viewModel.updateEmail(value),
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                           hintText: "メールアドレス",
                           filled: true,
                           fillColor: Color(0xFFFAFAFA),
@@ -57,11 +57,11 @@ class AccountRegistrationSignUpPage extends ConsumerWidget {
                     ),
                   ),
                   Container(
-                    margin: const EdgeInsets.symmetric(vertical: 16),
+                    margin: EdgeInsets.symmetric(vertical: 16),
                     height: 48,
                     child: TextField(
                       onChanged: (value) => viewModel.updatePassword(value),
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                           hintText: "パスワード",
                           filled: true,
                           fillColor: Color(0xFFFAFAFA),
@@ -83,11 +83,11 @@ class AccountRegistrationSignUpPage extends ConsumerWidget {
                             if (res) {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (_) =>
-                                      const AccountRegistrationNamePage()));
+                                      AccountRegistrationNamePage()));
                             }
                           },
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 12),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 12),
                             child: Text("次へ"),
                           ),
                           style: ElevatedButton.styleFrom(elevation: 0),
@@ -105,8 +105,8 @@ class AccountRegistrationSignUpPage extends ConsumerWidget {
                         height: 1,
                         color: Colors.grey,
                       )),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 36),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 36),
                         child: Text("または"),
                       ),
                       Flexible(
@@ -118,8 +118,8 @@ class AccountRegistrationSignUpPage extends ConsumerWidget {
                   ),
                   TextButton.icon(
                       onPressed: () {},
-                      icon: const Text("f"),
-                      label: const Text(
+                      icon: Text("f"),
+                      label: Text(
                         "Facebookでログイン",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       )),
