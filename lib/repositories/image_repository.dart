@@ -26,15 +26,15 @@ abstract class IImageRepository {
 }
 
 class ImageRepository implements IImageRepository {
-  final IStorageClient _storageClient;
-  final IFirestoreClient _firestoreClient;
+  IStorageClient _storageClient;
+  IFirestoreClient _firestoreClient;
 
   ImageRepository(this._firestoreClient, this._storageClient);
 
   @override
   Future<String> create(
       {required File file, required ImageMetadata imageMetadata}) async {
-    const folderName = "images/";
+    final folderName = "images/";
 
     final documentReference =
         FirebaseFirestore.instance.collection(ImageEntity.collectionName).doc();

@@ -17,7 +17,7 @@ class _ProfileNumericStatusModel {
 }
 
 class ProfileStatusWidget extends StatelessWidget {
-  const ProfileStatusWidget(
+  ProfileStatusWidget(
       {Key? key,
       required this.user,
       required this.hasNewStory,
@@ -50,7 +50,7 @@ class ProfileStatusWidget extends StatelessWidget {
                     hasNewStory: hasNewStory,
                     size: avatarSize),
               ),
-              const SizedBox(width: 24),
+              SizedBox(width: 24),
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -84,7 +84,7 @@ class ProfileStatusWidget extends StatelessWidget {
               )
             ],
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -99,7 +99,7 @@ class ProfileStatusWidget extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyText1),
             ],
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Container(
             height: 32,
             child: Row(
@@ -120,7 +120,7 @@ class ProfileStatusWidget extends StatelessWidget {
             style: OutlinedButton.styleFrom(primary: Colors.black),
             child: Row(
               mainAxisSize: MainAxisSize.min,
-              children: const [
+              children: [
                 Text(
                   "フォロー中",
                 ),
@@ -128,15 +128,15 @@ class ProfileStatusWidget extends StatelessWidget {
               ],
             )),
       ),
-      const SizedBox(
+      SizedBox(
         width: 8,
       ),
       Expanded(
           child: OutlinedButton(
               style: OutlinedButton.styleFrom(primary: Colors.black),
               onPressed: () {},
-              child: const Text("メッセージ"))),
-      const SizedBox(
+              child: Text("メッセージ"))),
+      SizedBox(
         width: 8,
       ),
       Container(
@@ -147,7 +147,7 @@ class ProfileStatusWidget extends StatelessWidget {
         width: 28,
         child: InkWell(
             onTap: () {},
-            child: const Icon(
+            child: Icon(
               Icons.arrow_drop_down_rounded,
             )),
       )

@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_instagram/pages/after_login_page.dart';
 import 'package:flutter_instagram/pages/login/login_page.dart';
 import 'package:flutter_instagram/pages/root_page.dart';
 import 'package:flutter_instagram/providers/providers.dart';
@@ -34,11 +35,11 @@ class AccountRegistrationIdPage extends ConsumerWidget {
                       style: Theme.of(context).textTheme.bodyText1,
                     ),
                     Container(
-                      margin: const EdgeInsets.symmetric(vertical: 16),
+                      margin: EdgeInsets.symmetric(vertical: 16),
                       height: 48,
                       child: TextField(
                         onChanged: (value) => viewModel.updateUserId(value),
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                             hintText: "user_id",
                             filled: true,
                             fillColor: Color(0xFFFAFAFA),

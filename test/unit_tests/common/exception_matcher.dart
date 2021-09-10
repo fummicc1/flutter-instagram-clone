@@ -9,9 +9,7 @@ class GenericExceptionMatcher extends Matcher {
   bool matches(actual, Map matchState) {
     matchState["actual_message"] =
         actual is GenericException ? actual.message() : "unknown";
-    if (actual is! GenericException) {
-      return false;
-    }
+    if (!(actual is GenericException)) return false;
     return actual.message() == expected.message();
   }
 
