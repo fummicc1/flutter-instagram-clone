@@ -6,9 +6,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const ProviderScope(
+  runApp(ProviderScope(
       child: FastTheme(
     accentColor: Colors.blue,
+    themeMode: ThemeMode.light,
     child: MyApp(),
   )));
 }
@@ -20,6 +21,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Flutter Demo',
         theme: FastTheme.of(context).theme,
-        home: RootPage());
+        home: const RootPage());
   }
 }

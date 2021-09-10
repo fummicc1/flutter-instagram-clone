@@ -46,6 +46,7 @@ dependencies:
   flutter_fast_ui_white:
     git:
       url: https://github.com/organic-nailer/flutter_fast_ui_white
+      ref: 63697edb5b97ac0d03dd8cc094f700986f5fa26e
 
 dev_dependencies:
   build_runner: ^2.1.1

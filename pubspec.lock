@@ -318,8 +318,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: HEAD
-      resolved-ref: "0d02372cc0c54b8a208c44a21b82cbdc5d0f64b7"
+      ref: "63697edb5b97ac0d03dd8cc094f700986f5fa26e"
+      resolved-ref: "63697edb5b97ac0d03dd8cc094f700986f5fa26e"
       url: "https://github.com/organic-nailer/flutter_fast_ui_white"
     source: git
     version: "1.0.0+1"
