@@ -11,7 +11,7 @@ class LoginViewModel extends StateNotifier<LoginState> {
   final IUserRepository _userRepository;
   final Reader _read;
   LoginViewModel(this._authRepository, this._userRepository, this._read)
-      : super(LoginState());
+      : super(const LoginState());
 
   void updateEmail(String newValue) {
     state = state.copyWith(email: newValue);

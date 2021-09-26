@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_instagram/pages/after_login_page.dart';
 import 'package:flutter_instagram/pages/login/login_page.dart';
 import 'package:flutter_instagram/pages/root_page.dart';
 import 'package:flutter_instagram/providers/providers.dart';
-import 'package:flutter_instagram/viewmodels/account_registration_viewmodel.dart';
 import 'package:flutter_instagram/viewmodels/app_viewmodel.dart';
 import 'package:flutter_instagram/viewmodels/login_viewmodel.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -17,7 +15,7 @@ class TestApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: LoginPage(),
     );
   }
@@ -44,7 +42,7 @@ void main() {
     addTearDown(container.dispose);
     await tester.pumpWidget(UncontrolledProviderScope(
       container: container,
-      child: TestApp(),
+      child: const TestApp(),
     ));
 
     // 入力の確認

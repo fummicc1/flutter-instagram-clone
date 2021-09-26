@@ -11,12 +11,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AccountRegistrationViewModel
     extends StateNotifier<AccountRegistrationState> {
-  IAuthRepository _authRepository;
-  IUserRepository _userRepository;
-  Reader _read;
+  final IAuthRepository _authRepository;
+  final IUserRepository _userRepository;
+  final Reader _read;
   AccountRegistrationViewModel(
       this._authRepository, this._userRepository, this._read)
-      : super(AccountRegistrationState());
+      : super(const AccountRegistrationState());
 
   void updateEmail(String newValue) {
     state = state.copyWith(email: newValue);

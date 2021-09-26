@@ -34,11 +34,11 @@ class AccountRegistrationNamePage extends ConsumerWidget {
                       style: Theme.of(context).textTheme.bodyText1,
                     ),
                     Container(
-                      margin: EdgeInsets.symmetric(vertical: 16),
+                      margin: const EdgeInsets.symmetric(vertical: 16),
                       height: 48,
                       child: TextField(
                         onChanged: (value) => viewModel.updateUserName(value),
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             hintText: "名前",
                             filled: true,
                             fillColor: Color(0xFFFAFAFA),
@@ -61,7 +61,7 @@ class AccountRegistrationNamePage extends ConsumerWidget {
                                     Navigator.of(context).pushReplacement(
                                         MaterialPageRoute(
                                             builder: (_) =>
-                                                AccountRegistrationIdPage()));
+                                                const AccountRegistrationIdPage()));
                                   }
                                 : null,
                             child: Padding(
@@ -93,17 +93,17 @@ class AccountRegistrationNamePage extends ConsumerWidget {
                   const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
               child: RichText(
                 text: TextSpan(children: [
-                  TextSpan(text: "すでにアカウントをお持ちの場合は、"),
+                  const TextSpan(text: "すでにアカウントをお持ちの場合は、"),
                   TextSpan(
                       text: "ログイン",
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.black, fontWeight: FontWeight.bold),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          Navigator.of(context).push(
-                              MaterialPageRoute(builder: (_) => LoginPage()));
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (_) => const LoginPage()));
                         }),
-                  TextSpan(text: "してください。")
+                  const TextSpan(text: "してください。")
                 ], style: Theme.of(context).textTheme.caption),
                 textAlign: TextAlign.center,
               ),

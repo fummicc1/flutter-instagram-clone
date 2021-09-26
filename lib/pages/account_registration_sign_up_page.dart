@@ -17,15 +17,15 @@ class AccountRegistrationSignUpPage extends ConsumerWidget {
           appBar: AppBar(
             elevation: 0,
             backgroundColor: Colors.transparent,
-            iconTheme: IconThemeData(color: Colors.black),
+            iconTheme: const IconThemeData(color: Colors.black),
           ),
           body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 48),
               child: Column(
                 children: [
-                  Text("電話番号またはメールアドレスを入力"),
-                  TabBar(
+                  const Text("電話番号またはメールアドレスを入力"),
+                  const TabBar(
                     tabs: [
                       Tab(
                         text: "電話番号",
@@ -40,11 +40,11 @@ class AccountRegistrationSignUpPage extends ConsumerWidget {
                         borderSide: BorderSide(color: Colors.black)),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 16),
+                    margin: const EdgeInsets.symmetric(vertical: 16),
                     height: 48,
                     child: TextField(
                       onChanged: (value) => viewModel.updateEmail(value),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           hintText: "メールアドレス",
                           filled: true,
                           fillColor: Color(0xFFFAFAFA),
@@ -58,12 +58,12 @@ class AccountRegistrationSignUpPage extends ConsumerWidget {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 16),
+                    margin: const EdgeInsets.symmetric(vertical: 16),
                     height: 48,
                     child: TextField(
                       onChanged: (value) => viewModel.updatePassword(value),
                       obscureText: true,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           hintText: "パスワード",
                           filled: true,
                           fillColor: Color(0xFFFAFAFA),
@@ -86,11 +86,11 @@ class AccountRegistrationSignUpPage extends ConsumerWidget {
                               Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
                                       builder: (_) =>
-                                          AccountRegistrationNamePage()));
+                                          const AccountRegistrationNamePage()));
                             }
                           },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 12),
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 12),
                             child: Text("次へ"),
                           ),
                           style: ElevatedButton.styleFrom(elevation: 0),
@@ -108,8 +108,8 @@ class AccountRegistrationSignUpPage extends ConsumerWidget {
                         height: 1,
                         color: Colors.grey,
                       )),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 36),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 36),
                         child: Text("または"),
                       ),
                       Flexible(
@@ -121,8 +121,8 @@ class AccountRegistrationSignUpPage extends ConsumerWidget {
                   ),
                   TextButton.icon(
                       onPressed: () {},
-                      icon: Text("f"),
-                      label: Text(
+                      icon: const Text("f"),
+                      label: const Text(
                         "Facebookでログイン",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       )),

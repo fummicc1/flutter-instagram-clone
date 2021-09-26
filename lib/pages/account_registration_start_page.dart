@@ -21,7 +21,7 @@ class AccountRegistrationStartPage extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Spacer(
+                        const Spacer(
                           flex: 1,
                         ),
                         Flexible(
@@ -35,12 +35,12 @@ class AccountRegistrationStartPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Spacer(
+                        const Spacer(
                           flex: 1,
                         ),
                       ],
                     ),
-                    Text("登録して友達の写真や動画をチェックしよう"),
+                    const Text("登録して友達の写真や動画をチェックしよう"),
                     Container(
                       height: 150,
                     ),
@@ -49,9 +49,9 @@ class AccountRegistrationStartPage extends StatelessWidget {
                         Expanded(
                           child: ElevatedButton.icon(
                             onPressed: () {},
-                            icon: Text("f"),
-                            label: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 12),
+                            icon: const Text("f"),
+                            label: const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 12),
                               child: Text("Facebookでログイン"),
                             ),
                             style: ElevatedButton.styleFrom(elevation: 0),
@@ -69,8 +69,8 @@ class AccountRegistrationStartPage extends StatelessWidget {
                           height: 1,
                           color: Colors.grey,
                         )),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 36),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 36),
                           child: Text("または"),
                         ),
                         Flexible(
@@ -83,9 +83,10 @@ class AccountRegistrationStartPage extends StatelessWidget {
                     TextButton(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (_) => AccountRegistrationSignUpPage()));
+                              builder: (_) =>
+                                  const AccountRegistrationSignUpPage()));
                         },
-                        child: Text(
+                        child: const Text(
                           "電話番号またはメールアドレスで登録",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         )),
@@ -105,17 +106,18 @@ class AccountRegistrationStartPage extends StatelessWidget {
                   const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
               child: RichText(
                 text: TextSpan(children: [
-                  TextSpan(text: "すでにアカウントをお持ちの場合は、"),
+                  const TextSpan(text: "すでにアカウントをお持ちの場合は、"),
                   TextSpan(
                       text: "ログイン",
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.black, fontWeight: FontWeight.bold),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
                           Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(builder: (_) => LoginPage()));
+                              MaterialPageRoute(
+                                  builder: (_) => const LoginPage()));
                         }),
-                  TextSpan(text: "してください。")
+                  const TextSpan(text: "してください。")
                 ], style: Theme.of(context).textTheme.caption),
                 textAlign: TextAlign.center,
               ),
