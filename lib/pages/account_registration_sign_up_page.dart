@@ -62,6 +62,7 @@ class AccountRegistrationSignUpPage extends ConsumerWidget {
                     height: 48,
                     child: TextField(
                       onChanged: (value) => viewModel.updatePassword(value),
+                      obscureText: true,
                       decoration: InputDecoration(
                           hintText: "パスワード",
                           filled: true,
