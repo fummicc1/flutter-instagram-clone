@@ -1,14 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_instagram/models/grid_post_model.dart';
 import 'package:flutter_instagram/models/story_highlights_model.dart';
 import 'package:flutter_instagram/providers/providers.dart';
-import 'package:flutter_instagram/states/profile_state.dart';
 import 'package:flutter_instagram/ui_components/grid_timeline_card_widget.dart';
 import 'package:flutter_instagram/ui_components/profile_status_widget.dart';
 import 'package:flutter_instagram/ui_components/profile_story_list_widget.dart';
-import 'package:flutter_instagram/ui_components/story_highlight_widget.dart';
-import 'package:flutter_instagram/ui_components/user_image_widget.dart';
-import 'package:flutter_instagram/viewmodels/profile_viewmodel.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class MyProfilePage extends ConsumerWidget {
@@ -22,54 +18,73 @@ class MyProfilePage extends ConsumerWidget {
 
     if (user == null) {
       viewModel.setup();
-      return Center(child: CircularProgressIndicator());
+      return const Center(child: CircularProgressIndicator());
     }
 
-    return Column(
-      children: [
-        ProfileStatusWidget(
-            user: user,
-            hasNewStory: state.hasNewStory,
-            avatarSize: state.avatarSize,
-            isMyAccount: state.isMyAccount),
-        SizedBox(
-          height: 16,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          user.displayName ?? "",
+          style: Theme.of(context)
+              .textTheme
+              .headline6
+              ?.copyWith(fontWeight: FontWeight.bold),
         ),
-        _buildStoryHighlighView(context, state.storyHighlightsList),
-        Container(
-          height: 56,
-          child: Row(
-            children: [
-              Expanded(
-                  child: IconButton(
-                      onPressed: () {}, icon: Icon(Icons.apps_rounded))),
-              Expanded(
-                  child: IconButton(onPressed: () {}, icon: Icon(Icons.list))),
-              Expanded(
-                  child: IconButton(
-                      onPressed: () {}, icon: Icon(Icons.person_pin_rounded))),
-            ],
+        actions: [
+          IconButton(
+              onPressed: () {}, icon: const Icon(Icons.add_box_outlined)),
+          IconButton(onPressed: () {}, icon: const Icon(Icons.list_outlined)),
+        ],
+      ),
+      body: Column(
+        children: [
+          ProfileStatusWidget(
+              user: user,
+              hasNewStory: state.hasNewStory,
+              avatarSize: state.avatarSize,
+              isMyAccount: state.isMyAccount),
+          const SizedBox(
+            height: 16,
           ),
-        ),
-        Flexible(
-          child: GridView.count(
-            crossAxisCount: 3,
-            children: state.posts
-                .map((model) => GridTimelineCardWidget(
-                    gridPostModel: model, onSelect: () {}))
-                .toList(),
+          _buildStoryHighlighView(context, state.storyHighlightsList),
+          SizedBox(
+            height: 56,
+            child: Row(
+              children: [
+                Expanded(
+                    child: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.apps_rounded))),
+                Expanded(
+                    child: IconButton(
+                        onPressed: () {}, icon: const Icon(Icons.list))),
+                Expanded(
+                    child: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.person_pin_rounded))),
+              ],
+            ),
           ),
-        )
-      ],
+          Flexible(
+            child: GridView.count(
+              crossAxisCount: 3,
+              children: state.posts
+                  .map((model) => GridTimelineCardWidget(
+                      gridPostModel: model, onSelect: () {}))
+                  .toList(),
+            ),
+          )
+        ],
+      ),
     );
   }
 
   Widget _buildStoryHighlighView(
       BuildContext context, List<StoryHighlightsModel> stories) {
     if (stories.isEmpty) {
-      return SizedBox.shrink();
+      return const SizedBox.shrink();
     }
-    return Container(
+    return SizedBox(
         height: 96, child: ProfileStoryListWidget(storyHighlightList: stories));
   }
 }
