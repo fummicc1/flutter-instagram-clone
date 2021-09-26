@@ -100,9 +100,11 @@ class LoginPage extends ConsumerWidget {
                           TextSpan(text: "ログイン情報を忘れた場合は、"),
                           TextSpan(
                               text: "ログインに関するヘルプ",
-                              style: TextStyle(color: Colors.black)),
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold)),
                           TextSpan(text: "をご確認ください。")
-                        ]),
+                        ], style: Theme.of(context).textTheme.caption),
                       ),
                       Row(
                         children: [
@@ -149,7 +151,8 @@ class LoginPage extends ConsumerWidget {
                   TextSpan(text: "アカウントを持っていない場合は、"),
                   TextSpan(
                       text: "登録",
-                      style: TextStyle(color: Colors.black),
+                      style: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.bold),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
                           Navigator.of(context).pushReplacement(
@@ -158,7 +161,7 @@ class LoginPage extends ConsumerWidget {
                                       AccountRegistrationSignUpPage()));
                         }),
                   TextSpan(text: "してください。")
-                ]),
+                ], style: Theme.of(context).textTheme.caption),
                 textAlign: TextAlign.center,
               ),
             )

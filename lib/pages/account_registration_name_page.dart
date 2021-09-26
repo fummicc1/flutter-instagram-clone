@@ -58,7 +58,7 @@ class AccountRegistrationNamePage extends ConsumerWidget {
                           child: ElevatedButton(
                             onPressed: state.userName.isNotEmpty
                                 ? () async {
-                                    Navigator.of(context).push(
+                                    Navigator.of(context).pushReplacement(
                                         MaterialPageRoute(
                                             builder: (_) =>
                                                 AccountRegistrationIdPage()));
@@ -88,24 +88,25 @@ class AccountRegistrationNamePage extends ConsumerWidget {
                 height: 1,
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                RichText(
-                  text: TextSpan(children: [
-                    TextSpan(text: "すでにアカウントをお持ちの場合は、"),
-                    TextSpan(
-                        text: "ログイン",
-                        style: TextStyle(color: Colors.black),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            Navigator.of(context).push(
-                                MaterialPageRoute(builder: (_) => LoginPage()));
-                          }),
-                    TextSpan(text: "してください。")
-                  ]),
-                ),
-              ],
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+              child: RichText(
+                text: TextSpan(children: [
+                  TextSpan(text: "すでにアカウントをお持ちの場合は、"),
+                  TextSpan(
+                      text: "ログイン",
+                      style: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.bold),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.of(context).push(
+                              MaterialPageRoute(builder: (_) => LoginPage()));
+                        }),
+                  TextSpan(text: "してください。")
+                ], style: Theme.of(context).textTheme.caption),
+                textAlign: TextAlign.center,
+              ),
             )
           ],
         ),

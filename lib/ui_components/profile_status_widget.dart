@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_fast_ui_white/flutter_fast_ui_white.dart';
 import 'package:flutter_instagram/models/user_model.dart';
 import 'package:flutter_instagram/ui_components/user_image_widget.dart';
 
@@ -117,6 +118,8 @@ class ProfileStatusWidget extends StatelessWidget {
       Expanded(
         child: OutlinedButton(
             onPressed: () {},
+            style: OutlinedButton.styleFrom(
+                primary: FastTheme.of(context).nonColoredAccent),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -130,7 +133,12 @@ class ProfileStatusWidget extends StatelessWidget {
       SizedBox(
         width: 8,
       ),
-      Expanded(child: OutlinedButton(onPressed: () {}, child: Text("メッセージ"))),
+      Expanded(
+          child: OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                  primary: FastTheme.of(context).nonColoredAccent),
+              onPressed: () {},
+              child: Text("メッセージ"))),
       SizedBox(
         width: 8,
       ),

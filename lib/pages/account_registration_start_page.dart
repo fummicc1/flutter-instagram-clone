@@ -108,14 +108,15 @@ class AccountRegistrationStartPage extends StatelessWidget {
                   TextSpan(text: "すでにアカウントをお持ちの場合は、"),
                   TextSpan(
                       text: "ログイン",
-                      style: TextStyle(color: Colors.black),
+                      style: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.bold),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
                           Navigator.of(context).pushReplacement(
                               MaterialPageRoute(builder: (_) => LoginPage()));
                         }),
                   TextSpan(text: "してください。")
-                ]),
+                ], style: Theme.of(context).textTheme.caption),
                 textAlign: TextAlign.center,
               ),
             )
