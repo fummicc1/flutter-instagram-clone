@@ -22,7 +22,11 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
   ProfileViewModel(this._userRepository, this._postRepository,
       this._imageRepository, this._errorStateNotifier,
       {required this.userID})
-      : super(ProfileState());
+      : super(const ProfileState()) {
+    Future(() async {
+      await setup();
+    });
+  }
 
   Future<UserModel> _fetchUser() async {
     if (userID == null) {

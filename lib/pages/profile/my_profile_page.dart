@@ -24,7 +24,7 @@ class MyProfilePage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          user.displayName ?? "",
+          user.userID,
           style: Theme.of(context)
               .textTheme
               .headline6
