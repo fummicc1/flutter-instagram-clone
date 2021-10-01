@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram/pages/account_registration_sign_up_page.dart';
-import 'package:flutter_instagram/pages/after_login_page.dart';
 import 'package:flutter_instagram/pages/root_page.dart';
 import 'package:flutter_instagram/providers/providers.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -23,7 +22,7 @@ class LoginPage extends ConsumerWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 48),
                   child: Column(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 72,
                       ),
                       AspectRatio(
@@ -35,11 +34,11 @@ class LoginPage extends ConsumerWidget {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.symmetric(vertical: 16),
+                        margin: const EdgeInsets.symmetric(vertical: 16),
                         height: 48,
                         child: TextField(
                           onChanged: (value) => viewModel.updateEmail(value),
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               hintText: "メールアドレス",
                               filled: true,
                               fillColor: Color(0xFFFAFAFA),
@@ -54,11 +53,12 @@ class LoginPage extends ConsumerWidget {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.symmetric(vertical: 16),
+                        margin: const EdgeInsets.symmetric(vertical: 16),
                         height: 48,
                         child: TextField(
                           onChanged: (value) => viewModel.updatePassword(value),
-                          decoration: InputDecoration(
+                          obscureText: true,
+                          decoration: const InputDecoration(
                               hintText: "パスワード",
                               filled: true,
                               fillColor: Color(0xFFFAFAFA),
@@ -82,12 +82,11 @@ class LoginPage extends ConsumerWidget {
                                 if (res) {
                                   Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(
-                                          builder: (_) => RootPage()));
+                                          builder: (_) => const RootPage()));
                                 }
                               },
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 12),
+                              child: const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 12),
                                 child: Text("ログイン"),
                               ),
                               style: ElevatedButton.styleFrom(elevation: 0),
@@ -96,7 +95,7 @@ class LoginPage extends ConsumerWidget {
                         ],
                       ),
                       RichText(
-                        text: TextSpan(children: [
+                        text: TextSpan(children: const [
                           TextSpan(text: "ログイン情報を忘れた場合は、"),
                           TextSpan(
                               text: "ログインに関するヘルプ",
@@ -113,8 +112,8 @@ class LoginPage extends ConsumerWidget {
                             height: 1,
                             color: Colors.grey,
                           )),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 36),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 36),
                             child: Text("または"),
                           ),
                           Flexible(
@@ -126,8 +125,8 @@ class LoginPage extends ConsumerWidget {
                       ),
                       TextButton.icon(
                           onPressed: () {},
-                          icon: Text("f"),
-                          label: Text(
+                          icon: const Text("f"),
+                          label: const Text(
                             "Facebookでログイン",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           )),
@@ -148,19 +147,19 @@ class LoginPage extends ConsumerWidget {
                   const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
               child: RichText(
                 text: TextSpan(children: [
-                  TextSpan(text: "アカウントを持っていない場合は、"),
+                  const TextSpan(text: "アカウントを持っていない場合は、"),
                   TextSpan(
                       text: "登録",
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.black, fontWeight: FontWeight.bold),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
                           Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
                                   builder: (_) =>
-                                      AccountRegistrationSignUpPage()));
+                                      const AccountRegistrationSignUpPage()));
                         }),
-                  TextSpan(text: "してください。")
+                  const TextSpan(text: "してください。")
                 ], style: Theme.of(context).textTheme.caption),
                 textAlign: TextAlign.center,
               ),
