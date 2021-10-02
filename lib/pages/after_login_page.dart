@@ -11,11 +11,11 @@ class AfterLoginPage extends ConsumerWidget {
   const AfterLoginPage({Key? key}) : super(key: key);
 
   static const List<Widget> pages = [
-    const HomePage(),
-    const SearchPage(),
-    const ReelPage(),
-    const ShopPage(),
-    const MyProfilePage()
+    HomePage(),
+    SearchPage(),
+    ReelPage(),
+    ShopPage(),
+    MyProfilePage()
   ];
 
   @override
@@ -24,9 +24,6 @@ class AfterLoginPage extends ConsumerWidget {
     final userId = ref.watch(myProfileUserIdStateProvider).state;
     final selectedIndex = ref.watch(selectedBottomNavigationIndex).state;
     return Scaffold(
-      appBar: AppBar(
-        title: Text("AfterLoginPage"),
-      ),
       body: pages[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const [

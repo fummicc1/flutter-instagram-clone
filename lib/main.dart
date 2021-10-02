@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
             theme: lightTheme,
             darkTheme: darkTheme,
             themeMode: mode,
-            home: RootPage());
+            home: const RootPage());
       },
     );
   }
