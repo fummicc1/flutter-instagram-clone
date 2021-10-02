@@ -29,17 +29,17 @@ class RootPage extends ConsumerWidget {
           if (snapshot.connectionState != ConnectionState.done) {
             return Container(); // Not complete initializing Firebase
           }
-          final loginStatus = ref.watch(needToLoginProvider);
+          final loginStatus = ref.watch(accountStatusProvider);
           return loginStatus.when(
               loading: () => Container(),
               error: (err, stack) => Container(),
               data: (status) {
                 switch (status) {
-                  case LoginStatus.notLoggedIn:
+                  case AccountStatus.notLoggedIn:
                     return const AccountRegistrationStartPage();
-                  case LoginStatus.needToRegister:
+                  case AccountStatus.needToRegister:
                     return const AccountRegistrationNamePage();
-                  case LoginStatus.loggedIn:
+                  case AccountStatus.loggedIn:
                     return const AfterLoginPage();
                 }
               });
