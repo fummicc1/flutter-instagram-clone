@@ -70,8 +70,15 @@ final _uidStreamProvider = StreamProvider<String?>((ref) {
   return auth.uIdStream;
 });
 
-final needToLoginProvider = FutureProvider<bool>((ref) async {
-  return (await ref.watch(_uidStreamProvider.last)) == null;
+enum LoginStatus { notLoggedIn, loggedIn, needToRegister }
+final needToLoginProvider = FutureProvider<LoginStatus>((ref) async {
+  if ((await ref.watch(_uidStreamProvider.last)) == null) {
+    return LoginStatus.notLoggedIn;
+  }
+  if (ref.watch(myProfileUserIdStateProvider).state == null) {
+    return LoginStatus.needToRegister;
+  }
+  return LoginStatus.loggedIn;
 });
 
 final _userIdFutureProvider = FutureProvider<String?>((ref) async {
