@@ -41,4 +41,13 @@ class FakeUserRepository implements IUserRepository {
     final data = userData[uid];
     return data?.userId;
   }
+
+  @override
+  Future<List<UserEntity>> searchWithUserIdContaining(
+      String containingText) async {
+    return userData.entries
+        .where((element) => element.value.userId.contains(containingText))
+        .map((e) => e.value)
+        .toList();
+  }
 }

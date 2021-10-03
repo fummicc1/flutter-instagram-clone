@@ -12,6 +12,8 @@ abstract class IUserRepository {
   Future<UserEntity?> findWithID(String userID);
 
   Future<String?> uidToUserId(String uid);
+
+  Future<List<UserEntity>> searchWithUserIdContaining(String containingText);
 }
 
 class UserRepository implements IUserRepository {
@@ -56,10 +58,27 @@ class UserRepository implements IUserRepository {
         FirebaseFirestore.instance.collection(UserEntity.collectionName);
     final List<Map<String, dynamic>> data = await _firestoreClient
         .getWithQuery(query.build(baseReference))
-        .catchError((_) => [Map<String, dynamic>()]);
+        .catchError((_) => [<String, dynamic>{}]);
     try {
       final UserEntity userEntity = UserEntity.fromData(data.first);
       return userEntity.userId;
+    } on EntityParserException catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  @override
+  Future<List<UserEntity>> searchWithUserIdContaining(
+      String containingText) async {
+    final query =
+        ContainsQueryModel(fieldName: "user_id", element: containingText);
+    final baseReference =
+        FirebaseFirestore.instance.collection(UserEntity.collectionName);
+    final List<Map<String, dynamic>> data = await _firestoreClient
+        .getWithQuery(query.build(baseReference))
+        .catchError((_) => [<String, dynamic>{}]);
+    try {
+      return data.map((e) => UserEntity.fromData(e)).toList();
     } on EntityParserException catch (e) {
       return Future.error(e);
     }
