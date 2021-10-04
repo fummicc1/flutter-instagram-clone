@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_instagram/pages/account_registration_name_page.dart';
+import 'package:flutter_instagram/pages/account_registration/account_registration_name_page.dart';
 import 'package:flutter_instagram/providers/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

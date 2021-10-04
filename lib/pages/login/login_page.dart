@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_instagram/pages/account_registration_sign_up_page.dart';
+import 'package:flutter_instagram/pages/account_registration/account_registration_sign_up_page.dart';
 import 'package:flutter_instagram/pages/root_page.dart';
 import 'package:flutter_instagram/providers/providers.dart';
 import 'package:flutter_instagram/ui_components/instagram_logo_widget.dart';
