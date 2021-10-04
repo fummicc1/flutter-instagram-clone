@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram/common/exception.dart';
-import 'package:flutter_instagram/pages/account_registration_name_page.dart';
-import 'package:flutter_instagram/pages/account_registration_start_page.dart';
+import 'package:flutter_instagram/pages/account_registration/account_registration_name_page.dart';
+import 'package:flutter_instagram/pages/account_registration/account_registration_start_page.dart';
 import 'package:flutter_instagram/pages/after_login_page.dart';
 import 'package:flutter_instagram/providers/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
