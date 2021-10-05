@@ -16,7 +16,12 @@ class HomePage extends HookConsumerWidget {
     return Scaffold(
       body: PageView(
         controller: pageController,
-        children: [NewPostPage(pageController: pageController,), const TimelinePage()],
+        children: [
+          NewPostPage(
+            pageController: pageController,
+          ),
+          const TimelinePage()
+        ],
       ),
     );
   }

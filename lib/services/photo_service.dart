@@ -28,7 +28,9 @@ class PhotoService implements IPhotoService {
       filterOption.addOrderOption(
           const OrderOption(type: OrderOptionType.updateDate, asc: false));
       PhotoManager.getAssetPathList(
-          type: RequestType.image, onlyAll: true, filterOption: filterOption)
+              type: RequestType.image,
+              onlyAll: true,
+              filterOption: filterOption)
           .then((groupList) async {
         for (final group in groupList) {
           final entities = await group.getAssetListPaged(page, _pageSize);
