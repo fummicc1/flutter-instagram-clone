@@ -7,9 +7,7 @@ part 'new_post_state.freezed.dart';
 @freezed
 class NewPostState with _$NewPostState {
   const factory NewPostState(
-      {@Default("") String caption,
-      File? imageFile,
+      {File? imageFile,
       String? albumName,
-      @Default([]) List<File> photos,
-      @Default(false) bool canSelectMultiple}) = _NewPostState;
+      @Default([]) List<File> photos}) = _NewPostState;
 }

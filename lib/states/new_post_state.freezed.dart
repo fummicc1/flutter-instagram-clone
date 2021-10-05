@@ -17,17 +17,11 @@ class _$NewPostStateTearOff {
   const _$NewPostStateTearOff();
 
   _NewPostState call(
-      {String caption = "",
-      File? imageFile,
-      String? albumName,
-      List<File> photos = const [],
-      bool canSelectMultiple = false}) {
+      {File? imageFile, String? albumName, List<File> photos = const []}) {
     return _NewPostState(
-      caption: caption,
       imageFile: imageFile,
       albumName: albumName,
       photos: photos,
-      canSelectMultiple: canSelectMultiple,
     );
   }
 }
@@ -37,11 +31,9 @@ const $NewPostState = _$NewPostStateTearOff();
 
 /// @nodoc
 mixin _$NewPostState {
-  String get caption => throw _privateConstructorUsedError;
   File? get imageFile => throw _privateConstructorUsedError;
   String? get albumName => throw _privateConstructorUsedError;
   List<File> get photos => throw _privateConstructorUsedError;
-  bool get canSelectMultiple => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NewPostStateCopyWith<NewPostState> get copyWith =>
@@ -53,12 +45,7 @@ abstract class $NewPostStateCopyWith<$Res> {
   factory $NewPostStateCopyWith(
           NewPostState value, $Res Function(NewPostState) then) =
       _$NewPostStateCopyWithImpl<$Res>;
-  $Res call(
-      {String caption,
-      File? imageFile,
-      String? albumName,
-      List<File> photos,
-      bool canSelectMultiple});
+  $Res call({File? imageFile, String? albumName, List<File> photos});
 }
 
 /// @nodoc
@@ -71,17 +58,11 @@ class _$NewPostStateCopyWithImpl<$Res> implements $NewPostStateCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? caption = freezed,
     Object? imageFile = freezed,
     Object? albumName = freezed,
     Object? photos = freezed,
-    Object? canSelectMultiple = freezed,
   }) {
     return _then(_value.copyWith(
-      caption: caption == freezed
-          ? _value.caption
-          : caption // ignore: cast_nullable_to_non_nullable
-              as String,
       imageFile: imageFile == freezed
           ? _value.imageFile
           : imageFile // ignore: cast_nullable_to_non_nullable
@@ -94,10 +75,6 @@ class _$NewPostStateCopyWithImpl<$Res> implements $NewPostStateCopyWith<$Res> {
           ? _value.photos
           : photos // ignore: cast_nullable_to_non_nullable
               as List<File>,
-      canSelectMultiple: canSelectMultiple == freezed
-          ? _value.canSelectMultiple
-          : canSelectMultiple // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -109,12 +86,7 @@ abstract class _$NewPostStateCopyWith<$Res>
           _NewPostState value, $Res Function(_NewPostState) then) =
       __$NewPostStateCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {String caption,
-      File? imageFile,
-      String? albumName,
-      List<File> photos,
-      bool canSelectMultiple});
+  $Res call({File? imageFile, String? albumName, List<File> photos});
 }
 
 /// @nodoc
@@ -129,17 +101,11 @@ class __$NewPostStateCopyWithImpl<$Res> extends _$NewPostStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? caption = freezed,
     Object? imageFile = freezed,
     Object? albumName = freezed,
     Object? photos = freezed,
-    Object? canSelectMultiple = freezed,
   }) {
     return _then(_NewPostState(
-      caption: caption == freezed
-          ? _value.caption
-          : caption // ignore: cast_nullable_to_non_nullable
-              as String,
       imageFile: imageFile == freezed
           ? _value.imageFile
           : imageFile // ignore: cast_nullable_to_non_nullable
@@ -152,10 +118,6 @@ class __$NewPostStateCopyWithImpl<$Res> extends _$NewPostStateCopyWithImpl<$Res>
           ? _value.photos
           : photos // ignore: cast_nullable_to_non_nullable
               as List<File>,
-      canSelectMultiple: canSelectMultiple == freezed
-          ? _value.canSelectMultiple
-          : canSelectMultiple // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -164,15 +126,8 @@ class __$NewPostStateCopyWithImpl<$Res> extends _$NewPostStateCopyWithImpl<$Res>
 
 class _$_NewPostState implements _NewPostState {
   const _$_NewPostState(
-      {this.caption = "",
-      this.imageFile,
-      this.albumName,
-      this.photos = const [],
-      this.canSelectMultiple = false});
+      {this.imageFile, this.albumName, this.photos = const []});
 
-  @JsonKey(defaultValue: "")
-  @override
-  final String caption;
   @override
   final File? imageFile;
   @override
@@ -180,22 +135,16 @@ class _$_NewPostState implements _NewPostState {
   @JsonKey(defaultValue: const [])
   @override
   final List<File> photos;
-  @JsonKey(defaultValue: false)
-  @override
-  final bool canSelectMultiple;
 
   @override
   String toString() {
-    return 'NewPostState(caption: $caption, imageFile: $imageFile, albumName: $albumName, photos: $photos, canSelectMultiple: $canSelectMultiple)';
+    return 'NewPostState(imageFile: $imageFile, albumName: $albumName, photos: $photos)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _NewPostState &&
-            (identical(other.caption, caption) ||
-                const DeepCollectionEquality()
-                    .equals(other.caption, caption)) &&
             (identical(other.imageFile, imageFile) ||
                 const DeepCollectionEquality()
                     .equals(other.imageFile, imageFile)) &&
@@ -203,20 +152,15 @@ class _$_NewPostState implements _NewPostState {
                 const DeepCollectionEquality()
                     .equals(other.albumName, albumName)) &&
             (identical(other.photos, photos) ||
-                const DeepCollectionEquality().equals(other.photos, photos)) &&
-            (identical(other.canSelectMultiple, canSelectMultiple) ||
-                const DeepCollectionEquality()
-                    .equals(other.canSelectMultiple, canSelectMultiple)));
+                const DeepCollectionEquality().equals(other.photos, photos)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(caption) ^
       const DeepCollectionEquality().hash(imageFile) ^
       const DeepCollectionEquality().hash(albumName) ^
-      const DeepCollectionEquality().hash(photos) ^
-      const DeepCollectionEquality().hash(canSelectMultiple);
+      const DeepCollectionEquality().hash(photos);
 
   @JsonKey(ignore: true)
   @override
@@ -226,22 +170,16 @@ class _$_NewPostState implements _NewPostState {
 
 abstract class _NewPostState implements NewPostState {
   const factory _NewPostState(
-      {String caption,
-      File? imageFile,
+      {File? imageFile,
       String? albumName,
-      List<File> photos,
-      bool canSelectMultiple}) = _$_NewPostState;
+      List<File> photos}) = _$_NewPostState;
 
-  @override
-  String get caption => throw _privateConstructorUsedError;
   @override
   File? get imageFile => throw _privateConstructorUsedError;
   @override
   String? get albumName => throw _privateConstructorUsedError;
   @override
   List<File> get photos => throw _privateConstructorUsedError;
-  @override
-  bool get canSelectMultiple => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$NewPostStateCopyWith<_NewPostState> get copyWith =>

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fast_ui_white/flutter_fast_ui_white.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_instagram/pages/post/add_new_post_info_page.dart';
 import 'package:flutter_instagram/providers/providers.dart';
 import 'package:flutter_instagram/ui_components/colored_text.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,7 +21,14 @@ class NewPostPage extends HookConsumerWidget {
         title: ColoredText.backgroundColor(context, "New Post",
             style: Theme.of(context).textTheme.headline6!),
         backgroundColor: FastTheme.of(context).nonColoredAccent,
-        actions: [TextButton(onPressed: () {}, child: const Text("Next"))],
+        actions: [
+          TextButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const AddNewPostInfoPage()));
+              },
+              child: const Text("Next"))
+        ],
         leading: IconButton(
           icon: Icon(
             Icons.close,

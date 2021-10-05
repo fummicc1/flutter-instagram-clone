@@ -10,11 +10,13 @@ import 'package:flutter_instagram/repositories/image_repository.dart';
 import 'package:flutter_instagram/repositories/post_repository.dart';
 import 'package:flutter_instagram/repositories/user_repository.dart';
 import 'package:flutter_instagram/services/photo_service.dart';
+import 'package:flutter_instagram/states/add_new_post_info_state.dart';
 import 'package:flutter_instagram/states/login_state.dart';
 import 'package:flutter_instagram/states/new_post_state.dart';
 import 'package:flutter_instagram/states/profile_state.dart';
 import 'package:flutter_instagram/viewmodels/login_viewmodel.dart';
-import 'package:flutter_instagram/viewmodels/new_post_viewmodel.dart';
+import 'package:flutter_instagram/viewmodels/post/add_new_post_info_viewmodel.dart';
+import 'package:flutter_instagram/viewmodels/post/new_post_viewmodel.dart';
 import 'package:flutter_instagram/viewmodels/profile_viewmodel.dart';
 import 'package:flutter_instagram/states/account_registration_state.dart';
 import 'package:flutter_instagram/viewmodels/account_registration_viewmodel.dart';
@@ -141,13 +143,23 @@ final selectedBottomNavigationIndex = StateProvider<int>((_) => 0);
 /// NewPostViewModel
 final newPostStateProvider =
     StateNotifierProvider<NewPostViewModel, NewPostState>((ref) {
+  final photoService = ref.watch(_photoService);
+  const initialState = NewPostState();
+
+  return NewPostViewModel(initialState, photoService);
+});
+
+/// AddNewPostInfoViewModel
+final addNewPostInfoStateProvider =
+    StateNotifierProvider<AddNewPostInfoViewModel, AddNewPostInfoState>((ref) {
   final authRepository = ref.watch(_authRepository);
   final userRepository = ref.watch(_userRepository);
   final postRepository = ref.watch(_postRepository);
   final imageRepository = ref.watch(_imageRepository);
-  final photoService = ref.watch(_photoService);
-  const initialState = NewPostState();
+  final imageFile =
+      ref.watch(newPostStateProvider.select((state) => state.imageFile));
+  final initialState = AddNewPostInfoState(imageFile: imageFile);
 
-  return NewPostViewModel(initialState, postRepository, userRepository,
-      authRepository, imageRepository, photoService, ref.read);
+  return AddNewPostInfoViewModel(initialState, postRepository, userRepository,
+      authRepository, imageRepository, ref.read);
 });
