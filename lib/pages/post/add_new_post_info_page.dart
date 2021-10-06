@@ -8,7 +8,6 @@ class AddNewPostInfoPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final viewModel = ref.watch(addNewPostInfoStateProvider.notifier);
     final state = ref.watch(addNewPostInfoStateProvider);
     final captionTextController = useTextEditingController(text: state.caption);
@@ -17,13 +16,15 @@ class AddNewPostInfoPage extends HookConsumerWidget {
       appBar: AppBar(
         title: const Text("New Post"),
         actions: [
-          TextButton(onPressed: () async {
-            await viewModel.submit();
-            Navigator.of(context).popUntil((route) {
-              // Rootまで戻る
-              return route.settings.name == "/";
-            });
-          }, child: const Text("Share"))
+          TextButton(
+              onPressed: () async {
+                await viewModel.submit();
+                Navigator.of(context).popUntil((route) {
+                  // Rootまで戻る
+                  return route.settings.name == "/";
+                });
+              },
+              child: const Text("Share"))
         ],
         leading: IconButton(
             onPressed: () {
@@ -42,7 +43,9 @@ class AddNewPostInfoPage extends HookConsumerWidget {
                   height: 56,
                   child: Image.file(state.imageFile!),
                 ),
-                const SizedBox(width: 8,),
+                const SizedBox(
+                  width: 8,
+                ),
                 Flexible(
                   child: TextField(
                     controller: captionTextController,
