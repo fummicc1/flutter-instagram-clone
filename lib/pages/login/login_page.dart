@@ -1,8 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_instagram/pages/account_registration/account_registration_sign_up_page.dart';
+import 'package:flutter_instagram/pages/account_registration_sign_up_page.dart';
 import 'package:flutter_instagram/pages/root_page.dart';
 import 'package:flutter_instagram/providers/providers.dart';
+import 'package:flutter_instagram/ui_components/instagram_logo_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -25,14 +26,8 @@ class LoginPage extends ConsumerWidget {
                       const SizedBox(
                         height: 72,
                       ),
-                      AspectRatio(
-                        aspectRatio: 2.8,
-                        child: SvgPicture.asset(
-                          "assets/images/Instagram_logo.svg",
-                          color: Colors.black,
-                          semanticsLabel: "Instagram Logo",
-                        ),
-                      ),
+                      const AspectRatio(
+                          aspectRatio: 2.8, child: InstagramLogoWidget()),
                       Container(
                         margin: const EdgeInsets.symmetric(vertical: 16),
                         height: 48,
