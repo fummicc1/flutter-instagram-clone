@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_instagram/models/grid_post_model.dart';
-import 'package:flutter_instagram/models/post.dart';
-import 'package:flutter_instagram/models/story.dart';
 import 'package:flutter_instagram/models/story_highlights_model.dart';
 import 'package:flutter_instagram/models/user_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
