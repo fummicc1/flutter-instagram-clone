@@ -5,14 +5,21 @@ import 'package:flutter_instagram/repositories/auth_repository.dart';
 
 class FakeAuthRepository implements IAuthRepository {
   final _users = [
-    _FakeAuthUserData("FAKE_USER_0", "fake@fastriver.dev", "fake"),
+    _FakeAuthUserData(
+      "FAKE_USER_0",
+      "fake@fastriver.dev",
+      "fake",
+    ),
   ];
   _FakeAuthUserData? _currentUser;
   int _uidCounter = 0;
   final StreamController<String?> _userIdStreamController = StreamController();
 
-  FakeAuthRepository() {
+  FakeAuthRepository({bool isAlreadyLoggedIn = false}) {
     _uidCounter = _users.length;
+    if (isAlreadyLoggedIn) {
+      _currentUser = _users[0];
+    }
   }
 
   void dispose() {
@@ -57,14 +64,12 @@ class FakeAuthRepository implements IAuthRepository {
     _currentUser = null;
     _userIdStreamController.sink.add(null);
   }
-
-  @override
-  Future<String?> uidToUserId(String uid) => throw UnimplementedError();
 }
 
 class _FakeAuthUserData {
   final String uid;
   final String email;
   final String password;
+
   _FakeAuthUserData(this.uid, this.email, this.password);
 }

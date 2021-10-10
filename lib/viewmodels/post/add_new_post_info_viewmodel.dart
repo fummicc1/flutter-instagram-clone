@@ -30,18 +30,18 @@ class AddNewPostInfoViewModel extends StateNotifier<AddNewPostInfoState> {
     state = state.copyWith(caption: caption);
   }
 
-  Future submit() async {
+  Future<bool> submit() async {
     try {
-      if (state.caption.isEmpty) return;
+      if (state.caption.isEmpty) return false;
 
       final uid = _authRepository.getCurrentUserId();
       if (uid == null) {
-        return;
+        return false;
       }
       final senderId = await _userRepository.uidToUserId(uid);
 
       if (senderId == null) {
-        return;
+        return false;
       }
 
       List<String> imageIdList = [];
@@ -66,10 +66,12 @@ class AddNewPostInfoViewModel extends StateNotifier<AddNewPostInfoState> {
           createdAt: Timestamp.now(),
           imageDocumentReferenceList: imageIdList);
       await _postRepository.create(post);
+      return true;
     } on GenericException catch (exception) {
       _reader(errorStateProvider).state = exception;
     } catch (e) {
       _reader(errorStateProvider).state = SimpleException(e.toString());
     }
+    return false;
   }
 }
