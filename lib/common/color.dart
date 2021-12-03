@@ -11,12 +11,12 @@ enum AppColor {
 }
 
 class AppCustomColors extends CustomColors {
-  AppCustomColors() : super({
+  AppCustomColors(SwitchableColor accent) : super({
     AppColor.background: const SwitchableColor(light: Colors.white, dark: Colors.black),
-    AppColor.accent: const SwitchableColor(light: Colors.blue, dark: Colors.blue),
+    AppColor.accent: accent,
     AppColor.nonColoredBackground: const SwitchableColor(light: Colors.white, dark: Colors.black),
     AppColor.nonColoredAccent: const SwitchableColor(light: Colors.black, dark: Colors.white),
     AppColor.reverseBackground: const SwitchableColor(light: Colors.black, dark: Colors.white),
     AppColor.reverseAccent: const SwitchableColor(light: Colors.white, dark: Colors.black),
-  })
+  });
 }

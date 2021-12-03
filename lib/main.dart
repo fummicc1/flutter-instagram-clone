@@ -14,10 +14,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    const MaterialColor accentColor = Colors.blue;
     return FastThemeScope(
-      accentColor: Colors.blue,
+      accentColor: accentColor,
       themeMode: ThemeMode.light,
-      customColors: AppCustomColors(),
+      customColors: AppCustomColors(
+          const SwitchableColor(light: accentColor, dark: accentColor)),
       builder: (context, lightTheme, darkTheme, mode) {
         return MaterialApp(
             title: 'Flutter Demo',
