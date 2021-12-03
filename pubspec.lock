@@ -28,7 +28,7 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.8.2"
+    version: "2.8.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -318,11 +318,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "v0.2"
-      resolved-ref: "1bb2f118a6ce0f35b4c36af4309d56d75a85125e"
+      ref: "v0.3"
+      resolved-ref: e1da96b74ca1082a2aa74f22b17ce53e07390da4
       url: "https://github.com/organic-nailer/flutter_fast_ui_white"
     source: git
-    version: "0.2.0"
+    version: "0.3.0"
   flutter_hooks:
     dependency: "direct main"
     description:
@@ -479,7 +479,7 @@ packages:
       name: matcher
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.12.11"
+    version: "0.12.10"
   meta:
     dependency: transitive
     description:
@@ -652,7 +652,7 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.3"
+    version: "0.4.2"
   timing:
     dependency: transitive
     description:

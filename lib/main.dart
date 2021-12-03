@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fast_ui_white/flutter_fast_ui_white.dart';
+import 'package:flutter_instagram/common/color.dart';
 
 import 'package:flutter_instagram/pages/root_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,9 +14,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    const MaterialColor accentColor = Colors.blue;
     return FastThemeScope(
-      accentColor: Colors.blue,
+      accentColor: accentColor,
       themeMode: ThemeMode.light,
+      customColors: AppCustomColors(
+          const SwitchableColor(light: accentColor, dark: accentColor)),
       builder: (context, lightTheme, darkTheme, mode) {
         return MaterialApp(
             title: 'Flutter Demo',
