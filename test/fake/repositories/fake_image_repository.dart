@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:flutter_instagram/entities/image.dart';
 import 'package:flutter_instagram/repositories/image_repository.dart';
 import 'package:flutter_instagram/repositories/query.dart';
@@ -10,16 +11,19 @@ class FakeImageRepository implements IImageRepository {
   Map<String, File> _fileCache = {};
   Map<DocumentReference, ImageEntity> _entitiesCache = {};
 
+  final FakeFirebaseFirestore _fakeFirebaseFirestore = FakeFirebaseFirestore();
+
   @override
   Future<String> create(
       {required File file, required ImageMetadata imageMetadata}) async {
     final documentReference =
-        FirebaseFirestore.instance.collection(ImageEntity.collectionName).doc();
+        _fakeFirebaseFirestore.collection(ImageEntity.collectionName).doc();
     final entity = ImageEntity(
-        id: documentReference.id,
-        path: "images/",
-        fileName: documentReference.id,
-        imageMetadata: imageMetadata);
+      id: documentReference.id,
+      path: "images/",
+      fileName: documentReference.id,
+      imageMetadata: imageMetadata,
+    );
 
     final url = entity.getFileURL();
 
@@ -43,7 +47,8 @@ class FakeImageRepository implements IImageRepository {
   }
 
   @override
-  Future<List<ImageEntity>> findWithQuery(QueryModel queryModel) => findWithQueries([queryModel]);
+  Future<List<ImageEntity>> findWithQuery(QueryModel queryModel) =>
+      findWithQueries([queryModel]);
 
   @override
   Future<String> getURL(ImageEntity imageEntity) async {

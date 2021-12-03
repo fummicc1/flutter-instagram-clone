@@ -161,5 +161,5 @@ final addNewPostInfoStateProvider =
   final initialState = AddNewPostInfoState(imageFile: imageFile);
 
   return AddNewPostInfoViewModel(initialState, postRepository, userRepository,
-      authRepository, imageRepository, ref.read);
+      authRepository, imageRepository, FirebaseFirestore.instance, ref.read);
 });

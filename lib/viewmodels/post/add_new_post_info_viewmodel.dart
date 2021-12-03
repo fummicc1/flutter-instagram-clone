@@ -17,6 +17,7 @@ class AddNewPostInfoViewModel extends StateNotifier<AddNewPostInfoState> {
       this._userRepository,
       this._authRepository,
       this._imageRepository,
+      this._firebaseFirestore,
       this._reader)
       : super(state);
 
@@ -24,6 +25,7 @@ class AddNewPostInfoViewModel extends StateNotifier<AddNewPostInfoState> {
   final IUserRepository _userRepository;
   final IAuthRepository _authRepository;
   final IImageRepository _imageRepository;
+  final FirebaseFirestore _firebaseFirestore;
   final Reader _reader;
 
   updateCaption(String caption) {
@@ -53,10 +55,8 @@ class AddNewPostInfoViewModel extends StateNotifier<AddNewPostInfoState> {
         imageIdList.add(documentID);
       }
 
-      final id = FirebaseFirestore.instance
-          .collection(PostEntity.collectionName)
-          .doc()
-          .id;
+      final id =
+          _firebaseFirestore.collection(PostEntity.collectionName).doc().id;
 
       final post = PostEntity(
           id: id,

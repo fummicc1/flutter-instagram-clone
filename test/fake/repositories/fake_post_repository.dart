@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:flutter_instagram/entities/post.dart';
 import 'package:flutter_instagram/repositories/post_repository.dart';
 import 'package:flutter_instagram/repositories/query.dart';
@@ -7,9 +8,11 @@ class FakePostRepository extends IPostRepository {
 
   Map<DocumentReference, PostEntity> _data = {};
 
+  final FakeFirebaseFirestore _fakeFirebaseFirestore =  FakeFirebaseFirestore();
+
   @override
   Future create(PostEntity postEntity) async {
-    final ref = FirebaseFirestore.instance.collection(PostEntity.collectionName).doc(postEntity.id);
+    final ref = _fakeFirebaseFirestore.collection(PostEntity.collectionName).doc(postEntity.id);
     _data[ref] = postEntity;
   }
 
@@ -42,7 +45,7 @@ class FakePostRepository extends IPostRepository {
 
   @override
   Future update({required String id, required PostEntity newEntity}) async {
-    final ref = FirebaseFirestore.instance.collection(PostEntity.collectionName).doc(id);
+    final ref = _fakeFirebaseFirestore.collection(PostEntity.collectionName).doc(id);
     _data[ref] = newEntity;
   }
 }

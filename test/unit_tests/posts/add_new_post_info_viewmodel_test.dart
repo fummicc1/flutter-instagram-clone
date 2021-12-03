@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:flutter_instagram/states/add_new_post_info_state.dart';
 import 'package:flutter_instagram/viewmodels/post/add_new_post_info_viewmodel.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,6 +24,7 @@ void main() {
       FakeUserRepository(),
       FakeAuthRepository(isAlreadyLoggedIn: true),
       FakeImageRepository(),
+      FakeFirebaseFirestore(),
       providerContainer.read,
     );
   });
@@ -34,7 +36,7 @@ void main() {
   });
 
   test("Can submit with Image", () async {
-    final stubImageFile = File("");
+    final stubImageFile = File("../assets/images/placeholder_320.png");
     const stubCaption = "テストキャプション";
     viewModel.state = viewModel.state.copyWith(
       caption: stubCaption,
