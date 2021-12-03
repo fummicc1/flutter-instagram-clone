@@ -73,7 +73,7 @@ class ProfileViewModel extends StateNotifier<ProfileState> {
     List<GridPostModel> postModels = [];
     for (PostEntity entity in postEntities) {
       final postID = entity.id;
-      final imageID = entity.imageDocumentReferenceList[0].id;
+      final imageID = entity.imageDocumentReferenceList[0];
       final image = await _imageRepository.find(imageID);
       final imageURL = await _imageRepository.getURL(image);
       final model = GridPostModel(

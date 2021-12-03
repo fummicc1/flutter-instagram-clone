@@ -11,7 +11,7 @@ class PostEntity with FirestoreModel {
   final String senderId; // 投稿者のUserID
   final List<String> likedUserIdList; // いいねしたユーザーのID一覧
   final Timestamp createdAt; // 作成
-  final List<DocumentReference>
+  final List<String>
       imageDocumentReferenceList; // imagesコレクション内にある画像のDocumentReference一覧
 
   PostEntity(
@@ -23,13 +23,13 @@ class PostEntity with FirestoreModel {
       required this.imageDocumentReferenceList});
 
   factory PostEntity.fromData(Map<String, dynamic> data) {
-    final id = data["id"] as String?;
+    final id = data["id"] as String;
     final message = data["message"] as String?;
     final senderId = data["sender_id"] as String?;
     final likedUserIdList = data["liked_user_id_list"] as List<String>?;
     final createdAt = data["created_at"] as Timestamp?;
     final imageDocumentReferenceList =
-        data["image_document_reference_list"] as List<DocumentReference>?;
+        data["image_document_reference_list"] as List<String>?;
 
     if (id == null ||
         message == null ||
