@@ -318,11 +318,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "v0.2"
-      resolved-ref: "1bb2f118a6ce0f35b4c36af4309d56d75a85125e"
+      ref: "v0.3"
+      resolved-ref: e1da96b74ca1082a2aa74f22b17ce53e07390da4
       url: "https://github.com/organic-nailer/flutter_fast_ui_white"
     source: git
-    version: "0.2.0"
+    version: "0.3.0"
   flutter_hooks:
     dependency: "direct main"
     description:
@@ -344,6 +344,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0-dev.6"
+  flutter_staggered_grid_view:
+    dependency: "direct main"
+    description:
+      name: flutter_staggered_grid_view
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.0"
   flutter_svg:
     dependency: "direct main"
     description:

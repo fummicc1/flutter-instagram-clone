@@ -11,11 +11,13 @@ import 'package:flutter_instagram/repositories/post_repository.dart';
 import 'package:flutter_instagram/repositories/user_repository.dart';
 import 'package:flutter_instagram/states/login_state.dart';
 import 'package:flutter_instagram/states/profile_state.dart';
+import 'package:flutter_instagram/states/search_state.dart';
 import 'package:flutter_instagram/viewmodels/login_viewmodel.dart';
 import 'package:flutter_instagram/viewmodels/profile_viewmodel.dart';
 import 'package:flutter_instagram/states/account_registration_state.dart';
 import 'package:flutter_instagram/viewmodels/account_registration_viewmodel.dart';
 import 'package:flutter_instagram/viewmodels/app_viewmodel.dart';
+import 'package:flutter_instagram/viewmodels/search_viewmodel.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 /// flow errors from ViewModels.
@@ -130,3 +132,11 @@ final myProfileStateProvider =
 
 /// Current selecting bottomNavigation index
 final selectedBottomNavigationIndex = StateProvider<int>((_) => 0);
+
+final searchViewModelProvider =
+    StateNotifierProvider<SearchViewModel, SearchState>((ref) {
+  final userRepository = ref.watch(_userRepository);
+  final imageRepository = ref.watch(_imageRepository);
+
+  return SearchViewModel(userRepository, imageRepository);
+});
